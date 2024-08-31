@@ -1,13 +1,19 @@
 import { View, StyleSheet, Image, ScrollView } from "react-native";
 import React from "react";
-import { colorPuplic } from "@/app/constant/stylesPuplic";
+import { colorPuplic } from "@/constant/stylesPuplic";
 import ComponentTop from "./components/ComponentTop";
 import ComponentBottom from "./components/ComponentBottom";
 import { router } from "expo-router";
+import { useDispatch } from "react-redux";
+import { questionSelect } from "@/redux/slice/ResultSlice";
+import { questionList } from "@/constant/data";
 
-export default function PageOne() {
+export default function Welcome() {
+  const dispatch = useDispatch();
+
   const goToScreen = () => {
-    router.push("/screens/pageTwo");
+    // dispatch(questionSelect(questionList[0]));
+    router.push("/test/");
   };
 
   return (

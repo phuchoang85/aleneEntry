@@ -5,7 +5,7 @@ import {
   colorLinearPublic,
   colorPuplic,
   stylesTextPuplic,
-} from "@/app/constant/stylesPuplic";
+} from "@/constant/stylesPuplic";
 
 const ButtonStrokeLinear = ({
   content,

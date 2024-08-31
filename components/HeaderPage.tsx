@@ -7,7 +7,7 @@ import {
   Pressable,
 } from "react-native";
 import React from "react";
-import { colorPuplic, stylesTextPuplic } from "@/app/constant/stylesPuplic";
+import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
 
 type headerProp = {
   imageLeft: ImageSourcePropType | null;

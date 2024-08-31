@@ -1,20 +1,18 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { colorLinearPublic } from "@/app/constant/stylesPuplic";
+import { colorLinearPublic } from "@/constant/stylesPuplic";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 const LinearTextStyle = ({
-  content,
   styles,
   children,
 }: {
-  content: string;
-  styles: Object;
+  styles: any;
   children: React.ReactNode;
 }) => {
   return (
     <MaskedView
-      style={{ height: 100 }}
+      style={{ height: styles[1]?.height || 0 }}
       maskElement={<Text style={styles}>{children}</Text>}
     >
       <LinearGradient

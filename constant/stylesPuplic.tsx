@@ -15,8 +15,8 @@ export const colorLinearPublic = {
     locations: [0, 0.12, 0.49, 0.87, 1],
   },
   linear: {
-    colors: ["rgba(255, 255, 255,1)", "rgba(180, 212, 147,1)", "rgba(115, 164, 66,1)", "rgba(71, 132, 73,1)"],
-    locations: [0, 0.56, 0.68, 1],
+    colors: ["#0E470E", "#20680D", "#2E820D", "#13500E"],
+    locations: [0, 0.24, 0.72, 1],
   },
   linearYellow: {
     colors: [

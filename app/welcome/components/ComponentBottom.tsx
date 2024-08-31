@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
-import { colorPuplic, stylesTextPuplic } from "@/app/constant/stylesPuplic";
+import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
 
 const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
   return (

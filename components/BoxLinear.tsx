@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { colorLinearPublic } from "@/app/constant/stylesPuplic";
+import { colorLinearPublic } from "@/constant/stylesPuplic";
 
 const BoxLinear = ({
   children,

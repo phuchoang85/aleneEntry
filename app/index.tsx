@@ -1,13 +1,9 @@
-import { View, Text } from "react-native";
-import React from "react";
-import PageOne from "./screens/pageOne/_layout";
+import { View, Text } from 'react-native'
+import React from 'react'
+import Welcome from './welcome'
 
-const HomePage = () => {
+const index = () => {
+  return <Welcome/>
+}
 
-    
-  return (
-    <PageOne/>
-  );
-};
-
-export default HomePage;
+export default index

@@ -3,7 +3,7 @@ import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import HeaderPage from "@/components/HeaderPage";
 import LinearTextStyle from "@/components/LinearTextStyle";
-import { colorPuplic, stylesTextPuplic } from "@/app/constant/stylesPuplic";
+import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
 
 const ComponentTop = () => {
   return (
@@ -16,7 +16,6 @@ const ComponentTop = () => {
         imageRight={require("@images/logo.png")}
       />
       <LinearTextStyle
-        content="TẾT BẬN RỘN CƠ-XƯƠNG-KHỚP CÓ KHỎE ĐỂ CHU TOÀN?"
         styles={[stylesTextPuplic.text22regular, styles.containerText]}
       >
         TẾT BẬN RỘN CƠ-XƯƠNG-KHỚP CÓ KHỎE ĐỂ CHU TOÀN?
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
   containerText: {
     paddingHorizontal: 28,
     textAlign: "center",
+    height: 100,
   },
 });
 

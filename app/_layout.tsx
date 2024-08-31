@@ -1,9 +1,15 @@
+import { persistor, store } from "@/redux/store";
 import { useFonts } from "expo-font";
-import { Stack } from 'expo-router'; // Import thêm Screen
+import { Stack } from "expo-router"; // Import thêm Screen
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 SplashScreen.preventAutoHideAsync();
+
+export const unstable_settings = {
+  initialRouteName: "welcome"
+};
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -20,11 +26,25 @@ export default function RootLayout() {
     return null;
   }
 
+  return <RootLayoutNav />;
+}
+
+const RootLayoutNav = () => {
   return (
-    <Stack initialRouteName="screens/pageOne">
-      <Stack.Screen name="screens/pageOne" options={{headerShown: false}}/>
-      <Stack.Screen name="screens/pageTwo" options={{headerShown: false}}/>
-      <Stack.Screen name="index" options={{headerShown: false}}/>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  );
+};
+
+const App = () => {
+  return (
+    <Stack>
+      <Stack.Screen name="welcome" options={{ headerShown: false }} />
+      <Stack.Screen name="test" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
     </Stack>
   );
-}
+};
