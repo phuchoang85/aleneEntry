@@ -10,14 +10,16 @@ const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 
 const MainViewTest = ({
   resultQ,
-  isAtTheEnd,
   animatedValue,
 }: {
   resultQ: initial;
-  isAtTheEnd: () => boolean;
   animatedValue: Animated.Value;
 }) => {
   const dispatch = useDispatch();
+
+  const isAtTheEnd = () => {
+    return resultQ.questionSelect?.id == 4;
+  };
   const handleButtonPress = (result: resultReq, status: "good" | "bad") => {
     if (result.id !== resultQ.questionSelect?.id) {
       Alert.alert("Thông báo hãy chọn theo thứ tự");

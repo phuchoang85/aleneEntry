@@ -1,8 +1,9 @@
 import {  configureStore,combineReducers } from "@reduxjs/toolkit";
 import { resultReducer } from "./slice/ResultSlice";
-import { persistReducer, persistStore } from 'redux-persist';
-import localStorage from "redux-persist/es/storage";
-import storage from 'redux-persist/lib/storage';
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 const rootReducer = combineReducers({
   result: resultReducer,
@@ -12,9 +13,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
-  timeout: 30000,
-  whitelist: ['resultReducer'],
+  storage: AsyncStorage,
 };
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer);
@@ -24,7 +23,9 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
         thunk: true,
-        serializableCheck: false,
+        serializableCheck:{
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
     }),
 });
 

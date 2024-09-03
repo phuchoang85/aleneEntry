@@ -1,4 +1,4 @@
-import { Text, Pressable, Image, StyleSheet } from "react-native";
+import { Text, Pressable, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
 
@@ -12,12 +12,12 @@ const ButtonSelect = ({
   image: number;
 }) => {
   return (
-    <Pressable style={styles.container} onPress={handleButtonPress}>
+    <TouchableOpacity style={styles.container} onPress={handleButtonPress}>
       <Image source={image} style={styles.image} />
       <Text style={[stylesTextPuplic.text12bold, { color: colorPuplic.white }]}>
         {content}
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

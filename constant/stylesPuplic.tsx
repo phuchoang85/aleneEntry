@@ -62,6 +62,10 @@ export const colorLinearPublic = {
     colors: ["#73A442", "#478449"],
     locations: [0, 1],
   },
+  gray: {
+    colors: ["#969696", "#969696"],
+    locations: [0, 1],
+  },
   feedback: {
     colors: ["#376E48", "#187B33"],
     locations: [0, 0.4],
@@ -79,7 +83,12 @@ export const colorLinearPublic = {
     locations: [0, 0.35, 0.61, 0.8, 1],
   },
   mauKV: {
-    colors: ["rgba(14, 71, 14, 0.1)", "rgba(32, 104, 13, 0.15)", "#2E820D", "#13500E"],
+    colors: [
+      "rgba(14, 71, 14, 0.1)",
+      "rgba(32, 104, 13, 0.15)",
+      "#2E820D",
+      "#13500E",
+    ],
     locations: [0, 0.24, 0.72, 1],
   },
   luuy: {

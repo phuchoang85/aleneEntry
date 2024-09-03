@@ -23,7 +23,7 @@ const resultSlice = createSlice({
         state.questionSelect = action.payload;
     },
     restart: (state)=>{
-      state.questionList = questionList;
+      state.questionList = questionList.map((item) => ({ ...item, status: 'noSelect' }));;
     }
   },
 });

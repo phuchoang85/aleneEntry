@@ -11,7 +11,6 @@ import { ResizeMode, Video } from "expo-av";
 import { resultReq } from "@/constant/type";
 import ButtonSelect from "./ButtonSelect";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-import { usePathname, useRouter } from "expo-router";
 const videoDemo = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const ItemVideo = ({

@@ -6,12 +6,17 @@ import {
   Dimensions,
   Animated,
   Pressable,
+  Button,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import HeaderPage from "@/components/HeaderPage";
 import BackgroundPage from "@/components/BackgroundPage";
-import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-import { useNavigation } from "@react-navigation/native";
+import {
+  colorLinearPublic,
+  colorPuplic,
+  stylesTextPuplic,
+} from "@/constant/stylesPuplic";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import StatusTest from "./components/StatusTest";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -24,6 +29,7 @@ import MainViewTest from "./components/MainViewTest";
 import { RootStackParams } from "@/app";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import ModalCustom from "@/components/ModalCustom";
+import { questionList } from "@/constant/data";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Test = () => {
   const navigation =
@@ -31,9 +37,6 @@ const Test = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const resultQ = useSelector((state: RootState) => state.result);
   const dispatch = useDispatch();
-  const isAtTheEnd = () => {
-    return resultQ.questionSelect?.id == 4;
-  };
   const animatedValue = useRef(new Animated.Value(0)).current;
   const acctionLeft = () => {
     const idQuestionSelect = resultQ.questionSelect?.id || 0;
@@ -77,14 +80,23 @@ const Test = () => {
   };
 
   const goToPageSubmit = () => {
+    setIsOpenModal(false);
     navigation.navigate("Submit");
   };
 
-  useEffect(() => {
-    dispatch(questionSelect(resultQ.questionList[0]));
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(questionSelect(questionList[0]));
+      Animated.timing(animatedValue, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start();
+    }, [])
+  );
+
   return (
-    <BackgroundPage styles={styles.container}>
+    <BackgroundPage styles={styles.container} colors={colorLinearPublic.linear}>
       <ScrollView style={styles.containerScrollView}>
         <HeaderPage
           acctionLeft={acctionLeft}
@@ -101,11 +113,7 @@ const Test = () => {
 
           <StatusTest resultQ={resultQ} />
 
-          <MainViewTest
-            isAtTheEnd={isAtTheEnd}
-            resultQ={resultQ}
-            animatedValue={animatedValue}
-          />
+          <MainViewTest resultQ={resultQ} animatedValue={animatedValue} />
 
           <Pressable
             style={[

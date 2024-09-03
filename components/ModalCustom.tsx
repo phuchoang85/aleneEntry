@@ -43,7 +43,7 @@ const ModalCustom = ({
             <NormalButton
               content={nameButtonRight}
               backgroundColor={colorPuplic.RED}
-              onPress={onPressLeft}
+              onPress={onPressRight}
               textColor={colorPuplic.white}
             />
           </View>
