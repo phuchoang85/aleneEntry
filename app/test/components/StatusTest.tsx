@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import React from "react";
 import ItemStatusTest from "./ItemStatusTest";
 import { initial } from "@/constant/type";
@@ -9,25 +9,23 @@ const StatusTest = ({ resultQ }: { resultQ: initial }) => {
   return (
     <View style={styles.container}>
       {resultQ.questionList.map((ele) => {
-        return <ItemStatusTest key={ele.id} {...ele} requestSelected={resultQ.questionSelect} />;
+        return (
+          <ItemStatusTest
+            key={ele.id}
+            {...ele}
+            requestSelected={resultQ.questionSelect}
+          />
+        );
       })}
 
-      <View
-        style={{
-          position: "absolute",
-          bottom: 44,
-          width: MAX_WIDTH-120,
-          flexDirection: "row",
-          zIndex: -1,
-          left: 16,
-        }}
-      >
+      <View style={styles.containerLine}>
         <View
           style={[
             styles.line,
             {
               borderStyle:
-                (resultQ.questionList[0].status && resultQ.questionList[1].status) !== "noSelect"
+                (resultQ.questionList[0].status &&
+                  resultQ.questionList[1].status) !== "noSelect"
                   ? "solid"
                   : "dashed",
             },
@@ -38,7 +36,8 @@ const StatusTest = ({ resultQ }: { resultQ: initial }) => {
             styles.line,
             {
               borderStyle:
-                (resultQ.questionList[1].status && resultQ.questionList[2].status) !== "noSelect"
+                (resultQ.questionList[1].status &&
+                  resultQ.questionList[2].status) !== "noSelect"
                   ? "solid"
                   : "dashed",
             },
@@ -49,7 +48,8 @@ const StatusTest = ({ resultQ }: { resultQ: initial }) => {
             styles.line,
             {
               borderStyle:
-                (resultQ.questionList[2].status && resultQ.questionList[3].status) !== "noSelect"
+                (resultQ.questionList[2].status &&
+                  resultQ.questionList[3].status) !== "noSelect"
                   ? "solid"
                   : "dashed",
             },
@@ -61,6 +61,14 @@ const StatusTest = ({ resultQ }: { resultQ: initial }) => {
 };
 
 const styles = StyleSheet.create({
+  containerLine: {
+    position: "absolute",
+    bottom: 44,
+    width: MAX_WIDTH - 120,
+    flexDirection: "row",
+    zIndex: -1,
+    left: 16,
+  },
   line: {
     height: 1,
     flex: 1,

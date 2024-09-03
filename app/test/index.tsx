@@ -40,10 +40,14 @@ const Test = () => {
       router.back();
     } else {
       const questtionAfter = resultQ.questionList[idQuestionSelect - 2];
-      const questionNoSelect = { ...questtionAfter, status: "noSelect" };
-
-      dispatch(updateResult(questionNoSelect));
-      dispatch(questionSelect(questionNoSelect));
+      const questionNoSelectAfter = { ...questtionAfter, status: "noSelect" };
+      const questionNoSelectNow = {
+        ...resultQ.questionSelect,
+        status: "noSelect",
+      };
+      dispatch(updateResult(questionNoSelectAfter));
+      dispatch(updateResult(questionNoSelectNow));
+      dispatch(questionSelect(questionNoSelectAfter));
       if (MAX_WIDTH < 720) {
         Animated.timing(animatedValue, {
           toValue: -(MAX_WIDTH - 24) * (idQuestionSelect - 2),
@@ -62,11 +66,10 @@ const Test = () => {
 
   useEffect(() => {
     dispatch(questionSelect(resultQ.questionList[0]));
-    console.log("a")
-  },[]);
+  }, []);
   return (
     <BackgroundPage styles={styles.container}>
-      <ScrollView style={{ flex: 1, paddingBottom: 16 }}>
+      <ScrollView style={styles.containerScrollView}>
         <HeaderPage
           acctionLeft={acctionLeft}
           acctionRight={acctionRight}
@@ -93,10 +96,14 @@ const Test = () => {
               styles.buttonAccept,
               { backgroundColor: isAtTheEnd() ? colorPuplic.RED : "#B8B8B8" },
             ]}
-            disabled={isAtTheEnd() ? false : true}
+            disabled={
+              isAtTheEnd() && resultQ.questionList[3].status !== "noSelect"
+                ? false
+                : true
+            }
           >
             <Text style={[stylesTextPuplic.text16bold, styles.styleTextNormal]}>
-              Xác nhận
+              XÁC NHẬN
             </Text>
           </Pressable>
 
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: 20,
-    marginBottom: 8
+    marginBottom: 8,
   },
   styleTextNormal: {
     color: colorPuplic.white,
@@ -127,6 +134,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  containerScrollView: {
+    flex: 1,
+    paddingBottom: 16,
   },
   containerPadding: {
     flex: 1,
