@@ -42,8 +42,6 @@ const RootLayoutNav = () => {
 const App = () => {
   return (
     <Stack>
-      <Stack.Screen name="welcome" options={{ headerShown: false }} />
-      <Stack.Screen name="test" options={{ headerShown: false }} />
       <Stack.Screen name="index" options={{ headerShown: false }} />
     </Stack>
   );

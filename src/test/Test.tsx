@@ -7,11 +7,11 @@ import {
   Animated,
   Pressable,
 } from "react-native";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HeaderPage from "@/components/HeaderPage";
 import BackgroundPage from "@/components/BackgroundPage";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import StatusTest from "./components/StatusTest";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -21,23 +21,35 @@ import {
   updateResult,
 } from "@/redux/slice/ResultSlice";
 import MainViewTest from "./components/MainViewTest";
-
+import { RootStackParams } from "@/app";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import ModalCustom from "@/components/ModalCustom";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Test = () => {
+  const navigation =
+    useNavigation <NativeStackNavigationProp<RootStackParams>>();
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const resultQ = useSelector((state: RootState) => state.result);
   const dispatch = useDispatch();
-
   const isAtTheEnd = () => {
     return resultQ.questionSelect?.id == 4;
   };
   const animatedValue = useRef(new Animated.Value(0)).current;
   const acctionLeft = () => {
     const idQuestionSelect = resultQ.questionSelect?.id || 0;
-
     if (idQuestionSelect === 1 || resultQ.questionSelect === null) {
       dispatch(questionSelect(null));
       dispatch(restart());
-      router.back();
+      navigation.goBack();
+    } else if (
+      idQuestionSelect === 4 &&
+      resultQ.questionList[3]?.status !== "noSelect"
+    ) {
+      const questionNoSelectNow = {
+        ...resultQ.questionSelect,
+        status: "noSelect",
+      };
+      dispatch(updateResult(questionNoSelectNow));
     } else {
       const questtionAfter = resultQ.questionList[idQuestionSelect - 2];
       const questionNoSelectAfter = { ...questtionAfter, status: "noSelect" };
@@ -61,7 +73,11 @@ const Test = () => {
   const acctionRight = () => {
     dispatch(questionSelect(null));
     dispatch(restart());
-    router.push("/welcome/");
+    navigation.navigate('Welcome');
+  };
+
+  const goToPageSubmit = () => {
+    navigation.navigate('Submit');
   };
 
   useEffect(() => {
@@ -94,13 +110,17 @@ const Test = () => {
           <Pressable
             style={[
               styles.buttonAccept,
-              { backgroundColor: isAtTheEnd() ? colorPuplic.RED : "#B8B8B8" },
+              {
+                backgroundColor:
+                  resultQ.questionList[3].status !== "noSelect"
+                    ? colorPuplic.RED
+                    : "#B8B8B8",
+              },
             ]}
             disabled={
-              isAtTheEnd() && resultQ.questionList[3].status !== "noSelect"
-                ? false
-                : true
+              resultQ.questionList[3].status !== "noSelect" ? false : true
             }
+            onPress={() => setIsOpenModal(true)}
           >
             <Text style={[stylesTextPuplic.text16bold, styles.styleTextNormal]}>
               XÁC NHẬN
@@ -111,6 +131,15 @@ const Test = () => {
             Lưu ý: Bài kiểm tra không dành cho đối tượng đang bị chấn thương
             hoặc có bệnh lý về cơ, xương, khớp hoặc bệnh tiểu đường
           </Text>
+
+          <ModalCustom
+          content="Bạn đã tham gia bài kiểm tra sức khỏe Hãy tiếp tục để có thể nhận kế quả kiểm tra sức khỏe của bạn"
+          title="CẢM ƠN"
+          nameButtonRight="TIẾP TỤC"
+          isOpen={isOpenModal}
+          onPressLeft={() => setIsOpenModal(false)}
+          onPressRight={goToPageSubmit}
+          />
         </View>
       </ScrollView>
     </BackgroundPage>

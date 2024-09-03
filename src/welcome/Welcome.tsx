@@ -3,17 +3,14 @@ import React from "react";
 import { colorPuplic } from "@/constant/stylesPuplic";
 import ComponentTop from "./components/ComponentTop";
 import ComponentBottom from "./components/ComponentBottom";
-import { router } from "expo-router";
-import { useDispatch } from "react-redux";
-import { questionSelect } from "@/redux/slice/ResultSlice";
-import { questionList } from "@/constant/data";
-
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParams } from "@/app";
 export default function Welcome() {
-  const dispatch = useDispatch();
-
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToScreen = () => {
-    // dispatch(questionSelect(questionList[0]));
-    router.push("/test/");
+    navigation.navigate('Test');
   };
 
   return (

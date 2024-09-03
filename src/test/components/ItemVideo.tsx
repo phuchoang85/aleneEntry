@@ -1,9 +1,17 @@
-import { View, Text, Dimensions, Image, StyleSheet } from "react-native";
-import React, { useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  Dimensions,
+  Image,
+  StyleSheet,
+  Pressable,
+} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import { ResizeMode, Video } from "expo-av";
 import { resultReq } from "@/constant/type";
 import ButtonSelect from "./ButtonSelect";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
+import { usePathname, useRouter } from "expo-router";
 const videoDemo = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const ItemVideo = ({
@@ -15,6 +23,7 @@ const ItemVideo = ({
   handleButtonPress: (data: resultReq, status: "good" | "bad") => void;
   questionSelected: resultReq | null;
 }) => {
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<Video>(null);
   const reponsiveMaxView = () => {
     if (MAX_WIDTH > 720) return { maxWidth: 225 };
@@ -35,7 +44,13 @@ const ItemVideo = ({
 
   return (
     <View style={[styles.container, reponsiveMaxView()]}>
-      <View
+      <Pressable
+        onPress={() => {
+          setIsPlaying(!isPlaying);
+          isPlaying
+            ? videoRef.current?.pauseAsync()
+            : videoRef.current?.playAsync();
+        }}
         style={[
           styles.viewVideo,
           {
@@ -50,9 +65,10 @@ const ItemVideo = ({
         <Video
           source={{ uri: data.video || videoDemo }}
           isLooping
+          shouldPlay
           ref={videoRef}
+          resizeMode={ResizeMode.CONTAIN}
           style={styles.video}
-          resizeMode={ResizeMode.STRETCH}
         />
 
         {data.status !== "noSelect" && (
@@ -65,15 +81,13 @@ const ItemVideo = ({
             }
           />
         )}
-      </View>
+      </Pressable>
 
       <Text style={[styles.textGuide, stylesTextPuplic.text15reg]}>
         {data.guide}
       </Text>
 
-      <View
-        style={styles.containerButton}
-      >
+      <View style={styles.containerButton}>
         <ButtonSelect
           handleButtonPress={() => handleButtonPress(data, "good")}
           content="Được"
@@ -99,6 +113,7 @@ const styles = StyleSheet.create({
     width: MAX_WIDTH - 48,
     height: MAX_WIDTH - 48,
     borderRadius: 18,
+    backgroundColor:'black'
   },
   video: {
     flex: 1,
@@ -117,12 +132,12 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 14,
   },
-  containerButton:{
+  containerButton: {
     flexDirection: "row",
     gap: 20,
     alignSelf: "center",
     alignItems: "center",
-  }
+  },
 });
 
 export default ItemVideo;
