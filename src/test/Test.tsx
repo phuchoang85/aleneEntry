@@ -27,7 +27,7 @@ import ModalCustom from "@/components/ModalCustom";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Test = () => {
   const navigation =
-    useNavigation <NativeStackNavigationProp<RootStackParams>>();
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const resultQ = useSelector((state: RootState) => state.result);
   const dispatch = useDispatch();
@@ -73,11 +73,11 @@ const Test = () => {
   const acctionRight = () => {
     dispatch(questionSelect(null));
     dispatch(restart());
-    navigation.navigate('Welcome');
+    navigation.navigate("Welcome");
   };
 
   const goToPageSubmit = () => {
-    navigation.navigate('Submit');
+    navigation.navigate("Submit");
   };
 
   useEffect(() => {
@@ -133,12 +133,12 @@ const Test = () => {
           </Text>
 
           <ModalCustom
-          content="Bạn đã tham gia bài kiểm tra sức khỏe Hãy tiếp tục để có thể nhận kế quả kiểm tra sức khỏe của bạn"
-          title="CẢM ƠN"
-          nameButtonRight="TIẾP TỤC"
-          isOpen={isOpenModal}
-          onPressLeft={() => setIsOpenModal(false)}
-          onPressRight={goToPageSubmit}
+            content={`Bạn đã tham gia bài kiểm tra sức khỏe \nHãy tiếp tục để có thể nhận kế quả kiểm tra sức khỏe của bạn`}
+            title="CẢM ƠN"
+            nameButtonRight="TIẾP TỤC"
+            isOpen={isOpenModal}
+            onPressLeft={() => setIsOpenModal(false)}
+            onPressRight={goToPageSubmit}
           />
         </View>
       </ScrollView>

@@ -1,6 +1,7 @@
 import { View, Text, Modal, Pressable, StyleSheet } from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
+import NormalButton from "./NormalButton";
 
 const ModalCustom = ({
   title,
@@ -27,18 +28,24 @@ const ModalCustom = ({
     >
       <View style={styles.containerModal}>
         <View style={styles.container}>
-          <Text style={[stylesTextPuplic.text24bold, styles.textTile]}>
+          <Text style={[stylesTextPuplic.text24bold, styles.textTitle]}>
             {title}
           </Text>
-          <Text>{content}</Text>
-          <View>
-            <Pressable onPress={onPressLeft}>
-              <Text>HỦY</Text>
-            </Pressable>
+          <Text  style={[stylesTextPuplic.text14regular, styles.textContent]}>{content}</Text>
+          <View style={styles.containerButton}>
+            <NormalButton
+              content="HỦY"
+              backgroundColor={colorPuplic.white}
+              onPress={onPressLeft}
+              textColor={colorPuplic.RED}
+            />
 
-            <Pressable onPress={onPressRight}>
-              <Text>{nameButtonRight}</Text>
-            </Pressable>
+            <NormalButton
+              content={nameButtonRight}
+              backgroundColor={colorPuplic.RED}
+              onPress={onPressLeft}
+              textColor={colorPuplic.white}
+            />
           </View>
         </View>
       </View>
@@ -47,7 +54,16 @@ const ModalCustom = ({
 };
 
 const styles = StyleSheet.create({
-  textTile: {
+  containerButton: {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textContent: {
+    color: colorPuplic.black1,
+  },
+  textTitle: {
     color: colorPuplic.green2,
   },
   container: {
@@ -56,8 +72,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
-    width: "80%",
-    maxWidth: 300,
+    margin: 20,
   },
   containerModal: {
     flex: 1,
