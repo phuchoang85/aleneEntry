@@ -1,5 +1,21 @@
 {
   "expo": {
+    "linking": {
+      "prefixes": ["anlene://", "https://anlene.com"], 
+      "config": {
+        "screens": {
+          "Welcome": {
+            "path": "Welcome"
+          },
+          "Test": {
+            "path": "Test"
+          },
+          "Submit": {
+            "path": "Submit" 
+          }
+        }
+      }
+    },
     "name": "aleneEntry",
     "slug": "aleneEntry",
     "version": "1.0.0",
@@ -21,6 +37,7 @@
       }
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -39,9 +56,8 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      [
-        "expo-router"
-      ],
+      "@react-native-firebase/app",
+      "expo-router",
       [
         "expo-av",
         {

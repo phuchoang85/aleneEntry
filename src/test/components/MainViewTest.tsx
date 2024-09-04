@@ -21,10 +21,10 @@ const MainViewTest = ({
     return resultQ.questionSelect?.id == 4;
   };
   const handleButtonPress = (result: resultReq, status: "good" | "bad") => {
-    if (result.id !== resultQ.questionSelect?.id) {
-      Alert.alert("Thông báo hãy chọn theo thứ tự");
-      return;
-    }
+    // if (result.id !== resultQ.questionSelect?.id) {
+    //   Alert.alert("Thông báo hãy chọn theo thứ tự");
+    //   return;
+    // }
 
     if (!isAtTheEnd() && MAX_WIDTH < 720) {
       Animated.timing(animatedValue, {
