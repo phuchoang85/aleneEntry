@@ -1,21 +1,26 @@
-import { StyleSheet, Animated, Dimensions, Alert, View, Text } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import {
+  StyleSheet,
+  Animated,
+  Dimensions,
+} from "react-native";
+import React from "react";
 import LinearTextStyle from "@/components/LinearTextStyle";
 import { stylesTextPuplic } from "@/constant/stylesPuplic";
 import { initial, resultReq } from "@/constant/type";
-import { useDispatch } from "react-redux";
-import { questionSelect, updateResult } from "@/redux/slice/ResultSlice";
 import ItemVideo from "./ItemVideo";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 
 const MainViewTest = ({
   resultQ,
   animatedValue,
+  nextQuestion,
+  updateResultAQuestion,
 }: {
   resultQ: initial;
   animatedValue: Animated.Value;
+  nextQuestion: () => void;
+  updateResultAQuestion: (status: "good" | "bad", result: resultReq) => void;
 }) => {
-  const dispatch = useDispatch();
 
   const isAtTheEnd = () => {
     return resultQ.questionSelect?.id == 4;
@@ -35,11 +40,11 @@ const MainViewTest = ({
     }
 
     if (!isAtTheEnd()) {
-      dispatch(questionSelect(resultQ.questionList[result.id]));
+      nextQuestion();
     }
 
     if (result.status === "noSelect") {
-      dispatch(updateResult({ ...result, status: status }));
+      updateResultAQuestion(status, result);
     }
   };
   return (

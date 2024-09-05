@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState: initial = {
-    questionList: questionList,
+    questionList: [],
     questionSelect: null,
 };
 
@@ -24,9 +24,12 @@ const resultSlice = createSlice({
     },
     restart: (state)=>{
       state.questionList = questionList.map((item) => ({ ...item, status: 'noSelect' }));;
+    },
+    updateDataResult:(state,action) =>{
+      state.questionList = action.payload;
     }
   },
 });
 
-export const { updateResult, questionSelect,restart } = resultSlice.actions;
+export const { updateResult, questionSelect,restart,updateDataResult } = resultSlice.actions;
 export const resultReducer = resultSlice.reducer;

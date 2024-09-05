@@ -6,9 +6,8 @@ import {
   Dimensions,
   Animated,
   Pressable,
-  Button,
 } from "react-native";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import HeaderPage from "@/components/HeaderPage";
 import BackgroundPage from "@/components/BackgroundPage";
 import {
@@ -18,51 +17,43 @@ import {
 } from "@/constant/stylesPuplic";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import StatusTest from "./components/StatusTest";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import {
-  questionSelect,
-  restart,
-  updateResult,
-} from "@/redux/slice/ResultSlice";
 import MainViewTest from "./components/MainViewTest";
 import { RootStackParams } from "@/app";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import ModalCustom from "@/components/ModalCustom";
-import { questionList } from "@/constant/data";
+import { useTestPage } from "./hooks/useTestPage";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Test = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
+  const {
+    resultQ,
+    nullQuestionSelect,
+    restartQuestion,
+    selectFirstQuestion,
+    updateQuestionNoSelectAtNow,
+    updateQuestionNoSelectAtAfaterNow,
+    updateQuestionSelectedStatusToNoSelect,
+    nextQuestion,
+    updateResultAQuestion,
+  } = useTestPage();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const resultQ = useSelector((state: RootState) => state.result);
-  const dispatch = useDispatch();
   const animatedValue = useRef(new Animated.Value(0)).current;
   const acctionLeft = () => {
     const idQuestionSelect = resultQ.questionSelect?.id || 0;
     if (idQuestionSelect === 1 || resultQ.questionSelect === null) {
-      dispatch(questionSelect(null));
-      dispatch(restart());
+      nullQuestionSelect();
+      restartQuestion();
       navigation.goBack();
     } else if (
       idQuestionSelect === 4 &&
       resultQ.questionList[3]?.status !== "noSelect"
     ) {
-      const questionNoSelectNow = {
-        ...resultQ.questionSelect,
-        status: "noSelect",
-      };
-      dispatch(updateResult(questionNoSelectNow));
+      updateQuestionNoSelectAtNow();
     } else {
-      const questtionAfter = resultQ.questionList[idQuestionSelect - 2];
-      const questionNoSelectAfter = { ...questtionAfter, status: "noSelect" };
-      const questionNoSelectNow = {
-        ...resultQ.questionSelect,
-        status: "noSelect",
-      };
-      dispatch(updateResult(questionNoSelectAfter));
-      dispatch(updateResult(questionNoSelectNow));
-      dispatch(questionSelect(questionNoSelectAfter));
+      updateQuestionNoSelectAtNow();
+      updateQuestionNoSelectAtAfaterNow();
+      updateQuestionSelectedStatusToNoSelect();
       if (MAX_WIDTH < 720) {
         Animated.timing(animatedValue, {
           toValue: -(MAX_WIDTH - 24) * (idQuestionSelect - 2),
@@ -73,20 +64,20 @@ const Test = () => {
     }
   };
 
-  const acctionRight = () => {
-    dispatch(questionSelect(null));
-    dispatch(restart());
-    navigation.navigate("Welcome");
-  };
-
   const goToPageSubmit = () => {
     setIsOpenModal(false);
     navigation.navigate("Submit");
   };
 
+  const acctionRight = () => {
+    nullQuestionSelect();
+    restartQuestion();
+    navigation.navigate("Welcome");
+  };
+
   useFocusEffect(
     useCallback(() => {
-      dispatch(questionSelect(questionList[0]));
+      selectFirstQuestion();
       Animated.timing(animatedValue, {
         toValue: 0,
         duration: 1000,
@@ -113,7 +104,12 @@ const Test = () => {
 
           <StatusTest resultQ={resultQ} />
 
-          <MainViewTest resultQ={resultQ} animatedValue={animatedValue} />
+          <MainViewTest
+            nextQuestion={nextQuestion}
+            updateResultAQuestion={updateResultAQuestion}
+            resultQ={resultQ}
+            animatedValue={animatedValue}
+          />
 
           <Pressable
             style={[
