@@ -7,9 +7,18 @@ export type form = {
   name: string;
   phone: string;
   email?: string;
+  result: userSelect[]
 };
 
-export const createForm = async (data:form ) => {
+export type userSelect = {
+  id: number;
+  content: string;
+  status: "good" | "bad" | "noSelect";
+} 
+
+export const createForm = createAsyncThunk(
+  CREATE_FORM_REQUEST,
+  async (data: form) => {
     try {
       const responseCheck = await checkData(data);
       if (responseCheck) {
@@ -22,6 +31,7 @@ export const createForm = async (data:form ) => {
       return Promise.reject(error);
     }
   }
+);
 
 const checkData = async (data: form) => {
   try {

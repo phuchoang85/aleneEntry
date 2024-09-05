@@ -11,6 +11,7 @@ const InputTextCustom = ({
   acctionSubmit,
   error,
   isNeccessary,
+  keyboardType
 }: {
   title: string;
   placeHolder: string;
@@ -20,6 +21,7 @@ const InputTextCustom = ({
   acctionSubmit: () => void;
   error: string;
   isNeccessary: boolean;
+  keyboardType: 'default' | 'phone-pad'
 }) => {
   return (
     <View style={styles.container}>
@@ -31,6 +33,7 @@ const InputTextCustom = ({
         placeholderTextColor={colorPuplic.grey}
         placeholder={placeHolder}
         value={data}
+        keyboardType={keyboardType}
         onChangeText={setData}
         onBlur={acctionSubmit}
         style={[

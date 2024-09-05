@@ -1,20 +1,20 @@
 import {  configureStore,combineReducers } from "@reduxjs/toolkit";
 import { resultReducer } from "./slice/ResultSlice";
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { dataTestReducer } from "./slice/DataTestSlice";
 import { useDispatch } from "react-redux";
-
+import { createFormReducer } from "./slice/CreateFormSlice";
 const rootReducer = combineReducers({
   result: resultReducer,
   dataResult: dataTestReducer,
+  createForm: createFormReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof store.dispatch
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,

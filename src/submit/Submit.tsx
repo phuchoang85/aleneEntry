@@ -7,32 +7,34 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import BackgroundPage from "@/components/BackgroundPage";
 import {
   colorLinearPublic,
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-import { RootState } from "@/redux/store";
 import HeaderPage from "@/components/HeaderPage";
 import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-import { restart } from "@/redux/slice/ResultSlice";
 import ModalCustom from "@/components/ModalCustom";
-import { useDispatch, useSelector } from "react-redux";
 import InputTextCustom from "./components/InputTextCustom";
 import Checkbox from "expo-checkbox";
 import NormalButton from "@/components/NormalButton";
 import ContentChange from "./components/ContentChange";
 import { RootStackParams } from "@/app";
-import { createForm, form } from "@/redux/action/CreateForm";
+import { useSubmit } from "./hooks/useSubmit";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Submit = () => {
-  const listQuest = useSelector(
-    (state: RootState) => state.result.questionList
-  );
+  const {
+    listQuest,
+    restartList,
+    createFormUser,
+    loading,
+    errorApi,
+    message,
+    clearMess,
+  } = useSubmit();
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -43,9 +45,7 @@ const Submit = () => {
     email: "",
     phone: "",
   });
-  // firebaseInitialize();
   const [isChecked, setIsChecked] = useState(false);
-  const dispatch = useDispatch();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
@@ -60,48 +60,69 @@ const Submit = () => {
   };
 
   const acctionAccept = () => {
-    dispatch(restart());
+    restartList();
     navigation.goBack();
   };
 
   const acctionRight = () => {
     navigation.navigate("Welcome");
-    dispatch(restart());
+    restartList();
   };
 
-  const checkSubmitEnd = () => {
-    if (!input.name || !input.email || !input.phone || !isChecked) {
+  const checkSubmitEnd = useMemo(() => {
+    return () => {
+      const nameError =
+        !input.name || input.name.length < 5
+          ? "Vui lòng nhập họ và tên (tối thiểu 5 ký tự)"
+          : "";
+      const emailError =
+        !input.email || !/\S+@\S+\.\S+/.test(input.email)
+          ? "Vui lòng nhập email hợp lệ"
+          : "";
+      const phoneError =
+        !input.phone ||
+        input.phone.length !== 10 ||
+        !/^\d{10}$/.test(input.phone)
+          ? "Số điện thoại phải đúng định dạng"
+          : "";
+
       setError((prev) => {
         return {
           ...prev,
-          name: input.name ? "" : "Vui lòng nhập họ và tên",
-          phone: input.phone ? "" : "Vui lòng nhập số điện thoại",
+          name: nameError,
+          email: emailError,
+          phone: phoneError,
         };
       });
-      return false;
-    }
-    return true;
-  };
+      return !nameError && !emailError && !phoneError;
+    };
+  }, [input]);
 
-  const finished = async () => {
+  const finished = () => {
     try {
-      console.log(isChecked);
       if (!checkSubmitEnd() || !isChecked) {
         return;
       }
-
-      const data: form = {
-        email: input.email,
-        name: input.name,
-        phone: input.phone,
-      };
-
-      const response =await  createForm(data);
-      console.log(response)
+      createFormUser(input.name, input.email, input.phone);
     } catch (error) {
       console.error(error);
     }
   };
+  useEffect(() => {
+    if (loading) {
+      return;
+    } else if (!loading && errorApi) {
+      console.log(errorApi);
+      Alert.alert("Lỗi" + errorApi);
+      return;
+    }
+
+    if (message) {
+      console.log("thành công " + message);
+      Alert.alert("Lưu thành công");
+      clearMess();
+    }
+  }, [loading, errorApi, message]);
 
   return (
     <BackgroundPage styles={styles.container} colors={backgroundSubmit()}>
@@ -139,6 +160,7 @@ const Submit = () => {
                   ? colorPuplic.greenStrong
                   : colorPuplic.yellow
               }
+              keyboardType="default"
             />
             <InputTextCustom
               acctionSubmit={checkSubmitEnd}
@@ -157,6 +179,7 @@ const Submit = () => {
                   ? colorPuplic.greenStrong
                   : colorPuplic.yellow
               }
+              keyboardType="phone-pad"
             />
             <InputTextCustom
               acctionSubmit={checkSubmitEnd}
@@ -175,6 +198,7 @@ const Submit = () => {
                   ? colorPuplic.greenStrong
                   : colorPuplic.yellow
               }
+              keyboardType="default"
             />
 
             <View style={styles.containerCheckBox}>
@@ -198,7 +222,11 @@ const Submit = () => {
           </View>
 
           <NormalButton
-            backgroundColor={colorPuplic.RED}
+            backgroundColor={
+              !error.email && !error.name && !error.phone
+                ? colorPuplic.RED
+                : colorPuplic.grey
+            }
             content="HOÀN THÀNH"
             onPress={finished}
             textColor={colorPuplic.white}

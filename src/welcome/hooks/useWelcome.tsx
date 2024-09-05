@@ -1,13 +1,11 @@
-import { resultReq } from "@/constant/type";
 import { fetchQuestionAsync } from "@/redux/action/DataTestApi";
 import { updateDataResult } from "@/redux/slice/ResultSlice";
-import { RootState } from "@/redux/store";
-import { AsyncThunkAction, Dispatch, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState, useAppDispatch } from "@/redux/store";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const useWelcome = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { data, loading } = useSelector((state: RootState) => state.dataResult);
 
   useEffect(() => {

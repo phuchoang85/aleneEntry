@@ -23,19 +23,16 @@ const dataTestSlice = createSlice({
     .addCase(fetchQuestionAsync.pending, (state) => {
       state.loading = true;
       state.error = null;
-      console.log("loading")
     })
     .addCase(fetchQuestionAsync.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.error = null;
-       console.log("finhnes")
     })
     .addCase(fetchQuestionAsync.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message; 
       state.data = []; 
-      console.log("eror");
     });
   },
 });
