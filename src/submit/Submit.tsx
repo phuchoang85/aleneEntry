@@ -28,7 +28,6 @@ import NormalButton from "@/components/NormalButton";
 import ContentChange from "./components/ContentChange";
 import { RootStackParams } from "@/app";
 import { createForm, form } from "@/api";
-import { firebaseInitialize } from "@/firebasesetup";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Submit = () => {
   const listQuest = useSelector(
