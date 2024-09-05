@@ -27,6 +27,8 @@ import Checkbox from "expo-checkbox";
 import NormalButton from "@/components/NormalButton";
 import ContentChange from "./components/ContentChange";
 import { RootStackParams } from "@/app";
+import { createForm, form } from "@/api";
+import { firebaseInitialize } from "@/firebasesetup";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Submit = () => {
   const listQuest = useSelector(
@@ -42,6 +44,7 @@ const Submit = () => {
     email: "",
     phone: "",
   });
+  // firebaseInitialize();
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -81,14 +84,25 @@ const Submit = () => {
     return true;
   };
 
-  const finished = () => {
-    console.log(isChecked)
-    if(!checkSubmitEnd() || !isChecked){
-      return;
-    }
+  const finished = async () => {
+    try {
+      console.log(isChecked);
+      if (!checkSubmitEnd() || !isChecked) {
+        return;
+      }
 
-    Alert.alert("Hoàn thành");
-  }
+      const data: form = {
+        email: input.email,
+        name: input.name,
+        phone: input.phone,
+      };
+
+      const response =await  createForm(data);
+      console.log(response)
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <BackgroundPage styles={styles.container} colors={backgroundSubmit()}>

@@ -1,4 +1,4 @@
-package com.phucabadon.aleneEntry
+package com.phucabadon.alene_entry
 
 import android.os.Build
 import android.os.Bundle

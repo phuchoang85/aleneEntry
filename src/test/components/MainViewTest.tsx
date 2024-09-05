@@ -1,5 +1,5 @@
-import { StyleSheet, Animated, Dimensions, Alert } from "react-native";
-import React from "react";
+import { StyleSheet, Animated, Dimensions, Alert, View, Text } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import LinearTextStyle from "@/components/LinearTextStyle";
 import { stylesTextPuplic } from "@/constant/stylesPuplic";
 import { initial, resultReq } from "@/constant/type";

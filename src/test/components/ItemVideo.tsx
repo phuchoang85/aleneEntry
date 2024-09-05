@@ -6,11 +6,12 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { ResizeMode, Video } from "expo-av";
 import { resultReq } from "@/constant/type";
 import ButtonSelect from "./ButtonSelect";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
+import { useNavigation } from "@react-navigation/native";
 const videoDemo = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const ItemVideo = ({
@@ -22,7 +23,8 @@ const ItemVideo = ({
   handleButtonPress: (data: resultReq, status: "good" | "bad") => void;
   questionSelected: resultReq | null;
 }) => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const navigation = useNavigation();
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<Video>(null);
   const reponsiveMaxView = () => {
     if (MAX_WIDTH > 720) return { maxWidth: 225 };
@@ -34,12 +36,28 @@ const ItemVideo = ({
     else return null;
   };
   useEffect(() => {
-    if (data.id === questionSelected?.id && videoRef.current) {
-      videoRef.current?.playAsync();
-    } else {
-      videoRef.current?.pauseAsync();
+    if (questionSelected) {
+      if (data.id === questionSelected?.id && videoRef.current && !isPlaying) {
+        videoRef.current?.playAsync();
+        setIsPlaying(true);
+      } else {
+        if (isPlaying) {
+          videoRef.current?.pauseAsync();
+          setIsPlaying(false);
+        }
+      }
     }
   }, [questionSelected]);
+
+  useEffect(() => {
+    // Dừng video khi component unmount
+    const unsubscribe = navigation.addListener("blur", () => {
+      if (videoRef.current) {
+        videoRef.current.pauseAsync();
+      }
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={[styles.container, reponsiveMaxView()]}>
@@ -64,7 +82,6 @@ const ItemVideo = ({
         <Video
           source={{ uri: data.video || videoDemo }}
           isLooping
-          shouldPlay
           ref={videoRef}
           resizeMode={ResizeMode.CONTAIN}
           style={styles.video}
@@ -112,7 +129,7 @@ const styles = StyleSheet.create({
     width: MAX_WIDTH - 48,
     height: MAX_WIDTH - 48,
     borderRadius: 18,
-    backgroundColor:'black'
+    backgroundColor: "black",
   },
   video: {
     flex: 1,
@@ -139,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemVideo;
+export default memo(ItemVideo);

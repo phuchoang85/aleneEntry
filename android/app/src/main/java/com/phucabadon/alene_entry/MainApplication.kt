@@ -1,4 +1,4 @@
-package com.phucabadon.aleneEntry
+package com.phucabadon.alene_entry
 
 import android.app.Application
 import android.content.res.Configuration
