@@ -42,7 +42,7 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
 const styles = StyleSheet.create({
   containerBottom: {
     height: "100%",
-    marginTop: 380,
+    marginTop: 420,
     paddingTop: 30,
   },
   buttonRed: {
