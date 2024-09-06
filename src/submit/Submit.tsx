@@ -118,8 +118,9 @@ const Submit = () => {
     }
 
     if (message) {
-      console.log("thành công " + message);
-      Alert.alert("Lưu thành công");
+      // console.log("thành công " + message);
+      Alert.alert("Thông báo","Lưu thành công");
+      navigation.navigate('PageFour');
       clearMess();
     }
   }, [loading, errorApi, message]);

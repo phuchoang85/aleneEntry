@@ -1,55 +1,48 @@
 import {
   View,
-  StyleSheet,
-  Image,
-  ScrollView,
   Text,
+  StyleSheet,
+  ScrollView,
+  Image,
   ImageBackground,
 } from "react-native";
 import React from "react";
 import { colorPuplic } from "@/constant/stylesPuplic";
 import ComponentTop from "./components/ComponentTop";
 import ComponentBottom from "./components/ComponentBottom";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParams } from "@/app";
-import { useWelcome } from "./hooks/useWelcome";
-export default function Welcome() {
-  const { data, loading } = useWelcome();
+
+const PageFive = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToScreen = () => {
-    navigation.navigate("Test");
+    navigation.navigate("Welcome");
   };
-
-  if (data.length === 0 || loading) {
-    return (
-      <View>
-        <Text>Loading..........</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
       <ScrollView style={styles.containerScrollView}>
         <ImageBackground
-          source={require("@images/first_pic.png")}
+          source={require("@images/anlene_cofee.png")}
           resizeMode="cover"
           style={styles.styleImage}
         >
           <ComponentTop />
+
         </ImageBackground>
+
         <ComponentBottom goToScreen={goToScreen} />
       </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   styleImage: {
     flex: 1,
-    paddingBottom: 300,
+   paddingBottom: 350,
+   marginBottom: 210
   },
   container: {
     flex: 1,
@@ -57,5 +50,8 @@ const styles = StyleSheet.create({
   containerScrollView: {
     flex: 1,
     backgroundColor: colorPuplic.greenWeak,
+    position:'relative'
   },
 });
+
+export default PageFive;

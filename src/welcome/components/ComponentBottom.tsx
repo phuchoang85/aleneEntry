@@ -2,11 +2,20 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
-import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
+import {
+  colorLinearPublic,
+  colorPuplic,
+  stylesTextPuplic,
+} from "@/constant/stylesPuplic";
 
 const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
   return (
-    <BoxLinear styles={styles.containerBottom} direction={"top"}>
+    <BoxLinear
+      colors={colorLinearPublic.mauKV}
+      styles={styles.containerBottom}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 0.1 }}
+    >
       <View style={styles.buttonRed}>
         <ButtonStrokeLinear content="KIỂM TRA NGAY" onPress={goToScreen} />
       </View>
@@ -42,8 +51,8 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
 const styles = StyleSheet.create({
   containerBottom: {
     height: "100%",
-    marginTop: 420,
     paddingTop: 30,
+    backgroundColor:colorPuplic.white
   },
   buttonRed: {
     position: "absolute",

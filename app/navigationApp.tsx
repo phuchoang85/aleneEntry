@@ -6,7 +6,9 @@ import Welcome from "@/src/welcome/Welcome";
 import Test from "@/src/test/Test";
 import Submit from "@/src/submit/Submit";
 import { useDispatch } from "react-redux";
-import { restart } from "@/redux/slice/ResultSlice";
+import { questionSelect, restart } from "@/redux/slice/ResultSlice";
+import PageFour from "@/src/pageFour/PageFour";
+import PageFive from "@/src/pageFive/PageFive";
 
 const NavigationApp = () => {
   const Stack = createNativeStackNavigator<RootStackParams>();
@@ -24,7 +26,7 @@ const NavigationApp = () => {
         options={{ headerShown: false }}
         listeners={{
           beforeRemove: () => {
-            dispatch(restart());
+            dispatch(questionSelect(null));
           },
         }}
       />
@@ -32,11 +34,16 @@ const NavigationApp = () => {
         name="Submit"
         component={Submit}
         options={{ headerShown: false }}
-        listeners={{
-          beforeRemove: () => {
-            dispatch(restart());
-          },
-        }}
+      />
+      <Stack.Screen
+        name="PageFour"
+        component={PageFour}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PageFive"
+        component={PageFive}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

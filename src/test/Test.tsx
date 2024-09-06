@@ -78,6 +78,7 @@ const Test = () => {
   useFocusEffect(
     useCallback(() => {
       selectFirstQuestion();
+      restartQuestion();
       Animated.timing(animatedValue, {
         toValue: 0,
         duration: 1000,

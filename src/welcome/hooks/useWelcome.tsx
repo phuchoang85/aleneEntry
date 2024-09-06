@@ -9,12 +9,12 @@ export const useWelcome = () => {
   const { data, loading } = useSelector((state: RootState) => state.dataResult);
 
   useEffect(() => {
+    dispatch(fetchQuestionAsync());
+  }, []);
+
+  useEffect(() => {
     if (data.length > 0 && !loading) {
       dispatch(updateDataResult(data));
-    }
-
-    if (data.length === 0 && !loading) {
-      dispatch(fetchQuestionAsync());
     }
   }, [data]);
 

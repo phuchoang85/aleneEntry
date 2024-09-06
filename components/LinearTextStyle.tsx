@@ -6,9 +6,14 @@ import { LinearGradient } from "expo-linear-gradient";
 const LinearTextStyle = ({
   styles,
   children,
+  colors,
 }: {
   styles: any;
   children: React.ReactNode;
+  colors: {
+    colors: string[];
+    locations: number[];
+  };
 }) => {
   return (
     <MaskedView
@@ -16,8 +21,8 @@ const LinearTextStyle = ({
       maskElement={<Text style={styles}>{children}</Text>}
     >
       <LinearGradient
-        colors={colorLinearPublic.linearYellowhao.colors}
-        locations={colorLinearPublic.linearYellowhao.locations}
+        colors={colors.colors}
+        locations={colors.locations}
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 0.5 }}
         style={{ flex: 1 }}

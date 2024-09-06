@@ -91,6 +91,17 @@ export const colorLinearPublic = {
     ],
     locations: [0, 0.24, 0.72, 1],
   },
+  mauKV2: {
+    colors: [
+      "rgba(46, 130, 13, 0.1)",
+      "rgba(39, 117, 13, 0.7)",
+      "rgba(35, 110, 13, 0.85)",
+      "rgba(32, 104, 13, 0.9)",
+      "#1F660D",
+      "#0E470E",
+    ],
+    locations: [0, 0.2, 0.3, 0.4, 0.6, 1],
+  },
   luuy: {
     colors: ["#FD9500", "#FEBF00", "#FB8402"],
     locations: [0, 0.53, 1],
@@ -106,7 +117,7 @@ export const colorPuplic = {
   RED: "#C6463A",
   yellow: "#ECD24A",
   greenStrong: "#478449",
-  greenWeak: "#73A442",
+  greenWeak: "#0E470E",
   white: "#FFFFFF",
   gray1: "#464646",
   text: "#FFC200",
@@ -346,5 +357,19 @@ export const stylesTextPuplic = StyleSheet.create({
     fontFamily: "SVN-Gotham Regular",
     fontStyle: "italic",
     lineHeight: 13,
+  },
+  text10bold: {
+    fontSize: 10,
+    fontWeight: "bold",
+    fontFamily: "SVN-Gotham Regular",
+    fontStyle: "normal",
+    lineHeight: 13,
+  },
+  text6reg: {
+    fontSize: 6,
+    fontWeight: "normal",
+    fontFamily: "SVN-Gotham Regular",
+    fontStyle: "normal",
+    lineHeight: 10,
   },
 });

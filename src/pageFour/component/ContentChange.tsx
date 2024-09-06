@@ -19,22 +19,9 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
     }
   };
 
-  const retunContent = () => {
-    if (listQuest[3].status === "bad") {
-      return "Bạn có hệ Cơ-Xương-Khớp linh hoạt và có vẻ sức đề kháng của bạn cũng tốt.";
-    } else if (listQuest.find((ele) => ele.status === "bad")) {
-      return "Tuy rằng có vẻ bạn đang có đề kháng tốt nhưng cần quan tâm đến hệ vận động nhiều hơn nhé bởi sau 40 tuổi,...";
-    } else {
-      return "Tuy rằng có vẻ bạn đang có hệ vận động tốt nhưng cần chú ý đến đến sức đề kháng hơn nhé...";
-    }
-  };
-
   return (
     <>
-      <Text style={[stylesTextPuplic.text13bold, returnColor()]}>
-        HOÀN THÀNH BÀI KIỂM TRA
-      </Text>
-      {listQuest.find((ele) => ele.status !== "good") ? (
+      {listQuest.find((ele) => ele.status === "bad") ? (
         <Text style={[stylesTextPuplic.text26bold, returnColor()]}>
           LƯU Ý MỘT CHÚT!
         </Text>
@@ -48,15 +35,6 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
           </LinearTextStyle>
         </View>
       )}
-
-      <Text style={[stylesTextPuplic.text12bold, styles.styleTextWhite]}>
-        {retunContent()}
-      </Text>
-
-      <Text style={[stylesTextPuplic.text15bold, styles.styleTextWhite]}>
-        Điền thông tin bên dưới để xem đầy đủ kết quả và nhận ngay Voucher ưu
-        đãi lên đến 100.000đ đến từ Anlene.
-      </Text>
     </>
   );
 };
@@ -71,8 +49,8 @@ const styles = StyleSheet.create({
   },
   styleTextYellow: {
     color: colorPuplic.yellow,
-    textAlign: "center",
     height: 36,
+    textAlign: "center",
   },
   styleTextGreen: {
     color: colorPuplic.greenStrong,

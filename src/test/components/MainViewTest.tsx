@@ -1,11 +1,7 @@
-import {
-  StyleSheet,
-  Animated,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, Animated, Dimensions } from "react-native";
 import React from "react";
 import LinearTextStyle from "@/components/LinearTextStyle";
-import { stylesTextPuplic } from "@/constant/stylesPuplic";
+import { colorLinearPublic, stylesTextPuplic } from "@/constant/stylesPuplic";
 import { initial, resultReq } from "@/constant/type";
 import ItemVideo from "./ItemVideo";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
@@ -21,7 +17,6 @@ const MainViewTest = ({
   nextQuestion: () => void;
   updateResultAQuestion: (status: "good" | "bad", result: resultReq) => void;
 }) => {
-
   const isAtTheEnd = () => {
     return resultQ.questionSelect?.id == 4;
   };
@@ -50,6 +45,7 @@ const MainViewTest = ({
   return (
     <>
       <LinearTextStyle
+        colors={colorLinearPublic.linearYellowhao}
         styles={[stylesTextPuplic.text22regular, styles.linearText]}
       >
         Kiểm tra {resultQ.questionSelect?.content}

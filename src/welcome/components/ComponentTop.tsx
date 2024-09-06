@@ -3,19 +3,31 @@ import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import HeaderPage from "@/components/HeaderPage";
 import LinearTextStyle from "@/components/LinearTextStyle";
-import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
+import {
+  colorLinearPublic,
+  colorPuplic,
+  stylesTextPuplic,
+} from "@/constant/stylesPuplic";
 
 const ComponentTop = () => {
   return (
-    <BoxLinear styles={styles.styleboxTop} direction={"down"}>
-      <HeaderPage
-        acctionLeft={() => null}
-        imageLeft={null}
-        numberPage="1"
-        acctionRight={() => null}
-        imageRight={require("@images/logo.png")}
-      />
+    <BoxLinear
+      colors={colorLinearPublic.mauKV}
+      styles={styles.styleboxTop}
+      start={{x: 0.5, y: 1.7}}
+      end={{x: 0.5, y: 0}}
+    >
+      <View style={{ paddingHorizontal: 24 }}>
+        <HeaderPage
+          acctionLeft={() => null}
+          imageLeft={null}
+          numberPage="1"
+          acctionRight={() => null}
+          imageRight={require("@images/logo.png")}
+        />
+      </View>
       <LinearTextStyle
+        colors={colorLinearPublic.linearYellowhao}
         styles={[stylesTextPuplic.text22regular, styles.containerText]}
       >
         TẾT BẬN RỘN CƠ-XƯƠNG-KHỚP CÓ KHỎE ĐỂ CHU TOÀN?
@@ -24,15 +36,7 @@ const ComponentTop = () => {
         Trăm công nghìn việc dịp cận Tết mà cơ thể nhức mỏi, làm sao chu toàn?
       </Text>
 
-      <Text
-        style={[
-          stylesTextPuplic.text12reg,
-          styles.containerSmallText,
-          {
-            backgroundColor: "transparent",
-          },
-        ]}
-      >
+      <Text style={[stylesTextPuplic.text12reg, styles.containerSmallText]}>
         Ngay lúc này, hãy{" "}
         <Text style={{ color: colorPuplic.text }}>
           Kiểm tra Sức khỏe Cơ-Xương-Khớp{`\n`}
