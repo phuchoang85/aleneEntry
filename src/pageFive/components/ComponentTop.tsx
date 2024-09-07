@@ -9,7 +9,13 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 
-const ComponentTop = () => {
+const ComponentTop = ({
+  goBack,
+  goHome,
+}: {
+  goBack: () => void;
+  goHome: () => void;
+}) => {
   return (
     <BoxLinear
       colors={colorLinearPublic.mauKV2}
@@ -17,15 +23,13 @@ const ComponentTop = () => {
       start={{ x: 0.5, y: 1 }}
       end={{ x: 0.5, y: 0 }}
     >
-      <View style={{ paddingHorizontal: 24 }}>
-        <HeaderPage
-          acctionLeft={() => null}
-          imageLeft={null}
-          numberPage="5"
-          acctionRight={() => null}
-          imageRight={require("@images/logo.png")}
-        />
-      </View>
+      <HeaderPage
+        acctionLeft={goBack}
+        imageLeft={require("@images/arrow_back.png")}
+        imageRight={require("@images/home.png")}
+        numberPage="5"
+        acctionRight={goHome}
+      />
 
       <Image source={require("@images/logo.png")} style={styles.image} />
       <LinearTextStyle
@@ -60,7 +64,9 @@ const ComponentTop = () => {
 const styles = StyleSheet.create({
   image: {
     alignSelf: "center",
-    marginBottom: 16,
+    width: 98,
+    height: 27,
+    marginBottom: 16
   },
   styleboxTop: {
     width: "100%",

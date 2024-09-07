@@ -1,9 +1,7 @@
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
-  Image,
   ImageBackground,
 } from "react-native";
 import React from "react";
@@ -20,6 +18,13 @@ const PageFive = () => {
   const goToScreen = () => {
     navigation.navigate("Welcome");
   };
+  const goHome = () =>{
+    navigation.navigate("Welcome");
+  }
+
+  const goBack = () =>{
+    navigation.goBack();
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={styles.containerScrollView}>
@@ -28,8 +33,7 @@ const PageFive = () => {
           resizeMode="cover"
           style={styles.styleImage}
         >
-          <ComponentTop />
-
+          <ComponentTop goHome={goHome} goBack={goBack} />
         </ImageBackground>
 
         <ComponentBottom goToScreen={goToScreen} />
@@ -41,8 +45,8 @@ const PageFive = () => {
 const styles = StyleSheet.create({
   styleImage: {
     flex: 1,
-   paddingBottom: 350,
-   marginBottom: 210
+    paddingBottom: 350,
+    marginBottom: 210,
   },
   container: {
     flex: 1,
@@ -50,7 +54,8 @@ const styles = StyleSheet.create({
   containerScrollView: {
     flex: 1,
     backgroundColor: colorPuplic.greenWeak,
-    position:'relative'
+    position: "relative",
+    paddingTop: 15,
   },
 });
 

@@ -1,10 +1,11 @@
-import { StatusBar} from "react-native";
+import { StatusBar } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/redux/store";
 import NavigationApp from "./navigationApp";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export type RootStackParams = {
   Test: any;
@@ -37,12 +38,14 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <StatusBar
           translucent={true}
-          backgroundColor="rgba(0, 0, 0, 0.5)"
+          backgroundColor="rgba(0, 0, 0, 0)"
           barStyle={"light-content"}
         />
-        <NavigationContainer linking={linking} independent={true}>
-          <NavigationApp />
-        </NavigationContainer>
+        <SafeAreaView style={{ flex: 1, marginTop: -50 }}>
+          <NavigationContainer linking={linking} independent={true}>
+            <NavigationApp />
+          </NavigationContainer>
+        </SafeAreaView>
       </PersistGate>
     </Provider>
   );

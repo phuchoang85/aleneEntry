@@ -1,13 +1,11 @@
 import {
   View,
   StyleSheet,
-  Image,
   ScrollView,
   Text,
   ImageBackground,
 } from "react-native";
 import React from "react";
-import { colorPuplic } from "@/constant/stylesPuplic";
 import ComponentTop from "./components/ComponentTop";
 import ComponentBottom from "./components/ComponentBottom";
 import { useNavigation } from "@react-navigation/native";
@@ -56,6 +54,7 @@ const styles = StyleSheet.create({
   },
   containerScrollView: {
     flex: 1,
-    backgroundColor: colorPuplic.greenWeak,
+    paddingTop: 15,
+    backgroundColor: '#13500E',
   },
 });

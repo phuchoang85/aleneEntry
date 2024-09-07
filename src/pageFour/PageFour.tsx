@@ -3,7 +3,6 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  Dimensions,
   Image,
 } from "react-native";
 import React, { useState } from "react";
@@ -78,6 +77,7 @@ const PageFour = () => {
           numberPage="4"
         />
         <View style={styles.containerItem}>
+        <Image source={require("@images/logo.png")} style={styles.image} />
           <ContentChange listQuest={listQuest} />
           <Text style={[stylesTextPuplic.text13reg, styles.textWhite]}>
             {returnContent().content1}
@@ -127,8 +127,14 @@ const PageFour = () => {
 };
 
 const styles = StyleSheet.create({
+  image:{
+    width: 98,
+    height: 27,
+    marginBottom: 8
+  },
   container: {
     flex: 1,
+    paddingTop: 7.5,
   },
   containerItem: {
     flex: 1,
