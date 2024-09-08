@@ -3,6 +3,8 @@ import {
   StyleSheet,
   ScrollView,
   ImageBackground,
+  Image,
+  Linking,
 } from "react-native";
 import React from "react";
 import { colorPuplic } from "@/constant/stylesPuplic";
@@ -16,7 +18,8 @@ const PageFive = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToScreen = () => {
-    navigation.navigate("PageSix");
+    Linking.openURL("https://www.lazada.vn/shop/fonterra-official-store?tab=promotion&path=promotion-30470-0.html")
+    .catch(err => console.error('An error occurred', err));
   };
   const goHome = () =>{
     navigation.navigate("Welcome");
@@ -28,14 +31,17 @@ const PageFive = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.containerScrollView}>
-        <ImageBackground
+        {/* <ImageBackground
           source={require("@images/anlene_cofee.png")}
           resizeMode="cover"
-          style={styles.styleImage}
-        >
-          <ComponentTop goHome={goHome} goBack={goBack} />
-        </ImageBackground>
+          style={styles.styleImage} */}
 
+          <ComponentTop goHome={goHome} goBack={goBack} />
+        {/* </ImageBackground> */}
+        <Image
+          source={require("@images/anlene_cofee.png")}
+          style={styles.styleImage}
+        />
         <ComponentBottom goToScreen={goToScreen} />
       </ScrollView>
     </View>
@@ -45,8 +51,10 @@ const PageFive = () => {
 const styles = StyleSheet.create({
   styleImage: {
     flex: 1,
-    paddingBottom: 350,
-    marginBottom: 210,
+    position:'absolute',
+    top: 0,
+    zIndex: -1,
+    alignSelf:'center'
   },
   container: {
     flex: 1,

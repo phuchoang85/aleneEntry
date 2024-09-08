@@ -33,7 +33,7 @@ const App = () => {
       },
     },
   };
-  
+
   const firebaseConfig = {
     apiKey: process.env.EXPO_PUBLIC_APIKEY || "",
     authDomain: process.env.EXPO_PUBLIC_AUTHDOMAIN || "",
@@ -45,7 +45,7 @@ const App = () => {
     databaseURL: process.env.EXPO_PUBLIC_DATABASEURL || "",
   };
 
-  if(Platform.OS === "web"){
+  if (Platform.OS === "web") {
     firebase.initializeApp(firebaseConfig);
   }
 

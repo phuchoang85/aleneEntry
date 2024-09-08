@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     width: 24,
     backgroundColor: "green",
     height: 24,
-    paddingBottom: 2,
   },
   container: {
     position: "relative",

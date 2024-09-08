@@ -10,8 +10,13 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import { ResizeMode, Video } from "expo-av";
 import { resultReq } from "@/constant/type";
 import ButtonSelect from "./ButtonSelect";
-import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
+import {
+  colorLinearPublic,
+  colorPuplic,
+  stylesTextPuplic,
+} from "@/constant/stylesPuplic";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 const videoDemo = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const ItemVideo = ({
@@ -34,6 +39,10 @@ const ItemVideo = ({
   const reponsiveVideo = () => {
     if (MAX_WIDTH > 720) return { maxWidth: 225, maxHeight: 225 };
     else return null;
+  };
+
+  const isSelectedStatus = () => {
+    return data?.status;
   };
   useEffect(() => {
     if (questionSelected) {
@@ -74,8 +83,7 @@ const ItemVideo = ({
             ...reponsiveVideo(),
             borderWidth: data.status !== "noSelect" ? 3 : 0,
 
-            borderColor:
-              data.status === "good" ? '#73A442' : colorPuplic.red,
+            borderColor: data.status === "good" ? "#73A442" : colorPuplic.red,
           },
         ]}
       >
@@ -104,27 +112,54 @@ const ItemVideo = ({
       </Text>
 
       <View style={styles.containerButton}>
-        <ButtonSelect
-          handleButtonPress={() => handleButtonPress(data, "good")}
-          content="Được"
-          image={require("@images/yes.png")}
-        />
+        <LinearGradient
+          colors={colorLinearPublic.goldLinear.colors}
+          locations={colorLinearPublic.goldLinear.locations}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 0 }}
+          style={[
+            styles.containerButtonSelect,
+            { padding: isSelectedStatus() === 'good' ? 2 : null },
+          ]}
+        >
+          <ButtonSelect
+            handleButtonPress={() => handleButtonPress(data, "good")}
+            content="Được"
+            image={require("@images/yes.png")}
+          />
+        </LinearGradient>
 
-        <ButtonSelect
-          handleButtonPress={() => handleButtonPress(data, "bad")}
-          content="Không được"
-          image={require("@images/no.png")}
-        />
+        <LinearGradient
+          colors={colorLinearPublic.goldLinear.colors}
+          locations={colorLinearPublic.goldLinear.locations}
+          start={{ x: 0.5, y: 0 }}
+          end={{ x: 0.5, y: 0 }}
+          style={[
+            styles.containerButtonSelect,
+            { padding: isSelectedStatus() === 'bad' ? 2 : null },
+          ]}
+        >
+          <ButtonSelect
+            handleButtonPress={() => handleButtonPress(data, "bad")}
+            content="Không được"
+            image={require("@images/no.png")}
+          />
+        </LinearGradient>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  containerButtonSelect: {
+    width: 90,
+    height: 90,
+    borderRadius: 12
+  },
   container: {
     marginRight: 24,
     width: MAX_WIDTH - 48,
-    justifyContent:'space-between',
+    justifyContent: "space-between",
     height: 408,
   },
   viewVideo: {

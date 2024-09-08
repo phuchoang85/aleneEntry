@@ -3,7 +3,7 @@ import {
   StyleSheet,
   ScrollView,
   Text,
-  ImageBackground,
+  Image,
 } from "react-native";
 import React from "react";
 import ComponentTop from "./components/ComponentTop";
@@ -31,13 +31,11 @@ export default function Welcome() {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.containerScrollView}>
-        <ImageBackground
+        <ComponentTop />
+        <Image
           source={require("@images/first_pic.png")}
-          resizeMode="cover"
           style={styles.styleImage}
-        >
-          <ComponentTop />
-        </ImageBackground>
+        />
         <ComponentBottom goToScreen={goToScreen} />
       </ScrollView>
     </View>
@@ -47,14 +45,18 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   styleImage: {
     flex: 1,
-    paddingBottom: 300,
+    position:'absolute',
+    top: 0,
+    zIndex: -1,
+    alignSelf:'center'
   },
   container: {
     flex: 1,
+    position:'relative'
   },
   containerScrollView: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#13500E',
+    backgroundColor: "#13500E",
   },
 });

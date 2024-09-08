@@ -64,6 +64,13 @@ const Test = () => {
     }
   };
 
+  const checkStatus = () =>{
+    if(resultQ.questionList.filter(question => question.status === "noSelect").length === 0){
+      return false;
+    }
+    return true;
+  } 
+
   const goToPageSubmit = () => {
     setIsOpenModal(false);
     navigation.navigate("Submit");
@@ -117,14 +124,12 @@ const Test = () => {
               styles.buttonAccept,
               {
                 backgroundColor:
-                  resultQ.questionList[3].status !== "noSelect"
-                    ? colorPuplic.RED
-                    : "#B8B8B8",
+                checkStatus()
+                    ? "#B8B8B8"
+                    : colorPuplic.RED,
               },
             ]}
-            disabled={
-              resultQ.questionList[3].status !== "noSelect" ? false : true
-            }
+            disabled={  checkStatus() }
             onPress={() => setIsOpenModal(true)}
           >
             <Text style={[stylesTextPuplic.text16bold, styles.styleTextNormal]}>

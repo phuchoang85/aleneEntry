@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderColor: colorPuplic.white,
     alignSelf: "center",
     position:'absolute',
-    top: -35,
+    top: -20,
     zIndex: 3
   },
   containerWhite: {

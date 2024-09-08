@@ -1,14 +1,12 @@
-import { View, Text, Image, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
-import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
 import {
   colorLinearPublic,
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import CardSale from "./CardSale";
-import NormalButton from "@/components/NormalButton";
 
 const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
   return (
@@ -16,7 +14,7 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
       colors={colorLinearPublic.mauKV2}
       styles={styles.containerBottom}
       start={{ x: 0.5, y: 0 }}
-      end={{ x: 0.5, y: 0.3 }}
+      end={{ x: 0.5, y: 0.1 }}
     >
       <CardSale />
 
@@ -32,14 +30,16 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
         </Text>
       </Pressable>
 
-      <Text
-        style={[stylesTextPuplic.text10book, styles.continerTextWhite]}
-      >
+      <Text style={[stylesTextPuplic.text10book, styles.continerTextWhite]}>
         * Voucher chỉ áp dụng cho đơn hàng mua các sản phẩm Anlene Gold 3X,
         Anlene Gold 5X tại gian hàng Fonterra Official Retail Store trên Lazada
       </Text>
       <Text
-        style={[stylesTextPuplic.text10book, styles.continerTextWhite,{marginTop: 4}]}
+        style={[
+          stylesTextPuplic.text10book,
+          styles.continerTextWhite,
+          { marginTop: 4 },
+        ]}
       >
         * Voucher chỉ áp dụng cho đơn hàng có giá trị từ 200.000đ
       </Text>
@@ -49,11 +49,10 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
 
 const styles = StyleSheet.create({
   containerBottom: {
-    paddingTop: 80,
-    paddingBottom:30,
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
+    paddingTop: 100,
+    paddingBottom: 30,
+    marginTop: 350,
+    paddingHorizontal: 18
   },
   buttonRed: {
     position: "absolute",

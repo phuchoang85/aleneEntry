@@ -95,12 +95,12 @@ export const colorLinearPublic = {
     colors: [
       "rgba(46, 130, 13, 0.1)",
       "rgba(39, 117, 13, 0.7)",
-      "rgba(35, 110, 13, 0.85)",
-      "rgba(32, 104, 13, 0.9)",
+      "rgba(35, 110, 13, 1)",
+      "rgba(32, 104, 13, 1)",
       "#1F660D",
       "#0E470E",
     ],
-    locations: [0, 0.2, 0.3, 0.4, 0.6, 1],
+    locations: [0, 0.1, 0.15, 0.4, 0.6, 1],
   },
   luuy: {
     colors: ["#FD9500", "#FEBF00", "#FB8402"],
