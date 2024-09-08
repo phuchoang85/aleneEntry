@@ -8,7 +8,13 @@ import {
 } from "@/constant/stylesPuplic";
 import CardSale from "./CardSale";
 
-const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
+const ComponentBottom = ({
+  goToScreen,
+  goToWeb,
+}: {
+  goToWeb: () => void;
+  goToScreen: () => void;
+}) => {
   return (
     <BoxLinear
       colors={colorLinearPublic.mauKV2}
@@ -18,7 +24,7 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
     >
       <CardSale />
 
-      <Pressable style={styles.button} onPress={goToScreen}>
+      <Pressable style={styles.button} onPress={goToWeb}>
         <Text style={[stylesTextPuplic.text20bold, styles.styleText]}>
           MUA NGAY
         </Text>
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     paddingBottom: 30,
     marginTop: 350,
-    paddingHorizontal: 18
+    paddingHorizontal: 18,
   },
   buttonRed: {
     position: "absolute",

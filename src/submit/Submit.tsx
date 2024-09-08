@@ -76,7 +76,7 @@ const Submit = () => {
           ? "Vui lòng nhập họ và tên (tối thiểu 5 ký tự)"
           : "";
       const emailError =
-        !input.email || !/\S+@\S+\.\S+/.test(input.email)
+        !input.email || !/\S+@gmail\.com$/.test(input.email)
           ? "Vui lòng nhập email hợp lệ"
           : "";
       const phoneError =
@@ -101,6 +101,19 @@ const Submit = () => {
   const finished = () => {
     try {
       if (!checkSubmitEnd() || !isChecked) {
+        return;
+      }
+
+      if (listQuest.filter((ele) => ele.status === "noSelect").length > 0) {
+        const mess = "Bạn chưa chọn kết quả xong";
+        setError((prev) => {
+          return {
+            ...prev,
+            name: mess,
+            email: mess,
+            phone: mess,
+          };
+        });
         return;
       }
       createFormUser(input.name, input.email, input.phone);
@@ -224,8 +237,12 @@ const Submit = () => {
 
           <NormalButton
             backgroundColor={
-              (!input.email || !input.name || !input.phone) ||
-              (error.name || error.email || error.phone)
+              !input.email ||
+              !input.name ||
+              !input.phone ||
+              error.name ||
+              error.email ||
+              error.phone
                 ? colorPuplic.grey
                 : colorPuplic.RED
             }
@@ -273,7 +290,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 7.5,
+    paddingTop: 22.5,
   },
   containerView: {
     flex: 1,

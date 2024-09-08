@@ -17,9 +17,13 @@ import { RootStackParams } from "@/app";
 const PageFive = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
-  const goToScreen = () => {
+  const goToWeb = () => {
     Linking.openURL("https://www.lazada.vn/shop/fonterra-official-store?tab=promotion&path=promotion-30470-0.html")
     .catch(err => console.error('An error occurred', err));
+  };
+
+  const goToScreen = () => {
+    navigation.navigate("PageSix");
   };
   const goHome = () =>{
     navigation.navigate("Welcome");
@@ -42,7 +46,7 @@ const PageFive = () => {
           source={require("@images/anlene_cofee.png")}
           style={styles.styleImage}
         />
-        <ComponentBottom goToScreen={goToScreen} />
+        <ComponentBottom goToScreen={goToScreen} goToWeb={goToWeb}/>
       </ScrollView>
     </View>
   );
@@ -63,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colorPuplic.greenWeak,
     position: "relative",
-    paddingTop: 15,
+    paddingTop: 45,
   },
 });
 

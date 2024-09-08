@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   containerScrollView: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 45,
     backgroundColor: "#13500E",
   },
 });

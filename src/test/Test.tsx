@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 45,
   },
   containerScrollView: {
     flex: 1,

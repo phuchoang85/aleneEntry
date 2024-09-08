@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   containerScrollView: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 45,
   },
   image: {
     alignSelf: "center",
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 20,
     width: "100%",
-    marginBottom: 26,
+    marginBottom: 50,
   },
 });
 

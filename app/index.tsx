@@ -1,5 +1,5 @@
 import { Platform, StatusBar } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -33,21 +33,7 @@ const App = () => {
       },
     },
   };
-
-  const firebaseConfig = {
-    apiKey: process.env.EXPO_PUBLIC_APIKEY || "",
-    authDomain: process.env.EXPO_PUBLIC_AUTHDOMAIN || "",
-    projectId: process.env.EXPO_PUBLIC_PROJECTID || "",
-    storageBucket: process.env.EXPO_PUBLIC_STORAGEBUCKET || "",
-    messagingSenderId: process.env.EXPO_PUBLIC_MESSAGINGSENDERID || "",
-    appId: process.env.EXPO_PUBLIC_APPID || "",
-    measurementId: process.env.EXPO_PUBLIC_MEASUREMENTID || "",
-    databaseURL: process.env.EXPO_PUBLIC_DATABASEURL || "",
-  };
-
-  if (Platform.OS === "web") {
-    firebase.initializeApp(firebaseConfig);
-  }
+ 
 
   return (
     <Provider store={store}>
