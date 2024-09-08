@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 60,
     marginBottom: 8,
   },
   styleTextNormal: {

@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/redux/store";
 import NavigationApp from "./navigationApp";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import * as firebase from "@react-native-firebase/app";
 export type RootStackParams = {
   Test: any;
   Welcome: any;
@@ -33,6 +33,21 @@ const App = () => {
       },
     },
   };
+  
+  const firebaseConfig = {
+    apiKey: process.env.EXPO_PUBLIC_APIKEY || "",
+    authDomain: process.env.EXPO_PUBLIC_AUTHDOMAIN || "",
+    projectId: process.env.EXPO_PUBLIC_PROJECTID || "",
+    storageBucket: process.env.EXPO_PUBLIC_STORAGEBUCKET || "",
+    messagingSenderId: process.env.EXPO_PUBLIC_MESSAGINGSENDERID || "",
+    appId: process.env.EXPO_PUBLIC_APPID || "",
+    measurementId: process.env.EXPO_PUBLIC_MEASUREMENTID || "",
+    databaseURL: process.env.EXPO_PUBLIC_DATABASEURL || "",
+  };
+
+  if(Platform.OS === "web"){
+    firebase.initializeApp(firebaseConfig);
+  }
 
   return (
     <Provider store={store}>

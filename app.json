@@ -1,21 +1,5 @@
 {
   "expo": {
-    "linking": {
-      "prefixes": ["anlene://", "https://anlene.com"], 
-      "config": {
-        "screens": {
-          "Welcome": {
-            "path": "Welcome"
-          },
-          "Test": {
-            "path": "Test"
-          },
-          "Submit": {
-            "path": "Submit" 
-          }
-        }
-      }
-    },
     "name": "aleneEntry",
     "slug": "aleneEntry",
     "version": "1.0.0",

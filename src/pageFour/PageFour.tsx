@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingHorizontal: 18,
+    paddingBottom: 30,
   },
   textWhite: {
     color: colorPuplic.white,

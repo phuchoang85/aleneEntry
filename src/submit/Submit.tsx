@@ -119,8 +119,8 @@ const Submit = () => {
 
     if (message) {
       // console.log("thành công " + message);
-      Alert.alert("Thông báo","Lưu thành công");
-      navigation.navigate('PageFour');
+      Alert.alert("Thông báo", "Lưu thành công");
+      navigation.navigate("PageFour");
       clearMess();
     }
   }, [loading, errorApi, message]);
@@ -224,9 +224,10 @@ const Submit = () => {
 
           <NormalButton
             backgroundColor={
-              !error.email && !error.name && !error.phone
-                ? colorPuplic.RED
-                : colorPuplic.grey
+              (!input.email || !input.name || !input.phone) ||
+              (error.name || error.email || error.phone)
+                ? colorPuplic.grey
+                : colorPuplic.RED
             }
             content="HOÀN THÀNH"
             onPress={finished}
