@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
+    maxWidth: 600
   },
   textWhite: {
     color: colorPuplic.white,

@@ -16,7 +16,7 @@ const PageFive = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToScreen = () => {
-    navigation.navigate("Welcome");
+    navigation.navigate("PageSix");
   };
   const goHome = () =>{
     navigation.navigate("Welcome");

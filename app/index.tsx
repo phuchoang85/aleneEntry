@@ -1,4 +1,4 @@
-import { StatusBar } from "react-native";
+import { Platform, StatusBar } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -13,6 +13,7 @@ export type RootStackParams = {
   Submit: any;
   PageFour: any;
   PageFive: any;
+  PageSix: any;
 };
 
 const App = () => {
@@ -41,7 +42,9 @@ const App = () => {
           backgroundColor="rgba(0, 0, 0, 0)"
           barStyle={"light-content"}
         />
-        <SafeAreaView style={{ flex: 1, marginTop: -50 }}>
+        <SafeAreaView
+          style={{ flex: 1, marginTop: Platform.OS !== "web" ? -60 : null }}
+        >
           <NavigationContainer linking={linking} independent={true}>
             <NavigationApp />
           </NavigationContainer>

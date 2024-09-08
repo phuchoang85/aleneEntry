@@ -17,7 +17,7 @@ const BackgroundPage = ({
       colors={colors.colors}
       locations={colors.locations}
       start={{ x: 2, y: 2 }}
-      end={{ x: 0, y: -0 }}
+      end={{ x: 0, y: 0 }}
       style={styles}
     >
       {children}

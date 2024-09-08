@@ -75,7 +75,7 @@ const ItemVideo = ({
             borderWidth: data.status !== "noSelect" ? 3 : 0,
 
             borderColor:
-              data.status === "good" ? colorPuplic.greenWeak : colorPuplic.red,
+              data.status === "good" ? '#73A442' : colorPuplic.red,
           },
         ]}
       >
@@ -107,13 +107,13 @@ const ItemVideo = ({
         <ButtonSelect
           handleButtonPress={() => handleButtonPress(data, "good")}
           content="Được"
-          image={require("@images/good.png")}
+          image={require("@images/yes.png")}
         />
 
         <ButtonSelect
           handleButtonPress={() => handleButtonPress(data, "bad")}
           content="Không được"
-          image={require("@images/bad.png")}
+          image={require("@images/no.png")}
         />
       </View>
     </View>
@@ -124,11 +124,13 @@ const styles = StyleSheet.create({
   container: {
     marginRight: 24,
     width: MAX_WIDTH - 48,
+    justifyContent:'space-between',
+    height: 408,
   },
   viewVideo: {
     width: MAX_WIDTH - 48,
     height: MAX_WIDTH - 48,
-    borderRadius: 18,
+    borderRadius: 20,
     backgroundColor: "black",
   },
   video: {

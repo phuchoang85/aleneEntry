@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { questionSelect, restart } from "@/redux/slice/ResultSlice";
 import PageFour from "@/src/pageFour/PageFour";
 import PageFive from "@/src/pageFive/PageFive";
+import PageSix from "@/src/pageSix/PageSix";
 
 const NavigationApp = () => {
   const Stack = createNativeStackNavigator<RootStackParams>();
@@ -43,6 +44,11 @@ const NavigationApp = () => {
       <Stack.Screen
         name="PageFive"
         component={PageFive}
+        options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="PageSix"
+        component={PageSix}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { dataTestReducer } from "./slice/DataTestSlice";
 import { useDispatch } from "react-redux";
 import { createFormReducer } from "./slice/CreateFormSlice";
+import { Platform } from "react-native";
 const rootReducer = combineReducers({
   result: resultReducer,
   dataResult: dataTestReducer,
@@ -18,7 +19,8 @@ export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whiteList:["result"]
+  whiteList:["result"],
+  persistSession: Platform.OS !== "web",
 };
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer);
