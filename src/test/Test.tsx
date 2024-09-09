@@ -22,6 +22,7 @@ import { RootStackParams } from "@/app";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import ModalCustom from "@/components/ModalCustom";
 import { useTestPage } from "./hooks/useTestPage";
+import ContentTop from "./components/ContentTop";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const Test = () => {
   const navigation =
@@ -109,11 +110,7 @@ const Test = () => {
         />
 
         <View style={styles.containerPadding}>
-          <Text style={[stylesTextPuplic.text16bold, styles.styleTextNormal]}>
-            KIỂM TRA CƠ - XƯƠNG - KHỚP
-          </Text>
-
-          <StatusTest resultQ={resultQ} />
+          <ContentTop resultQ={resultQ} />
 
           <MainViewTest
             nextQuestion={nextQuestion}

@@ -114,6 +114,12 @@ const ItemVideo = ({
 
   return (
     <View style={[styles.container, reponsiveMaxView()]}>
+      {MAX_WIDTH >= 1024 && (
+        <Text style={[stylesTextPuplic.text16bold, styles.textContent]}>
+          Kiểm tra {data.content}
+        </Text>
+      )}
+
       <Pressable
         onPress={() => {
           setIsPlaying(!isPlaying);
@@ -161,7 +167,14 @@ const ItemVideo = ({
         )}
       </Pressable>
 
-      <Text style={[styles.textGuide, stylesTextPuplic.text15reg]}>
+      <Text
+        style={[
+          styles.textGuide,
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text18regular
+            : stylesTextPuplic.text15reg,
+        ]}
+      >
         {data.guide}
       </Text>
 
@@ -212,7 +225,6 @@ const styles = StyleSheet.create({
   },
   container: {
     width: MAX_WIDTH - 48,
-    justifyContent: "space-between",
     height: MAX_WIDTH >= 1024 ? 408 : "auto",
   },
   viewVideo: {
@@ -259,6 +271,11 @@ const styles = StyleSheet.create({
     gap: 20,
     alignSelf: "center",
     alignItems: "center",
+  },
+  textContent: {
+    textAlign: "center",
+    color: colorPuplic.white,
+    marginBottom: 8,
   },
 });
 

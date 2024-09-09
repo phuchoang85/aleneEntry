@@ -37,17 +37,19 @@ const MainViewTest = ({
       }).start();
       nextQuestion();
     }
-    
+
     updateResultAQuestion(status, result);
   };
   return (
     <>
-      <LinearTextStyle
-        colors={colorLinearPublic.linearYellowhao}
-        styles={[stylesTextPuplic.text22regular, styles.linearText]}
-      >
-        Kiểm tra {resultQ.questionSelect?.content}
-      </LinearTextStyle>
+      {MAX_WIDTH < 1024 && (
+        <LinearTextStyle
+          colors={colorLinearPublic.linearYellowhao}
+          styles={[stylesTextPuplic.text22regular, styles.linearText]}
+        >
+          Kiểm tra {resultQ.questionSelect?.content}
+        </LinearTextStyle>
+      )}
 
       <Animated.View
         style={[
