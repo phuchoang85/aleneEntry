@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -52,9 +46,9 @@ const PageFour = () => {
     navigation.navigate("Welcome");
   };
 
-  const goToPage = () =>{
+  const goToPage = () => {
     navigation.navigate("PageFive");
-  }
+  };
 
   const returnContent = () => {
     if (listQuest[3].status === "bad") {
@@ -77,7 +71,7 @@ const PageFour = () => {
           numberPage="4"
         />
         <View style={styles.containerItem}>
-        <Image source={require("@images/logo.png")} style={styles.image} />
+          <Image source={require("@images/logo.png")} style={styles.image} />
           <ContentChange listQuest={listQuest} />
           <Text style={[stylesTextPuplic.text13reg, styles.textWhite]}>
             {returnContent().content1}
@@ -117,9 +111,17 @@ const PageFour = () => {
             {returnContent().content3}
           </Text>
 
-          <ShowMoreText backgroundSubmit={backgroundSubmit} showMore={showMore} setShowMore={setShowMore} />
+          <ShowMoreText
+            backgroundSubmit={backgroundSubmit}
+            showMore={showMore}
+            setShowMore={setShowMore}
+          />
 
-          <ButtonStrokeLinear content="MUA NGAY" onPress={goToPage} />
+          <ButtonStrokeLinear
+            textSize={stylesTextPuplic.text20bold}
+            content="MUA NGAY"
+            onPress={goToPage}
+          />
         </View>
       </ScrollView>
     </BackgroundPage>
@@ -127,10 +129,10 @@ const PageFour = () => {
 };
 
 const styles = StyleSheet.create({
-  image:{
+  image: {
     width: 98,
     height: 27,
-    marginBottom: 8
+    marginBottom: 8,
   },
   container: {
     flex: 1,

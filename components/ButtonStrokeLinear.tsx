@@ -1,42 +1,56 @@
-import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Pressable,
+} from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  colorLinearPublic,
-  colorPuplic,
-  stylesTextPuplic,
-} from "@/constant/stylesPuplic";
+import { colorLinearPublic, colorPuplic } from "@/constant/stylesPuplic";
 
 const ButtonStrokeLinear = ({
   content,
   onPress,
+  textSize,
+  paddingButton,
+  isLeft,
 }: {
   content: string;
   onPress: () => void;
+  textSize: {};
+  paddingButton?: number;
+  isLeft?: boolean;
 }) => {
   return (
     <View style={styles.containerView}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={[stylesTextPuplic.text20bold, styles.styleText]}>
-          {content}
-        </Text>
-      </Pressable>
       <LinearGradient
         colors={colorLinearPublic.goldLinear.colors}
         locations={colorLinearPublic.goldLinear.locations}
-        style={styles.container}
+        style={[
+          styles.container,
+          {
+            alignSelf: isLeft ? "flex-start" : "center",
+          },
+        ]}
         start={{ x: 1, y: 0.1 }}
         end={{ x: 0.4, y: 0 }}
       >
-        <Text style={[stylesTextPuplic.text20bold, styles.styleText]}>
-          {content}
-        </Text>
+        <Pressable
+          style={[styles.button, { paddingHorizontal: paddingButton || 30 }]}
+          onPress={onPress}
+        >
+          <Text style={[textSize, styles.styleText]}>{content}</Text>
+        </Pressable>
       </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  containerView: {
+    width: "100%",
+  },
   styleText: {
     color: colorPuplic.white,
     textShadowColor: "rgba(0, 0, 0, 0.25)",
@@ -44,20 +58,9 @@ const styles = StyleSheet.create({
     textShadowRadius: 1,
     zIndex: 2,
   },
-  containerView: {
-    height: 50,
-    position: "relative",
-  },
   container: {
     borderRadius: 30,
-    height: 46,
-    position: "absolute",
-    top: 0,
-    zIndex: 0,
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    paddingHorizontal: 30,
+    padding: 2,
     shadowColor: "rgba(71, 2, 2, 1)",
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 5,
@@ -66,14 +69,11 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 28,
-    height: 42,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#B70002",
-    alignSelf: "center",
-    paddingHorizontal: 28,
-    top: 2,
-    zIndex: 1,
+    flex: 1,
+    paddingVertical: 10,
   },
 });
 export default ButtonStrokeLinear;

@@ -91,6 +91,15 @@ export const colorLinearPublic = {
     ],
     locations: [0, 0.24, 0.72, 1],
   },
+  mauKVBig: {
+    colors: [
+      "rgba(14, 71, 14, 0.1)",
+      "rgba(32, 104, 13, 1)",
+      "#2E820D",
+      "#13500E",
+    ],
+    locations: [0, 0.24, 0.72, 1],
+  },
   mauKV2: {
     colors: [
       "rgba(46, 130, 13, 0.1)",
@@ -147,6 +156,12 @@ export const stylesTextPuplic = StyleSheet.create({
     fontWeight: "bold",
     fontFamily: "SVN-Gotham Regular",
     lineHeight: 52,
+  },
+  text30bold: {
+    fontSize: 30,
+    fontWeight: "bold",
+    fontFamily: "SVN-Gotham Regular",
+    lineHeight: 40,
   },
   text28bold: {
     fontSize: 28,

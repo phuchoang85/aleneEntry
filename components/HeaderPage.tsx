@@ -10,11 +10,11 @@ import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
 
 type headerProp = {
-  imageLeft: ImageSourcePropType | null;
-  acctionLeft: () => void | null;
+  imageLeft?: ImageSourcePropType | null;
+  acctionLeft?: () => void | null;
   numberPage: string;
-  imageRight: ImageSourcePropType | null;
-  acctionRight: () => void | null;
+  imageRight?: ImageSourcePropType | null;
+  acctionRight?: () => void | null;
 };
 
 const HeaderPage = ({
