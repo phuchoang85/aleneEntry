@@ -64,15 +64,14 @@ const styles = StyleSheet.create({
   containerLine: {
     position: "absolute",
     bottom: 44,
-    width: MAX_WIDTH - 120,
+    width: MAX_WIDTH - 110,
     flexDirection: "row",
     zIndex: -1,
     left: 16,
   },
   line: {
-    height: 1,
     flex: 1,
-    borderWidth: 1,
+    borderWidth: 0.75,
     borderColor: "white",
   },
   container: {
