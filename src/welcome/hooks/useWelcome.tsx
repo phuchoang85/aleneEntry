@@ -13,7 +13,7 @@ export const useWelcome = () => {
   }, []);
 
   useEffect(() => {
-    if (data.length > 0 && !loading) {
+    if (!loading) {
       dispatch(updateDataResult(data));
     }
   }, [data]);

@@ -1,4 +1,3 @@
-import { questionList } from "@/constant/data";
 import { initial, resultReq } from "@/constant/type";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -23,7 +22,7 @@ const resultSlice = createSlice({
         state.questionSelect = action.payload;
     },
     restart: (state)=>{
-      state.questionList = questionList.map((item) => ({ ...item, status: 'noSelect' }));;
+      state.questionList = state.questionList.map((item) => ({ ...item, status: 'noSelect' }));;
     },
     updateDataResult:(state,action) =>{
       state.questionList = action.payload;

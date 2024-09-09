@@ -1,4 +1,4 @@
-import { StyleSheet, Animated, Dimensions } from "react-native";
+import { StyleSheet, Animated, Dimensions, View } from "react-native";
 import React from "react";
 import LinearTextStyle from "@/components/LinearTextStyle";
 import { colorLinearPublic, stylesTextPuplic } from "@/constant/stylesPuplic";
@@ -21,22 +21,24 @@ const MainViewTest = ({
     return resultQ.questionSelect?.id == 4;
   };
   const handleButtonPress = (result: resultReq, status: "good" | "bad") => {
+    if (
+      (resultQ.questionSelect?.status !== "noSelect" ||
+        result.status !== "noSelect") &&
+      MAX_WIDTH >= 1024
+    ) {
+      return;
+    }
 
-    if (!isAtTheEnd() && MAX_WIDTH < 720) {
+    if (!isAtTheEnd() && MAX_WIDTH < 1024) {
       Animated.timing(animatedValue, {
-        toValue: -(MAX_WIDTH - 24) * result.id,
+        toValue: -(MAX_WIDTH - 14) * result.id,
         duration: 500,
         useNativeDriver: true,
       }).start();
-    }
-
-    if (!isAtTheEnd()) {
       nextQuestion();
     }
-
-    if (result.status === "noSelect") {
-      updateResultAQuestion(status, result);
-    }
+    
+    updateResultAQuestion(status, result);
   };
   return (
     <>
@@ -51,7 +53,8 @@ const MainViewTest = ({
         style={[
           styles.containerListVideo,
           {
-            justifyContent: MAX_WIDTH > 720 ? "center" : "flex-start",
+            justifyContent: MAX_WIDTH >= 1024 ? "center" : "flex-start",
+            gap: MAX_WIDTH >= 1024 ? 20 : 34,
             transform: [{ translateX: animatedValue }],
           },
         ]}

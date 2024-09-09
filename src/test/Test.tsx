@@ -56,7 +56,7 @@ const Test = () => {
       updateQuestionSelectedStatusToNoSelect();
       if (MAX_WIDTH < 720) {
         Animated.timing(animatedValue, {
-          toValue: -(MAX_WIDTH - 24) * (idQuestionSelect - 2),
+          toValue: -(MAX_WIDTH - 14) * (idQuestionSelect - 2),
           duration: 500,
           useNativeDriver: true,
         }).start();
@@ -64,12 +64,15 @@ const Test = () => {
     }
   };
 
-  const checkStatus = () =>{
-    if(resultQ.questionList.filter(question => question.status === "noSelect").length === 0){
+  const checkStatus = () => {
+    if (
+      resultQ.questionList.filter((question) => question.status === "noSelect")
+        .length === 0
+    ) {
       return false;
     }
     return true;
-  } 
+  };
 
   const goToPageSubmit = () => {
     setIsOpenModal(false);
@@ -123,13 +126,10 @@ const Test = () => {
             style={[
               styles.buttonAccept,
               {
-                backgroundColor:
-                checkStatus()
-                    ? "#B8B8B8"
-                    : colorPuplic.RED,
+                backgroundColor: checkStatus() ? "#B8B8B8" : colorPuplic.RED,
               },
             ]}
-            disabled={  checkStatus() }
+            disabled={checkStatus()}
             onPress={() => setIsOpenModal(true)}
           >
             <Text style={[stylesTextPuplic.text16bold, styles.styleTextNormal]}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 60,
+    marginTop: 40,
     marginBottom: 8,
   },
   styleTextNormal: {
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
   containerPadding: {
     flex: 1,
     paddingHorizontal: 24,
-    overflow: "hidden",
   },
 });
 

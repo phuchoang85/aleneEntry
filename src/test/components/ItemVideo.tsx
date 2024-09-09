@@ -5,9 +5,16 @@ import {
   Image,
   StyleSheet,
   Pressable,
+  Platform,
+  ActivityIndicator,
 } from "react-native";
 import React, { memo, useEffect, useRef, useState } from "react";
-import { ResizeMode, Video } from "expo-av";
+import {
+  AVPlaybackStatus,
+  AVPlaybackStatusSuccess,
+  ResizeMode,
+  Video,
+} from "expo-av";
 import { resultReq } from "@/constant/type";
 import ButtonSelect from "./ButtonSelect";
 import {
@@ -17,7 +24,7 @@ import {
 } from "@/constant/stylesPuplic";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-const videoDemo = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
+import storage from "@react-native-firebase/storage";
 const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const ItemVideo = ({
   data,
@@ -29,16 +36,31 @@ const ItemVideo = ({
   questionSelected: resultReq | null;
 }) => {
   const navigation = useNavigation();
+  const [statusVideo, setStatus] = useState<AVPlaybackStatusSuccess>();
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<Video>(null);
+  const [videoFirebase, setvideoFirebase] = useState("");
   const reponsiveMaxView = () => {
-    if (MAX_WIDTH > 720) return { maxWidth: 225 };
+    if (MAX_WIDTH >= 1024) return { maxWidth: 225 };
     else return null;
   };
 
+  const isVideoLoaddingSucess = () => {
+    return (
+      statusVideo?.durationMillis !== undefined &&
+      statusVideo?.durationMillis > 1
+    );
+  };
+
   const reponsiveVideo = () => {
-    if (MAX_WIDTH > 720) return { maxWidth: 225, maxHeight: 225 };
+    if (MAX_WIDTH >= 1024) return { maxWidth: 225, maxHeight: 225 };
     else return null;
+  };
+
+  const hanldeCheckVideo = (data: resultReq, status: "good" | "bad") => {
+    if (isVideoLoaddingSucess()) {
+      handleButtonPress(data, status);
+    }
   };
 
   const isSelectedStatus = () => {
@@ -46,6 +68,10 @@ const ItemVideo = ({
   };
   useEffect(() => {
     if (questionSelected) {
+      loadVideoFromFireBase(data.video);
+    }
+
+    if (questionSelected && videoFirebase) {
       if (data.id === questionSelected?.id && videoRef.current && !isPlaying) {
         videoRef.current?.playAsync();
         setIsPlaying(true);
@@ -56,7 +82,12 @@ const ItemVideo = ({
         }
       }
     }
-  }, [questionSelected]);
+
+    if (MAX_WIDTH >= 1024) {
+      videoRef.current?.playAsync();
+      setIsPlaying(true);
+    }
+  }, [questionSelected, videoFirebase]);
 
   useEffect(() => {
     // Dừng video khi component unmount
@@ -67,6 +98,19 @@ const ItemVideo = ({
     });
     return unsubscribe;
   }, [navigation]);
+
+  const loadVideoFromFireBase = async (linkVideo: string) => {
+    await storage()
+      .ref("/" + linkVideo)
+      .getDownloadURL()
+      .then((url) => {
+        setvideoFirebase(url);
+      })
+      .catch((error) => {
+        console.error("Error getting download URL:", error);
+        setvideoFirebase("");
+      });
+  };
 
   return (
     <View style={[styles.container, reponsiveMaxView()]}>
@@ -88,12 +132,22 @@ const ItemVideo = ({
         ]}
       >
         <Video
-          source={{ uri: data.video || videoDemo }}
+          source={{ uri: videoFirebase }}
           isLooping
           ref={videoRef}
-          resizeMode={ResizeMode.CONTAIN}
+          resizeMode={ResizeMode.COVER}
+          onPlaybackStatusUpdate={(status: any) => setStatus(() => status)}
           style={styles.video}
+          videoStyle={styles.videoInLayout}
         />
+
+        {!isVideoLoaddingSucess() && (
+          <ActivityIndicator
+            size="large"
+            color="#0000ff"
+            style={styles.loadingVideo}
+          />
+        )}
 
         {data.status !== "noSelect" && (
           <Image
@@ -119,11 +173,11 @@ const ItemVideo = ({
           end={{ x: 0.5, y: 0 }}
           style={[
             styles.containerButtonSelect,
-            { padding: isSelectedStatus() === 'good' ? 2 : null },
+            { padding: isSelectedStatus() === "good" ? 2 : null },
           ]}
         >
           <ButtonSelect
-            handleButtonPress={() => handleButtonPress(data, "good")}
+            handleButtonPress={() => hanldeCheckVideo(data, "good")}
             content="Được"
             image={require("@images/yes.png")}
           />
@@ -136,11 +190,11 @@ const ItemVideo = ({
           end={{ x: 0.5, y: 0 }}
           style={[
             styles.containerButtonSelect,
-            { padding: isSelectedStatus() === 'bad' ? 2 : null },
+            { padding: isSelectedStatus() === "bad" ? 2 : null },
           ]}
         >
           <ButtonSelect
-            handleButtonPress={() => handleButtonPress(data, "bad")}
+            handleButtonPress={() => hanldeCheckVideo(data, "bad")}
             content="Không được"
             image={require("@images/no.png")}
           />
@@ -154,13 +208,12 @@ const styles = StyleSheet.create({
   containerButtonSelect: {
     width: 90,
     height: 90,
-    borderRadius: 12
+    borderRadius: 12,
   },
   container: {
-    marginRight: 24,
     width: MAX_WIDTH - 48,
     justifyContent: "space-between",
-    height: 408,
+    height: MAX_WIDTH >= 1024 ? 408 : "auto",
   },
   viewVideo: {
     width: MAX_WIDTH - 48,
@@ -169,8 +222,24 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   video: {
-    flex: 1,
     borderRadius: 16,
+    flex: 1,
+    maxWidth: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+    maxHeight: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+  },
+  videoInLayout: {
+    width: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+    height: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+    position: "absolute",
+    left: Platform.OS === "web" && MAX_WIDTH >= 1024 ? -20 : 0,
+  },
+  loadingVideo: {
+    borderRadius: 16,
+    width: "100%",
+    height: "100%",
+    maxWidth: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+    maxHeight: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+    backgroundColor: "white",
   },
   icon: {
     position: "absolute",

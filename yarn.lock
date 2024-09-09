@@ -2408,6 +2408,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-20.4.0.tgz#c6dffa240906f2a2c94c2563937c17a9f9779675"
   integrity sha512-owleZymOsq+Y1ed6nFduUo8GThCKpcXUC2J6OojYHjI+puM6VgBg8X8hrbIlh+btH6f76D6RUyqP39XV3jCRnQ==
 
+"@react-native-firebase/storage@^20.4.0":
+  version "20.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-20.4.0.tgz#9e5821ed53a93b4f8523b14553a4ac427d54a292"
+  integrity sha512-aqrg+Uo56hOODWjdnJddzFtMXZKj344Yv07R5VYcZOF9RMCMUyYTSPemG0k2tCrPoQnwl9ESWSlPqnUOUQskRg==
+
 "@react-native-masked-view/masked-view@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.3.1.tgz#5bd76f17004a6ccbcec03856893777ee91f23d29"

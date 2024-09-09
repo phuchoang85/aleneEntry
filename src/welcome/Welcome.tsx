@@ -20,7 +20,7 @@ export default function Welcome() {
     navigation.navigate("Test");
   };
 
-  if (data.length === 0 || loading) {
+  if (loading) {
     return (
       <View>
         <Text>Loading..........</Text>
