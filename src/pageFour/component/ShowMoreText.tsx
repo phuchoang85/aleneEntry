@@ -1,11 +1,11 @@
-import { Text, Pressable, StyleSheet, View } from "react-native";
+import { Text, Pressable, StyleSheet, View, Dimensions } from "react-native";
 import React from "react";
 import {
   colorLinearPublic,
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const ShowMoreText = ({
   showMore,
   setShowMore,
@@ -27,13 +27,16 @@ const ShowMoreText = ({
         <Pressable onPress={handleShowMore}>
           <Text
             style={[
-              stylesTextPuplic.text12reg,
+              MAX_WIDTH >= 1024
+                ? stylesTextPuplic.text13reg
+                : stylesTextPuplic.text12reg,
               {
                 textDecorationLine: "underline",
                 color:
                   backgroundSubmit() === colorLinearPublic.luuy
                     ? colorPuplic.greenStrong
                     : colorPuplic.yellow,
+                textAlign: "center",
               },
             ]}
           >
@@ -42,7 +45,14 @@ const ShowMoreText = ({
         </Pressable>
       )}
       {showMore && (
-        <Text style={[stylesTextPuplic.text12italic, styles.textWhite]}>
+        <Text
+          style={[
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text13book
+              : stylesTextPuplic.text12italic,
+            styles.textWhite,
+          ]}
+        >
           *Anlene 3 Khoẻ với công thức MovePro chứa các dưỡng chất Đạm, Canxi,
           Collagen cùng các Vitamin, Khoáng chất giúp Cơ-Xương-Khớp chắc khỏe và
           tăng sức đề kháng, cho bạn thoải mái vận động, tận hưởng cuộc sống.
@@ -55,10 +65,11 @@ const ShowMoreText = ({
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
+    width: "100%",
   },
   textWhite: {
     color: colorPuplic.white,
-    textAlign: "center",
+    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
   },
 });
 

@@ -24,7 +24,7 @@ const PageSix = () => {
     navigation.navigate("Welcome");
   };
   return (
-    <BackgroundPage colors={colorLinearPublic.mauKV} styles={styles.container}>
+    <BackgroundPage colors={colorLinearPublic.linear} styles={styles.container}>
       <ScrollView style={styles.containerScrollView}>
         <HeaderPage
           acctionLeft={goBack}

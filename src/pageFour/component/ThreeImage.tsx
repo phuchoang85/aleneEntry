@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import React from "react";
 import {
   colorLinearPublic,
@@ -6,7 +6,7 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import BackgroundPage from "@/components/BackgroundPage";
-
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const ThreeImage = () => {
   type data = {
     id: number;
@@ -39,15 +39,29 @@ const ThreeImage = () => {
   const _renderItem = (item: data) => {
     return (
       <View key={item.id} style={styles.containerItem}>
-        <Image source={item.image} />
+        <Image source={item.image} style={styles.image} />
         <BackgroundPage
           colors={colorLinearPublic.feedback}
           styles={styles.containerText}
         >
-          <Text style={[stylesTextPuplic.text12reg, styles.textWhite]}>
+          <Text
+            style={[
+              MAX_WIDTH >= 1024
+                ? stylesTextPuplic.text14regular
+                : stylesTextPuplic.text12reg,
+              styles.textWhite,
+            ]}
+          >
             {item.contentWhite.toLocaleUpperCase()}
           </Text>
-          <Text style={[stylesTextPuplic.text12reg, styles.textYellow]}>
+          <Text
+            style={[
+              MAX_WIDTH >= 1024
+                ? stylesTextPuplic.text14regular
+                : stylesTextPuplic.text12reg,
+              styles.textYellow,
+            ]}
+          >
             {item.contentYellow.toLocaleUpperCase()}
           </Text>
         </BackgroundPage>
@@ -63,6 +77,10 @@ const ThreeImage = () => {
 };
 
 const styles = StyleSheet.create({
+  image: {
+    width: MAX_WIDTH >= 1024 ? 140 : 86,
+    height: MAX_WIDTH >= 1024 ? 140 : 86,
+  },
   containerItem: {
     flexDirection: "column",
     alignItems: "center",
@@ -74,9 +92,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colorPuplic.white,
     borderRadius: 8,
-    minWidth: 100,
+    minWidth: MAX_WIDTH >= 1024 ? 158 : 100,
     alignItems: "center",
-    paddingVertical: 5,
+    paddingVertical: MAX_WIDTH >= 1024 ? 10 : 5,
     paddingHorizontal: 8,
   },
   container: {
@@ -84,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    maxWidth: 600
+    maxWidth: 600,
   },
   textWhite: {
     color: colorPuplic.white,

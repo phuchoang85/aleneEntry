@@ -1,11 +1,11 @@
 import {
   View,
   Text,
-  Dimensions,
   StyleSheet,
   Image,
   ScrollView,
   Alert,
+  Dimensions,
 } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import BackgroundPage from "@/components/BackgroundPage";
@@ -24,7 +24,7 @@ import NormalButton from "@/components/NormalButton";
 import ContentChange from "./components/ContentChange";
 import { RootStackParams } from "@/app";
 import { useSubmit } from "./hooks/useSubmit";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const Submit = () => {
   const {
     listQuest,
@@ -82,7 +82,7 @@ const Submit = () => {
       const phoneError =
         !input.phone ||
         input.phone.length !== 10 ||
-        !/^\d{10}$/.test(input.phone)
+        !/^(09|03|07|08|05)\d{8}$/.test(input.phone)
           ? "Số điện thoại phải đúng định dạng"
           : "";
 
@@ -141,99 +141,106 @@ const Submit = () => {
   return (
     <BackgroundPage styles={styles.container} colors={backgroundSubmit()}>
       <ScrollView style={styles.container}>
+        <HeaderPage
+          acctionLeft={() => setIsOpenModal(true)}
+          acctionRight={acctionRight}
+          imageLeft={require("@images/arrow_back.png")}
+          imageRight={require("@images/home.png")}
+          numberPage="3"
+        />
         <View style={styles.containerItem}>
-          <HeaderPage
-            acctionLeft={() => setIsOpenModal(true)}
-            acctionRight={acctionRight}
-            imageLeft={require("@images/arrow_back.png")}
-            imageRight={require("@images/home.png")}
-            numberPage="3"
+          <Image source={require("@images/logo.png")} style={styles.imgLogo} />
+
+          <ContentChange listQuest={listQuest} />
+
+          <InputTextCustom
+            acctionSubmit={checkSubmitEnd}
+            data={input.name}
+            setData={(value) =>
+              setInput((prev) => {
+                return { ...prev, name: value };
+              })
+            }
+            error={error.name}
+            placeHolder="Nhập họ và tên"
+            isNeccessary={true}
+            title="Họ và tên:"
+            colorError={
+              backgroundSubmit() === colorLinearPublic.luuy
+                ? colorPuplic.greenStrong
+                : colorPuplic.yellow
+            }
+            keyboardType="numeric"
           />
-          <View style={styles.containerView}>
-            <Image
-              source={require("@images/logo.png")}
-              style={styles.imgLogo}
-            />
+          <InputTextCustom
+            acctionSubmit={checkSubmitEnd}
+            data={input.phone}
+            setData={(value) =>
+              setInput((prev) => {
+                return { ...prev, phone: value };
+              })
+            }
+            error={error.phone}
+            placeHolder="Nhập số điện thoại"
+            isNeccessary={true}
+            title="Số điện thoại:"
+            colorError={
+              backgroundSubmit() === colorLinearPublic.luuy
+                ? colorPuplic.greenStrong
+                : colorPuplic.yellow
+            }
+            keyboardType="text"
+          />
+          <InputTextCustom
+            acctionSubmit={checkSubmitEnd}
+            data={input.email}
+            setData={(value) =>
+              setInput((prev) => {
+                return { ...prev, email: value };
+              })
+            }
+            error={error.email}
+            placeHolder="Nhập email"
+            isNeccessary={false}
+            title="Email:"
+            colorError={
+              backgroundSubmit() === colorLinearPublic.luuy
+                ? colorPuplic.greenStrong
+                : colorPuplic.yellow
+            }
+            keyboardType="text"
+          />
 
-            <ContentChange listQuest={listQuest} />
-
-            <InputTextCustom
-              acctionSubmit={checkSubmitEnd}
-              data={input.name}
-              setData={(value) =>
-                setInput((prev) => {
-                  return { ...prev, name: value };
-                })
-              }
-              error={error.name}
-              placeHolder="Nhập họ và tên"
-              isNeccessary={true}
-              title="Họ và tên:"
-              colorError={
-                backgroundSubmit() === colorLinearPublic.luuy
-                  ? colorPuplic.greenStrong
-                  : colorPuplic.yellow
-              }
-              keyboardType="default"
+          <View style={styles.containerCheckBox}>
+            <Checkbox
+              value={isChecked}
+              color={isChecked ? "black" : "white"}
+              onValueChange={setIsChecked}
             />
-            <InputTextCustom
-              acctionSubmit={checkSubmitEnd}
-              data={input.phone}
-              setData={(value) =>
-                setInput((prev) => {
-                  return { ...prev, phone: value };
-                })
-              }
-              error={error.phone}
-              placeHolder="Nhập số điện thoại"
-              isNeccessary={true}
-              title="Số điện thoại:"
-              colorError={
-                backgroundSubmit() === colorLinearPublic.luuy
-                  ? colorPuplic.greenStrong
-                  : colorPuplic.yellow
-              }
-              keyboardType="phone-pad"
-            />
-            <InputTextCustom
-              acctionSubmit={checkSubmitEnd}
-              data={input.email}
-              setData={(value) =>
-                setInput((prev) => {
-                  return { ...prev, email: value };
-                })
-              }
-              error={error.email}
-              placeHolder="Nhập email"
-              isNeccessary={false}
-              title="Email:"
-              colorError={
-                backgroundSubmit() === colorLinearPublic.luuy
-                  ? colorPuplic.greenStrong
-                  : colorPuplic.yellow
-              }
-              keyboardType="default"
-            />
-
-            <View style={styles.containerCheckBox}>
-              <Checkbox
-                value={isChecked}
-                color={isChecked ? "black" : "white"}
-                onValueChange={setIsChecked}
-              />
-              <Text
-                style={[stylesTextPuplic.text12regular, styles.styleTextWhite]}
-              >
-                Tôi đồng ý để Anlene Vietnam liên hệ trong bất kì chương trình
-                quảng cáo sản phẩm hay khuyến mãi nào
-              </Text>
-            </View>
-
-            <Text style={[stylesTextPuplic.text12italic, styles.styleTextGrey]}>
-              Bằng cách điền bảng thông tin này, tôi đồng ý với việc thông tin
-              của mình để xử lý dựa trên chính sách bảo mật của Anlene
+            <Text
+              style={[
+                MAX_WIDTH >= 1024
+                  ? stylesTextPuplic.text15reg
+                  : stylesTextPuplic.text12regular,
+                styles.styleTextWhite,
+              ]}
+            >
+              Tôi đồng ý để Anlene Vietnam liên hệ trong bất kì chương trình
+              quảng cáo sản phẩm hay khuyến mãi nào
             </Text>
           </View>
+
+          <Text
+            style={[
+              MAX_WIDTH >= 1024
+                ? stylesTextPuplic.text14bookItalic
+                : stylesTextPuplic.text12italic,
+              styles.styleTextGrey,
+            ]}
+          >
+            Bằng cách điền bảng thông tin này, tôi đồng ý với việc thông tin của
+            mình để xử lý dựa trên chính sách bảo mật của Anlene
+          </Text>
 
           <NormalButton
             backgroundColor={
@@ -246,6 +253,7 @@ const Submit = () => {
                 ? colorPuplic.grey
                 : colorPuplic.RED
             }
+            haveBorder={false}
             content="HOÀN THÀNH"
             onPress={finished}
             textColor={colorPuplic.white}
@@ -268,7 +276,11 @@ const Submit = () => {
 const styles = StyleSheet.create({
   containerItem: {
     flex: 1,
-    alignItems: MAX_WIDTH > 700 ? "center" : undefined,
+    alignItems: "center",
+    paddingHorizontal: 24,
+    maxWidth: 660,
+    marginBottom: 50,
+    alignSelf: "center",
   },
   containerCheckBox: {
     flexDirection: "row",
@@ -291,13 +303,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 22.5,
-  },
-  containerView: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 24,
-    maxWidth: 660,
-    marginBottom: 50,
   },
 });
 

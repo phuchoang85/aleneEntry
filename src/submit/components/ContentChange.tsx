@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 import { resultReq } from "@/constant/type";
 import {
@@ -7,7 +7,7 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import LinearTextStyle from "@/components/LinearTextStyle";
-
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
   const returnColor = () => {
     if (listQuest[3].status === "bad") {
@@ -31,31 +31,64 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
 
   return (
     <>
-      <Text style={[stylesTextPuplic.text13bold, returnColor()]}>
+      <Text
+        style={[
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text18bold
+            : stylesTextPuplic.text13bold,
+          returnColor(),
+        ]}
+      >
         HOÀN THÀNH BÀI KIỂM TRA
       </Text>
       {listQuest.find((ele) => ele.status !== "good") ? (
-        <Text style={[stylesTextPuplic.text26bold, returnColor()]}>
+        <Text
+          style={[
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text38bold
+              : stylesTextPuplic.text26bold,
+            returnColor(),
+          ]}
+        >
           LƯU Ý MỘT CHÚT!
         </Text>
       ) : (
         <View style={{ width: "100%" }}>
           <LinearTextStyle
             colors={colorLinearPublic.linearYellowhao}
-            styles={[stylesTextPuplic.text26bold, returnColor()]}
+            styles={[
+              MAX_WIDTH >= 1024
+                ? stylesTextPuplic.text38bold
+                : stylesTextPuplic.text26bold,
+              returnColor(),
+            ]}
           >
             XIN CHÚC MỪNG
           </LinearTextStyle>
         </View>
       )}
 
-      <Text style={[stylesTextPuplic.text12bold, styles.styleTextWhite]}>
+      <Text
+        style={[
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text14bold
+            : stylesTextPuplic.text12bold,
+          styles.styleTextWhite,
+        ]}
+      >
         {retunContent()}
       </Text>
 
-      <Text style={[stylesTextPuplic.text15bold, styles.styleTextWhite]}>
-        Điền thông tin bên dưới để xem đầy đủ kết quả và nhận ngay Voucher ưu
-        đãi lên đến 100.000đ đến từ Anlene.
+      <Text
+        style={[
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text18bold
+            : stylesTextPuplic.text15bold,
+          styles.styleTextWhite,
+        ]}
+      >
+        Điền thông tin bên dưới để xem đầy đủ kết quả và nhận ngay{"\n"}Voucher
+        ưu đãi lên đến 100.000đ đến từ Anlene.
       </Text>
     </>
   );
@@ -65,6 +98,7 @@ const styles = StyleSheet.create({
   styleTextWhite: {
     color: colorPuplic.white,
     textAlign: "center",
+    paddingHorizontal: 44
   },
   styleTextRed: {
     color: colorPuplic.red,

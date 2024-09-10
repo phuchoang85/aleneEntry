@@ -16,7 +16,6 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import StatusTest from "./components/StatusTest";
 import MainViewTest from "./components/MainViewTest";
 import { RootStackParams } from "@/app";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -129,12 +128,19 @@ const Test = () => {
             disabled={checkStatus()}
             onPress={() => setIsOpenModal(true)}
           >
-            <Text style={[stylesTextPuplic.text16bold, styles.styleTextNormal]}>
+            <Text
+              style={[
+                MAX_WIDTH >= 1024
+                  ? stylesTextPuplic.text20bold
+                  : stylesTextPuplic.text16bold,
+                styles.styleTextNormal,
+              ]}
+            >
               XÁC NHẬN
             </Text>
           </Pressable>
 
-          <Text style={[stylesTextPuplic.text12italic, styles.styleTextNormal]}>
+          <Text style={[MAX_WIDTH >=1024 ? stylesTextPuplic.text14book: stylesTextPuplic.text12italic, styles.styleTextNormal]}>
             Lưu ý: Bài kiểm tra không dành cho đối tượng đang bị chấn thương
             hoặc có bệnh lý về cơ, xương, khớp hoặc bệnh tiểu đường
           </Text>

@@ -1,7 +1,7 @@
 import React from "react";
-import PageFiveIndex from "@/src/pageFive/PageFive";
-const PageFive = () => {
-  return <PageFiveIndex />;
+import PageSixIndex from "@/src/pageSix/PageSix";
+const PageSix = () => {
+  return <PageSixIndex />;
 };
 
-export default PageFive;
+export default PageSix;

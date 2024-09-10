@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -14,11 +21,11 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParams } from "@/app";
 import ContentChange from "./component/ContentChange";
 import ThreeImage from "./component/ThreeImage";
-import LinearTextStyle from "@/components/LinearTextStyle";
 import { dataPageFour } from "@/constant/data";
 import ShowMoreText from "./component/ShowMoreText";
 import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
-
+import ContentMiddle from "./component/ContentMiddle";
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const PageFour = () => {
   const listQuest = useSelector(
     (state: RootState) => state.result.questionList
@@ -70,58 +77,64 @@ const PageFour = () => {
           imageRight={require("@images/home.png")}
           numberPage="4"
         />
+        <Image source={require("@images/logo.png")} style={styles.image} />
         <View style={styles.containerItem}>
-          <Image source={require("@images/logo.png")} style={styles.image} />
-          <ContentChange listQuest={listQuest} />
-          <Text style={[stylesTextPuplic.text13reg, styles.textWhite]}>
-            {returnContent().content1}
-          </Text>
-
-          <ThreeImage />
-          <Text style={[stylesTextPuplic.text12reg, styles.textWhite]}>
-            {returnContent().content2}
-          </Text>
-
-          <Image
-            source={require("@images/analene_and_four_circle.png")}
-            style={{ width: 282, height: 211 }}
-            resizeMode="contain"
-          />
-
-          <Text style={[stylesTextPuplic.text6reg, styles.textWhite]}>
-            {"*Mỗi 10 năm. Nguồn: Daly et al., 2013. BMC Geriatrics 13:71\n" +
-              "**Mỗi 5-7 năm sau khi mãn kinh. Nguồn: National Osteoporosis Foundation\n" +
-              "(2009). Hormones and Healthy Bones"}
-          </Text>
-
-          <View style={{ width: "100%" }}>
-            <LinearTextStyle
-              colors={
-                backgroundSubmit() === colorLinearPublic.luuy
-                  ? colorLinearPublic.feedback
-                  : colorLinearPublic.linearYellowhao
-              }
-              styles={[stylesTextPuplic.text13bold, styles.textLinear]}
+          <View style={styles.containerInItem}>
+            <ContentChange listQuest={listQuest} />
+            <Text
+              style={[
+                MAX_WIDTH >= 1024
+                  ? stylesTextPuplic.text16regular
+                  : stylesTextPuplic.text13reg,
+                styles.textWhite,
+              ]}
             >
-              LỰA CHỌN GIÚP CƠ-XƯƠNG-KHỚP CHẮC KHỎE
-            </LinearTextStyle>
+              {returnContent().content1}
+            </Text>
+
+            <ThreeImage />
+            <Text
+              style={[
+                MAX_WIDTH >= 1024
+                  ? stylesTextPuplic.text14regular
+                  : stylesTextPuplic.text12reg,
+                styles.textWhite,
+              ]}
+            >
+              {returnContent().content2}
+            </Text>
+
+            {MAX_WIDTH < 1024 && (
+              <ContentMiddle backgroundSubmit={backgroundSubmit} />
+            )}
+
+            <Text
+              style={[
+                MAX_WIDTH >= 1024
+                  ? stylesTextPuplic.text14regular
+                  : stylesTextPuplic.text12reg,
+                styles.textWhite,
+              ]}
+            >
+              {returnContent().content3}
+            </Text>
+
+            <ShowMoreText
+              backgroundSubmit={backgroundSubmit}
+              showMore={showMore}
+              setShowMore={setShowMore}
+            />
+
+            <ButtonStrokeLinear
+              textSize={stylesTextPuplic.text20bold}
+              content="MUA NGAY"
+              onPress={goToPage}
+            />
           </View>
 
-          <Text style={[stylesTextPuplic.text12reg, styles.textWhite]}>
-            {returnContent().content3}
-          </Text>
-
-          <ShowMoreText
-            backgroundSubmit={backgroundSubmit}
-            showMore={showMore}
-            setShowMore={setShowMore}
-          />
-
-          <ButtonStrokeLinear
-            textSize={stylesTextPuplic.text20bold}
-            content="MUA NGAY"
-            onPress={goToPage}
-          />
+          {MAX_WIDTH >= 1024 && (
+            <ContentMiddle backgroundSubmit={backgroundSubmit} />
+          )}
         </View>
       </ScrollView>
     </BackgroundPage>
@@ -130,9 +143,10 @@ const PageFour = () => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 98,
-    height: 27,
+    width: MAX_WIDTH >= 1024 ? 132 : 98,
+    height: MAX_WIDTH >= 1024 ? 36 : 27,
     marginBottom: 8,
+    alignSelf: "center",
   },
   container: {
     flex: 1,
@@ -140,18 +154,18 @@ const styles = StyleSheet.create({
   },
   containerItem: {
     flex: 1,
-    alignItems: "center",
     paddingHorizontal: 18,
     paddingBottom: 30,
+    flexDirection: MAX_WIDTH >= 1024 ? "row" : "column",
   },
   textWhite: {
     color: colorPuplic.white,
     marginBottom: 6,
-    textAlign: "center",
+    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
   },
-  textLinear: {
-    height: 18,
-    textAlign: "center",
+  containerInItem: {
+    flex: 1,
+    alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
   },
 });
 

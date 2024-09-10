@@ -23,34 +23,29 @@ const ButtonStrokeLinear = ({
   isLeft?: boolean;
 }) => {
   return (
-    <View style={styles.containerView}>
-      <LinearGradient
-        colors={colorLinearPublic.goldLinear.colors}
-        locations={colorLinearPublic.goldLinear.locations}
-        style={[
-          styles.container,
-          {
-            alignSelf: isLeft ? "flex-start" : "center",
-          },
-        ]}
-        start={{ x: 1, y: 0.1 }}
-        end={{ x: 0.4, y: 0 }}
+    <LinearGradient
+      colors={colorLinearPublic.goldLinear.colors}
+      locations={colorLinearPublic.goldLinear.locations}
+      style={[
+        styles.container,
+        {
+          alignSelf: isLeft ? "flex-start" : "center",
+        },
+      ]}
+      start={{ x: 1, y: 0.1 }}
+      end={{ x: 0.4, y: 0 }}
+    >
+      <Pressable
+        style={[styles.button, { paddingHorizontal: paddingButton || 30 }]}
+        onPress={onPress}
       >
-        <Pressable
-          style={[styles.button, { paddingHorizontal: paddingButton || 30 }]}
-          onPress={onPress}
-        >
-          <Text style={[textSize, styles.styleText]}>{content}</Text>
-        </Pressable>
-      </LinearGradient>
-    </View>
+        <Text style={[textSize, styles.styleText]}>{content}</Text>
+      </Pressable>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  containerView: {
-    width: "100%",
-  },
   styleText: {
     color: colorPuplic.white,
     textShadowColor: "rgba(0, 0, 0, 0.25)",

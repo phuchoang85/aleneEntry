@@ -1,7 +1,7 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const InputTextCustom = ({
   title,
   placeHolder,
@@ -11,7 +11,7 @@ const InputTextCustom = ({
   acctionSubmit,
   error,
   isNeccessary,
-  keyboardType
+  keyboardType,
 }: {
   title: string;
   placeHolder: string;
@@ -21,19 +21,27 @@ const InputTextCustom = ({
   acctionSubmit: () => void;
   error: string;
   isNeccessary: boolean;
-  keyboardType: 'default' | 'phone-pad'
+  keyboardType: "text" | "numeric";
 }) => {
   return (
     <View style={styles.container}>
-      <Text style={[stylesTextPuplic.text14regular, styles.textColorWhite]}>
-        {title}
-        {isNeccessary && <Text style={{ color: colorError }}>*</Text>}
-      </Text>
+      <View style={{ flexDirection: "row" }}>
+        <Text
+          style={[
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text18regular
+              : stylesTextPuplic.text14regular,
+            styles.textColorWhite,
+          ]}
+        >
+          {title}
+        </Text>
+        {isNeccessary && <Text style={{ color: colorError }}>{"*"}</Text>}
+      </View>
       <TextInput
         placeholderTextColor={colorPuplic.grey}
         placeholder={placeHolder}
         value={data}
-        keyboardType={keyboardType}
         onChangeText={setData}
         onBlur={acctionSubmit}
         style={[
@@ -41,13 +49,19 @@ const InputTextCustom = ({
           styles.inputText,
           { borderColor: error ? colorError : "transparent" },
         ]}
-        
+        inputMode={keyboardType}
       />
-      {error && (
-        <Text style={[stylesTextPuplic.text12regular, { color: colorError }]}>
-          {error}
-        </Text>
-      )}
+
+      <Text
+        style={[
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text14regular
+            : stylesTextPuplic.text12regular,
+          { color: colorError },
+        ]}
+      >
+        {error}
+      </Text>
     </View>
   );
 };

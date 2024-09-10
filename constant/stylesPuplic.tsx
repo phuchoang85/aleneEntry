@@ -157,6 +157,12 @@ export const stylesTextPuplic = StyleSheet.create({
     fontFamily: "SVN-Gotham Regular",
     lineHeight: 52,
   },
+  text36bold: {
+    fontSize: 36,
+    fontWeight: "bold",
+    fontFamily: "SVN-Gotham Regular",
+    lineHeight: 52,
+  },
   text30bold: {
     fontSize: 30,
     fontWeight: "bold",
@@ -206,7 +212,12 @@ export const stylesTextPuplic = StyleSheet.create({
     fontFamily: "SVN-Gotham Regular",
     lineHeight: 36,
   },
-
+  text22bold: {
+    fontSize: 22,
+    fontWeight: "bold",
+    fontFamily: "SVN-Gotham Regular",
+    lineHeight: 34,
+  },
   text22regular: {
     fontSize: 22,
     fontWeight: "normal",
@@ -382,6 +393,13 @@ export const stylesTextPuplic = StyleSheet.create({
   },
   text6reg: {
     fontSize: 6,
+    fontWeight: "normal",
+    fontFamily: "SVN-Gotham Regular",
+    fontStyle: "normal",
+    lineHeight: 10,
+  },
+  text8reg: {
+    fontSize: 8,
     fontWeight: "normal",
     fontFamily: "SVN-Gotham Regular",
     fontStyle: "normal",
