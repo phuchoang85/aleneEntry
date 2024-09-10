@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   containerBottom: {
     paddingTop: 30,
     backgroundColor: MAX_WIDTH >= 1024 ? undefined : colorPuplic.white,
-    marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT -340,
+    marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT - 340,
     width: MAX_WIDTH >= 1024 ? "62%" : "100%",
     alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
   },

@@ -1,14 +1,16 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const CardSale = () => {
   return (
     <View style={styles.container}>
       <View style={styles.containerWhite}>
         <Text
           style={[
-            stylesTextPuplic.text10bold,
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text16bold
+              : stylesTextPuplic.text10bold,
             { color: "#73A442", alignItems: "center" },
           ]}
         >
@@ -16,7 +18,9 @@ const CardSale = () => {
         </Text>
         <Text
           style={[
-            stylesTextPuplic.text16bold,
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text24bold
+              : stylesTextPuplic.text16bold,
             { color: colorPuplic.green2, alignItems: "center" },
           ]}
         >
@@ -26,7 +30,9 @@ const CardSale = () => {
       <View style={styles.containerGreen}>
         <Text
           style={[
-            stylesTextPuplic.text15bold,
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text20bold
+              : stylesTextPuplic.text15bold,
             { color: colorPuplic.yellow, alignItems: "center" },
           ]}
         >
@@ -43,14 +49,13 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1,
     borderColor: colorPuplic.white,
-    alignSelf: "center",
-    position:'absolute',
-    top: -20,
-    zIndex: 3
+    position: "absolute",
+    top: MAX_WIDTH >= 1024 ? -170 : -20,
+    zIndex: 3,
   },
   containerWhite: {
     backgroundColor: colorPuplic.white,
-    paddingHorizontal: 24,
+    paddingHorizontal: MAX_WIDTH >= 1024 ? 29 : 24,
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 10,
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     flexDirection: "row",
     gap: 12,
-    paddingHorizontal: 18,
+    paddingHorizontal: MAX_WIDTH >= 1024 ? 26 : 18,
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 15,

@@ -63,7 +63,7 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
               returnColor(),
             ]}
           >
-            XIN CHÚC MỪNG
+            XIN CHÚC MỪNG!
           </LinearTextStyle>
         </View>
       )}
@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
   styleTextWhite: {
     color: colorPuplic.white,
     textAlign: "center",
-    paddingHorizontal: 44
+    paddingHorizontal: 44,
+    marginTop: 10
   },
   styleTextRed: {
     color: colorPuplic.red,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   styleTextYellow: {
     color: colorPuplic.yellow,
     textAlign: "center",
-    height: 36,
+    height: 34,
   },
   styleTextGreen: {
     color: colorPuplic.greenStrong,

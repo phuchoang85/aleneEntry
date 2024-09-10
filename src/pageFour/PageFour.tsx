@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
   },
   textWhite: {
     color: colorPuplic.white,
-    marginBottom: 6,
     textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+    marginTop: 10
   },
   containerInItem: {
     flex: 1,

@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, Pressable, Dimensions } from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import {
@@ -7,7 +7,7 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import CardSale from "./CardSale";
-
+const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 const ComponentBottom = ({
   goToScreen,
   goToWeb,
@@ -20,7 +20,7 @@ const ComponentBottom = ({
       colors={colorLinearPublic.mauKV2}
       styles={styles.containerBottom}
       start={{ x: 0.5, y: 0 }}
-      end={{ x: 0.5, y: 0.1 }}
+      end={{ x: MAX_WIDTH >= 1024 ? 0 : 0.5, y: MAX_WIDTH >= 1024 ? 0 : 0.1 }}
     >
       <CardSale />
 
@@ -36,13 +36,22 @@ const ComponentBottom = ({
         </Text>
       </Pressable>
 
-      <Text style={[stylesTextPuplic.text10book, styles.continerTextWhite]}>
+      <Text
+        style={[
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text14bookItalic
+            : stylesTextPuplic.text10book,
+          styles.continerTextWhite,
+        ]}
+      >
         * Voucher chỉ áp dụng cho đơn hàng mua các sản phẩm Anlene Gold 3X,
         Anlene Gold 5X tại gian hàng Fonterra Official Retail Store trên Lazada
       </Text>
       <Text
         style={[
-          stylesTextPuplic.text10book,
+          MAX_WIDTH >= 1024
+            ? stylesTextPuplic.text14bookItalic
+            : stylesTextPuplic.text10book,
           styles.continerTextWhite,
           { marginTop: 4 },
         ]}
@@ -55,36 +64,17 @@ const ComponentBottom = ({
 
 const styles = StyleSheet.create({
   containerBottom: {
-    paddingTop: 100,
-    paddingBottom: 30,
-    marginTop: 350,
-    paddingHorizontal: 18,
-  },
-  buttonRed: {
-    position: "absolute",
-    width: "100%",
-    top: -30,
-  },
-  containerThreeButton: {
-    gap: 11,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 48,
-    marginBottom: 8,
-  },
-  styleImageThreeButton: {
-    width: 85,
-    height: 57,
-  },
-  containerSmallText: {
-    paddingHorizontal: 18,
-    textAlign: "center",
-    color: colorPuplic.white,
+    paddingBottom: 50,
+    paddingHorizontal: MAX_WIDTH >= 1024 ? 48 : 18,
+    paddingTop: MAX_WIDTH >= 1024 ? 0 : 100,
+    marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT - 340,
+    width: MAX_WIDTH >= 1024 ? "62%" : "100%",
+    alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
   },
   continerTextWhite: {
-    textAlign: "center",
+    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
     color: colorPuplic.white,
+    marginRight: MAX_WIDTH >= 1024 ? 300 : 0 
   },
   styleText: {
     color: colorPuplic.white,
@@ -101,7 +91,6 @@ const styles = StyleSheet.create({
     borderColor: "#73A442",
     paddingHorizontal: 34,
     paddingVertical: 8,
-    alignSelf: "center",
     backgroundColor: "white",
     marginTop: 8,
     marginBottom: 12,
@@ -111,7 +100,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#B70002",
-    alignSelf: "center",
     paddingHorizontal: 36,
     paddingVertical: 8,
     shadowColor: "rgba(71, 2, 2, 1)",
