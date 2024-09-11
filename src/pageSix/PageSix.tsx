@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import React from "react";
 import BoxBorder from "./components/BoxBorder";
 import HeaderPage from "@/components/HeaderPage";
@@ -11,7 +18,7 @@ import {
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-
+const { width: MAX_WIDTH } = Dimensions.get("screen");
 const PageSix = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
@@ -36,11 +43,25 @@ const PageSix = () => {
 
         <Image source={require("@images/logo.png")} style={styles.image} />
 
-        <Text style={[stylesTextPuplic.text24bold, styles.textYellow]}>
+        <Text
+          style={[
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text28bold
+              : stylesTextPuplic.text24bold,
+            styles.textYellow,
+          ]}
+        >
           THÔNG TIN SẢN PHẨM
         </Text>
 
-        <Text style={[stylesTextPuplic.text18bold, styles.textYellow]}>
+        <Text
+          style={[
+            MAX_WIDTH >= 1024
+              ? stylesTextPuplic.text18bold
+              : stylesTextPuplic.text18bold,
+            styles.textYellow,
+          ]}
+        >
           SỮA ANLENE 3 KHỎE
         </Text>
 
@@ -95,11 +116,13 @@ const styles = StyleSheet.create({
   },
   image: {
     alignSelf: "center",
-    width: 98,
-    height: 27,
+    width: MAX_WIDTH >= 1024 ? 132 : 98,
+    height: MAX_WIDTH >= 1024 ? 36 : 27,
     marginBottom: 16,
   },
   bigImage: {
+    width: MAX_WIDTH >= 1024 ? 489 : null,
+    height: MAX_WIDTH >= 1024 ? 300 : null,
     marginVertical: 16,
     alignSelf: "center",
   },
@@ -108,9 +131,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 24,
     marginBottom: 28,
+    maxWidth: MAX_WIDTH >= 1024? 500 : null,
+    alignSelf:'center',
   },
   containerThreeBox: {
-    flexDirection: "column",
+    flexDirection: MAX_WIDTH >= 1024 ? "row" : "column",
     alignItems: "center",
     justifyContent: "center",
     gap: 20,

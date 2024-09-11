@@ -6,6 +6,8 @@ import {
   ScrollView,
   Alert,
   Dimensions,
+  Modal,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import BackgroundPage from "@/components/BackgroundPage";
@@ -82,7 +84,7 @@ const Submit = () => {
       const phoneError =
         !input.phone ||
         input.phone.length !== 10 ||
-        !/^(09|03|07|08|05)\d{8}$/.test(input.phone)
+        !/^(09|03|07|08|05|02)\d{8}$/.test(input.phone)
           ? "Số điện thoại phải đúng định dạng"
           : "";
 
@@ -106,9 +108,8 @@ const Submit = () => {
 
       if (listQuest.filter((ele) => ele.status === "noSelect").length > 0) {
         const mess = "Bạn chưa chọn kết quả xong";
-        setError((prev) => {
+        setError(() => {
           return {
-            ...prev,
             name: mess,
             email: mess,
             phone: mess,
@@ -125,7 +126,22 @@ const Submit = () => {
     if (loading) {
       return;
     } else if (!loading && errorApi) {
-      console.log(errorApi);
+      if (errorApi === "Số điện thoại được đăng kí") {
+        setError((prev) => {
+          return {
+            ...prev,
+            phone: errorApi,
+          };
+        });
+      } else if (errorApi === "Email được đăng kí") {
+        setError((prev) => {
+          return {
+            ...prev,
+            email: errorApi,
+          };
+        });
+      }
+
       Alert.alert("Lỗi" + errorApi);
       return;
     }
@@ -269,11 +285,32 @@ const Submit = () => {
         title="THÔNG BÁO!"
         nameButtonRight="ĐỒNG Ý"
       />
+
+      <Modal visible={loading} transparent={true} animationType="slide">
+        <View style={styles.containerModalLoading}>
+          <ActivityIndicator
+            size="large"
+            color="#0000ff"
+            style={styles.viewLoading}
+          />
+        </View>
+      </Modal>
     </BackgroundPage>
   );
 };
 
 const styles = StyleSheet.create({
+  viewLoading: {
+    width: 300,
+    height: 100,
+    backgroundColor: "white",
+  },
+  containerModalLoading: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   containerItem: {
     flex: 1,
     alignItems: "center",
