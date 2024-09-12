@@ -91,7 +91,6 @@ const PageFour = () => {
             >
               {returnContent().content1}
             </Text>
-
             <ThreeImage />
             <Text
               style={[
@@ -103,11 +102,9 @@ const PageFour = () => {
             >
               {returnContent().content2}
             </Text>
-
             {MAX_WIDTH < 1024 && (
               <ContentMiddle backgroundSubmit={backgroundSubmit} />
             )}
-
             <Text
               style={[
                 MAX_WIDTH >= 1024
@@ -118,18 +115,19 @@ const PageFour = () => {
             >
               {returnContent().content3}
             </Text>
-
             <ShowMoreText
               backgroundSubmit={backgroundSubmit}
               showMore={showMore}
               setShowMore={setShowMore}
             />
+            
+  
+              <ButtonStrokeLinear
+                textSize={stylesTextPuplic.text20bold}
+                content="MUA NGAY"
+                onPress={goToPage}
+              />
 
-            <ButtonStrokeLinear
-              textSize={stylesTextPuplic.text20bold}
-              content="MUA NGAY"
-              onPress={goToPage}
-            />
           </View>
 
           {MAX_WIDTH >= 1024 && (
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
   textWhite: {
     color: colorPuplic.white,
     textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    marginTop: 10
+    marginTop: 10,
   },
   containerInItem: {
     flex: 1,

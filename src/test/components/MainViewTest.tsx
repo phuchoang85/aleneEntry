@@ -21,11 +21,7 @@ const MainViewTest = ({
     return resultQ.questionSelect?.id == 4;
   };
   const handleButtonPress = (result: resultReq, status: "good" | "bad") => {
-    if (
-      (resultQ.questionSelect?.status !== "noSelect" ||
-        result.status !== "noSelect") &&
-      MAX_WIDTH >= 1024
-    ) {
+    if (result.status !== "noSelect"  && result.id != resultQ.questionSelect?.id) {
       return;
     }
 

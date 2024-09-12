@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 3,
     shadowOpacity: 0.3,
+    maxHeight: 55
   },
   button: {
     borderRadius: 28,

@@ -186,7 +186,7 @@ const Submit = () => {
                 ? colorPuplic.greenStrong
                 : colorPuplic.yellow
             }
-            keyboardType="numeric"
+            keyboardType="text"
           />
           <InputTextCustom
             acctionSubmit={checkSubmitEnd}
@@ -205,7 +205,7 @@ const Submit = () => {
                 ? colorPuplic.greenStrong
                 : colorPuplic.yellow
             }
-            keyboardType="text"
+            keyboardType="numeric"
           />
           <InputTextCustom
             acctionSubmit={checkSubmitEnd}
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     maxWidth: 660,
     marginBottom: 50,
-    alignSelf: "center",
+    // alignSelf: "center",
   },
   containerCheckBox: {
     flexDirection: "row",

@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   container: {
-    width: "100%",
+    width: '100%',
     marginTop: 16,
   },
 });
