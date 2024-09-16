@@ -47,7 +47,7 @@ const Submit = () => {
       paddingHorizontal: 24,
       maxWidth: 660,
       marginBottom: 50,
-      // alignSelf: "center",
+      alignSelf: "center",
     },
     containerCheckBox: {
       flexDirection: "row",

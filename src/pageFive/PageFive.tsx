@@ -42,9 +42,8 @@ const PageFive = () => {
     },
     containerHeaderBigScreen: {
       position: "absolute",
-      top: 10,
+      top: 45,
       width: "100%",
-      paddingHorizontal: 36,
       zIndex: 2,
     },
   });

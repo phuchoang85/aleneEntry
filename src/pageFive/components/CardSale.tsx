@@ -18,6 +18,7 @@ const CardSale = () => {
       borderColor: colorPuplic.white,
       position: "absolute",
       top: MAX_WIDTH >= 1024 ? -170 : -20,
+      left: MAX_WIDTH >= 1024 ? 48 : undefined,
       zIndex: 3,
     },
     containerWhite: {

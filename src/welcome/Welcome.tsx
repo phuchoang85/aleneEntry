@@ -22,7 +22,7 @@ export default function Welcome() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToScreen = () => {
-    navigation.navigate("Test");
+    navigation.navigate("PageFour");
   };
 
   if (loading) {
@@ -36,7 +36,7 @@ export default function Welcome() {
   const styles = StyleSheet.create({
     containerHeaderBigScreen: {
       position: "absolute",
-      top: 10,
+      top: 20,
       width: "100%",
       paddingHorizontal: 36,
       zIndex: 2,

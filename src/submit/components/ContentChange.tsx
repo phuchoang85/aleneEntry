@@ -54,7 +54,7 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
           LƯU Ý MỘT CHÚT!
         </Text>
       ) : (
-        <View style={{ width: "100%" }}>
+        <View style={{ width: MAX_WIDTH }}>
           <LinearTextStyle
             colors={colorLinearPublic.linearYellowhao}
             styles={[
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   styleTextYellow: {
     color: colorPuplic.yellow,
     textAlign: "center",
-    height: 34,
+    height: 44,
   },
   styleTextGreen: {
     color: colorPuplic.greenStrong,

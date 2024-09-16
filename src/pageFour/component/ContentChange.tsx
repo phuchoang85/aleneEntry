@@ -26,7 +26,7 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
     },
     styleTextYellow: {
       color: colorPuplic.yellow,
-      height: 36,
+      height: 44,
       textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
     },
     styleTextGreen: {

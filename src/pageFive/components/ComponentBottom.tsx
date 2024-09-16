@@ -74,7 +74,7 @@ const ComponentBottom = ({
     <BoxLinear
       colors={colorLinearPublic.mauKV2}
       styles={styles.containerBottom}
-      start={{ x: 0.5, y: 0 }}
+      start={{ x: MAX_WIDTH >= 1024 ? 1 : 0.5, y: 0 }}
       end={{ x: MAX_WIDTH >= 1024 ? 0 : 0.5, y: MAX_WIDTH >= 1024 ? 0 : 0.1 }}
     >
       <CardSale />

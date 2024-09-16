@@ -43,7 +43,7 @@ const ComponentTop = () => {
         MAX_WIDTH >= 1024 ? colorLinearPublic.mauKVBig : colorLinearPublic.mauKV
       }
       styles={styles.styleboxTop}
-      start={{ x: 0.5, y: MAX_WIDTH >= 1024 ? 0 : 1.7 }}
+      start={{ x:MAX_WIDTH >= 1024 ? 1 : 0.5, y: MAX_WIDTH >= 1024 ? 0 : 1.7 }}
       end={{ x: MAX_WIDTH >= 1024 ? 0 : 0.5, y: 0 }}
     >
       <View style={{ paddingHorizontal: 24 }}>

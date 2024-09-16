@@ -34,30 +34,29 @@ const ComponentTop = ({
     styleboxTop: {
       width: MAX_WIDTH >= 1024 ? "62%" : "100%",
       paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
-      paddingTop: 45,
+      paddingTop: MAX_WIDTH >= 1024 ? 125 : 45,
       paddingLeft: MAX_WIDTH >= 1024 ? 48 : 18,
     },
     containerSmallText: {
       textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-      height: 30,
-      marginTop: MAX_WIDTH >= 1024 ? 76 : 0,
+      height: 34,
       color: colorPuplic.yellow,
     },
     containerText: {
       textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-      height: 30,
-      marginTop: MAX_WIDTH >= 1024 ? 76 : 0,
+      height: 34,
       color: colorPuplic.yellow,
     },
     textWhite: {
       color: colorPuplic.white,
+      marginTop: 13
     },
   });
   return (
     <BoxLinear
       colors={colorLinearPublic.mauKV2}
       styles={styles.styleboxTop}
-      start={{ x: 0.5, y: MAX_WIDTH >= 1024 ? 0 : 1 }}
+      start={{ x: MAX_WIDTH >= 1024 ? 1 : 0.5, y: MAX_WIDTH >= 1024 ? 0 : 1 }}
       end={{ x: MAX_WIDTH >= 1024 ? 0 : 0.5, y: 0 }}
     >
       {MAX_WIDTH < 1024 && (
@@ -102,7 +101,6 @@ const ComponentTop = ({
             ? stylesTextPuplic.text16bold
             : stylesTextPuplic.text12bold,
           styles.textWhite,
-          { marginTop: MAX_WIDTH >= 1024 ? 89 : 13 },
         ]}
       >
         ANLENE LÌ XÌ NGAY 100.000đ KHI ĐẶT MUA HÔM NAY!

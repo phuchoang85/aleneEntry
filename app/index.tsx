@@ -1,12 +1,11 @@
-import { Platform, StatusBar } from "react-native";
-import React, { useEffect } from "react";
+import { StatusBar } from "react-native";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "@/redux/store";
 import NavigationApp from "./navigationApp";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as firebase from "@react-native-firebase/app";
 export type RootStackParams = {
   Test: any;
   Welcome: any;
@@ -44,7 +43,7 @@ const App = () => {
           barStyle={"light-content"}
         />
         <SafeAreaView
-          style={{ flex: 1, marginTop: Platform.OS !== "web" ? -60 : null }}
+          style={{ flex: 1, marginTop: -60 }}
         >
           <NavigationContainer linking={linking} independent={true}>
             <NavigationApp />
