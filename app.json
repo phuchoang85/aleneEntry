@@ -34,11 +34,6 @@
       ],
       "package": "com.phucabadon.alene_entry"
     },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
     "plugins": [
       "@react-native-firebase/app",
       "expo-router",

@@ -191,7 +191,7 @@ const ItemVideo = ({
         >
           <ButtonSelect
             handleButtonPress={() => hanldeCheckVideo(data, "good")}
-            content="Được"
+            content={data.id === 4 ? "Hiếm khi" : "Được"}
             image={require("@images/yes.png")}
           />
         </LinearGradient>
@@ -208,7 +208,7 @@ const ItemVideo = ({
         >
           <ButtonSelect
             handleButtonPress={() => hanldeCheckVideo(data, "bad")}
-            content="Không được"
+            content={data.id === 4 ? "Nhiều" : "Không được"}
             image={require("@images/no.png")}
           />
         </LinearGradient>
