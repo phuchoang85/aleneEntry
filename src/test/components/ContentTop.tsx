@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image, useWindowDimensions } from "react-native";
 import React from "react";
 import { initial } from "@/constant/type";
 import {
@@ -8,8 +8,9 @@ import {
 } from "@/constant/stylesPuplic";
 import StatusTest from "./StatusTest";
 import LinearTextStyle from "@/components/LinearTextStyle";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const ContentTop = ({ resultQ }: { resultQ: initial }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
   return (
     <>
       {MAX_WIDTH >= 1024 ? (
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     width: 132,
     height: 36,
     alignSelf: "center",
-    marginBottom: 8
+    marginBottom: 8,
   },
   containerText: {
     alignSelf: "center",

@@ -1,4 +1,11 @@
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
@@ -7,8 +14,55 @@ import {
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    containerBottom: {
+      paddingTop: 30,
+      backgroundColor: MAX_WIDTH >= 1024 ? undefined : colorPuplic.white,
+      marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT - 340,
+      width: MAX_WIDTH >= 1024 ? "62%" : "100%",
+      alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
+    },
+    buttonRed: {
+      position: "absolute",
+      width: MAX_WIDTH >= 1024 ? "50%" : "100%",
+      top: -30,
+      left: MAX_WIDTH >= 1024 ? 48 : null,
+    },
+    containerThreeButton: {
+      gap: MAX_WIDTH >= 1024 ? 15 : 11,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 45 : 48,
+      marginBottom: 8,
+      marginTop: 24,
+    },
+    styleImageThreeButton: {
+      width: MAX_WIDTH >= 1024 ? 110 : 85,
+      height: MAX_WIDTH >= 1024 ? 79 : 57,
+    },
+    containerSmallText: {
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 48 : 18,
+      textAlign: "center",
+      color: colorPuplic.white,
+    },
+    continerTextMorePadding: {
+      padding: 24,
+      textAlign: "center",
+      marginTop: 20,
+      color: MAX_WIDTH >= 1024 ? colorPuplic.black1 : colorPuplic.white,
+    },
+    absoulteText: {
+      position: "absolute",
+      width: "100%",
+      left: "38%",
+      bottom: 10,
+    },
+  });
+
   const resposiveTextBottom = () => {
     if (MAX_WIDTH >= 1024) {
       return styles.absoulteText;
@@ -86,51 +140,4 @@ const ComponentBottom = ({ goToScreen }: { goToScreen: () => void }) => {
     </BoxLinear>
   );
 };
-
-const styles = StyleSheet.create({
-  containerBottom: {
-    paddingTop: 30,
-    backgroundColor: MAX_WIDTH >= 1024 ? undefined : colorPuplic.white,
-    marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT - 340,
-    width: MAX_WIDTH >= 1024 ? "62%" : "100%",
-    alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
-  },
-  buttonRed: {
-    position: "absolute",
-    width: MAX_WIDTH >= 1024 ? "50%" : "100%",
-    top: -30,
-    left: MAX_WIDTH >= 1024 ? 48 : null,
-  },
-  containerThreeButton: {
-    gap: MAX_WIDTH >= 1024 ? 15 : 11,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 45 : 48,
-    marginBottom: 8,
-    marginTop: 24,
-  },
-  styleImageThreeButton: {
-    width: MAX_WIDTH >= 1024 ? 110 : 85,
-    height: MAX_WIDTH >= 1024 ? 79 : 57,
-  },
-  containerSmallText: {
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 48 : 18,
-    textAlign: "center",
-    color: colorPuplic.white,
-  },
-  continerTextMorePadding: {
-    padding: 24,
-    textAlign: "center",
-    marginTop: 20,
-    color: MAX_WIDTH >= 1024 ? colorPuplic.black1 : colorPuplic.white,
-  },
-  absoulteText: {
-    position: "absolute",
-    width: "100%",
-    left: "38%",
-    bottom: 10,
-  },
-});
-
 export default ComponentBottom;

@@ -1,11 +1,17 @@
-import { Text, Pressable, StyleSheet, View, Dimensions } from "react-native";
+import {
+  Text,
+  Pressable,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import {
   colorLinearPublic,
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const ShowMoreText = ({
   showMore,
   setShowMore,
@@ -18,6 +24,18 @@ const ShowMoreText = ({
     locations: number[];
   };
 }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    container: {
+      marginVertical: 10,
+      width: "100%",
+    },
+    textWhite: {
+      color: colorPuplic.white,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+    },
+  });
+
   const handleShowMore = () => {
     setShowMore(true);
   };
@@ -61,16 +79,5 @@ const ShowMoreText = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-    width: "100%",
-  },
-  textWhite: {
-    color: colorPuplic.white,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-  },
-});
 
 export default ShowMoreText;

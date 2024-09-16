@@ -1,4 +1,10 @@
-import { Text, StyleSheet, Pressable, Dimensions } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import {
@@ -7,7 +13,7 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import CardSale from "./CardSale";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const ComponentBottom = ({
   goToScreen,
   goToWeb,
@@ -15,6 +21,55 @@ const ComponentBottom = ({
   goToWeb: () => void;
   goToScreen: () => void;
 }) => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    containerBottom: {
+      paddingBottom: 50,
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 48 : 18,
+      paddingTop: MAX_WIDTH >= 1024 ? 0 : 100,
+      marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT - 340,
+      width: MAX_WIDTH >= 1024 ? "62%" : "100%",
+      alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
+    },
+    continerTextWhite: {
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+      color: colorPuplic.white,
+      marginRight: MAX_WIDTH >= 1024 ? 300 : 0,
+    },
+    styleText: {
+      color: colorPuplic.white,
+      textShadowColor: "rgba(0, 0, 0, 0.25)",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 1,
+    },
+    styleTextGree: {
+      color: "#73A442",
+    },
+    buttonGreen: {
+      borderWidth: 2,
+      borderRadius: 100,
+      borderColor: "#73A442",
+      paddingHorizontal: 34,
+      paddingVertical: 8,
+      backgroundColor: "white",
+      marginTop: 8,
+      marginBottom: 12,
+    },
+    button: {
+      borderRadius: 100,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#B70002",
+      paddingHorizontal: 36,
+      paddingVertical: 8,
+      shadowColor: "rgba(71, 2, 2, 1)",
+      shadowOffset: { width: 0, height: 5 },
+      shadowRadius: 5,
+      elevation: 3,
+      shadowOpacity: 0.3,
+    },
+  });
+
   return (
     <BoxLinear
       colors={colorLinearPublic.mauKV2}
@@ -61,53 +116,5 @@ const ComponentBottom = ({
     </BoxLinear>
   );
 };
-
-const styles = StyleSheet.create({
-  containerBottom: {
-    paddingBottom: 50,
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 48 : 18,
-    paddingTop: MAX_WIDTH >= 1024 ? 0 : 100,
-    marginTop: MAX_WIDTH >= 1024 ? 0 : MAX_HEIGHT - 340,
-    width: MAX_WIDTH >= 1024 ? "62%" : "100%",
-    alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
-  },
-  continerTextWhite: {
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    color: colorPuplic.white,
-    marginRight: MAX_WIDTH >= 1024 ? 300 : 0 
-  },
-  styleText: {
-    color: colorPuplic.white,
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 1,
-  },
-  styleTextGree: {
-    color: "#73A442",
-  },
-  buttonGreen: {
-    borderWidth: 2,
-    borderRadius: 100,
-    borderColor: "#73A442",
-    paddingHorizontal: 34,
-    paddingVertical: 8,
-    backgroundColor: "white",
-    marginTop: 8,
-    marginBottom: 12,
-  },
-  button: {
-    borderRadius: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#B70002",
-    paddingHorizontal: 36,
-    paddingVertical: 8,
-    shadowColor: "rgba(71, 2, 2, 1)",
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 5,
-    elevation: 3,
-    shadowOpacity: 0.3,
-  },
-});
 
 export default ComponentBottom;

@@ -1,8 +1,44 @@
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const CardSale = () => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    container: {
+      borderRadius: 6,
+      borderWidth: 1,
+      borderColor: colorPuplic.white,
+      position: "absolute",
+      top: MAX_WIDTH >= 1024 ? -170 : -20,
+      zIndex: 3,
+    },
+    containerWhite: {
+      backgroundColor: colorPuplic.white,
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 29 : 24,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: 10,
+      paddingBottom: 8,
+    },
+    containerGreen: {
+      backgroundColor: "transparent",
+      flexDirection: "row",
+      gap: 12,
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 26 : 18,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: 15,
+      paddingBottom: 12,
+    },
+  });
   return (
     <View style={styles.container}>
       <View style={styles.containerWhite}>
@@ -43,34 +79,5 @@ const CardSale = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: colorPuplic.white,
-    position: "absolute",
-    top: MAX_WIDTH >= 1024 ? -170 : -20,
-    zIndex: 3,
-  },
-  containerWhite: {
-    backgroundColor: colorPuplic.white,
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 29 : 24,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 10,
-    paddingBottom: 8,
-  },
-  containerGreen: {
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    gap: 12,
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 26 : 18,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 15,
-    paddingBottom: 12,
-  },
-});
 
 export default CardSale;

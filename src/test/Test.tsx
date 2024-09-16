@@ -6,6 +6,7 @@ import {
   Dimensions,
   Animated,
   Pressable,
+  useWindowDimensions,
 } from "react-native";
 import React, { useCallback, useRef, useState } from "react";
 import HeaderPage from "@/components/HeaderPage";
@@ -22,8 +23,38 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import ModalCustom from "@/components/ModalCustom";
 import { useTestPage } from "./hooks/useTestPage";
 import ContentTop from "./components/ContentTop";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const Test = () => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    buttonAccept: {
+      width: 160,
+      height: 44,
+      borderRadius: 24,
+      textAlign: "center",
+      justifyContent: "center",
+      alignSelf: "center",
+      marginTop: 40,
+      marginBottom: 8,
+    },
+    styleTextNormal: {
+      color: colorPuplic.white,
+      textAlign: "center",
+    },
+    container: {
+      flex: 1,
+      paddingTop: 45,
+    },
+    containerScrollView: {
+      flex: 1,
+      paddingBottom: 16,
+    },
+    containerPadding: {
+      flex: 1,
+      paddingHorizontal: 24,
+    },
+  });
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const {
@@ -140,7 +171,14 @@ const Test = () => {
             </Text>
           </Pressable>
 
-          <Text style={[MAX_WIDTH >=1024 ? stylesTextPuplic.text14book: stylesTextPuplic.text12italic, styles.styleTextNormal]}>
+          <Text
+            style={[
+              MAX_WIDTH >= 1024
+                ? stylesTextPuplic.text14book
+                : stylesTextPuplic.text12italic,
+              styles.styleTextNormal,
+            ]}
+          >
             Lưu ý: Bài kiểm tra không dành cho đối tượng đang bị chấn thương
             hoặc có bệnh lý về cơ, xương, khớp hoặc bệnh tiểu đường
           </Text>
@@ -158,34 +196,5 @@ const Test = () => {
     </BackgroundPage>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonAccept: {
-    width: 160,
-    height: 44,
-    borderRadius: 24,
-    textAlign: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginTop: 40,
-    marginBottom: 8,
-  },
-  styleTextNormal: {
-    color: colorPuplic.white,
-    textAlign: "center",
-  },
-  container: {
-    flex: 1,
-    paddingTop: 45,
-  },
-  containerScrollView: {
-    flex: 1,
-    paddingBottom: 16,
-  },
-  containerPadding: {
-    flex: 1,
-    paddingHorizontal: 24,
-  },
-});
 
 export default Test;

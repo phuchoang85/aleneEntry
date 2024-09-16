@@ -5,9 +5,9 @@ import {
   Image,
   ScrollView,
   Alert,
-  Dimensions,
   Modal,
   ActivityIndicator,
+  useWindowDimensions,
 } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import BackgroundPage from "@/components/BackgroundPage";
@@ -26,8 +26,53 @@ import NormalButton from "@/components/NormalButton";
 import ContentChange from "./components/ContentChange";
 import { RootStackParams } from "@/app";
 import { useSubmit } from "./hooks/useSubmit";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const Submit = () => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    viewLoading: {
+      width: 300,
+      height: 100,
+      backgroundColor: "white",
+    },
+    containerModalLoading: {
+      flex: 1,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    containerItem: {
+      flex: 1,
+      alignItems: "center",
+      paddingHorizontal: 24,
+      maxWidth: 660,
+      marginBottom: 50,
+      // alignSelf: "center",
+    },
+    containerCheckBox: {
+      flexDirection: "row",
+      gap: 8,
+      marginTop: 16,
+      marginBottom: 8,
+      alignItems: "center",
+    },
+    styleTextWhite: {
+      color: colorPuplic.white,
+    },
+    styleTextGrey: {
+      color: colorPuplic.grey,
+    },
+    imgLogo: {
+      width: 110,
+      height: 31,
+      marginVertical: 16,
+    },
+    container: {
+      flex: 1,
+      paddingTop: 22.5,
+    },
+  });
+
   const {
     listQuest,
     restartList,
@@ -298,49 +343,5 @@ const Submit = () => {
     </BackgroundPage>
   );
 };
-
-const styles = StyleSheet.create({
-  viewLoading: {
-    width: 300,
-    height: 100,
-    backgroundColor: "white",
-  },
-  containerModalLoading: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  containerItem: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 24,
-    maxWidth: 660,
-    marginBottom: 50,
-    // alignSelf: "center",
-  },
-  containerCheckBox: {
-    flexDirection: "row",
-    gap: 8,
-    marginTop: 16,
-    marginBottom: 8,
-    alignItems: "center",
-  },
-  styleTextWhite: {
-    color: colorPuplic.white,
-  },
-  styleTextGrey: {
-    color: colorPuplic.grey,
-  },
-  imgLogo: {
-    width: 110,
-    height: 31,
-    marginVertical: 16,
-  },
-  container: {
-    flex: 1,
-    paddingTop: 22.5,
-  },
-});
 
 export default Submit;

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, useWindowDimensions } from "react-native";
 import React from "react";
 import { resultReq } from "@/constant/type";
 import {
@@ -7,8 +7,9 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import LinearTextStyle from "@/components/LinearTextStyle";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
   const returnColor = () => {
     if (listQuest[3].status === "bad") {
       return styles.styleTextGreen;

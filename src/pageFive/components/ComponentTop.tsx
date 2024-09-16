@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import HeaderPage from "@/components/HeaderPage";
@@ -8,7 +15,7 @@ import {
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const ComponentTop = ({
   goBack,
   goHome,
@@ -16,6 +23,36 @@ const ComponentTop = ({
   goBack: () => void;
   goHome: () => void;
 }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    image: {
+      alignSelf: "center",
+      width: 98,
+      height: 27,
+      marginBottom: 16,
+    },
+    styleboxTop: {
+      width: MAX_WIDTH >= 1024 ? "62%" : "100%",
+      paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
+      paddingTop: 45,
+      paddingLeft: MAX_WIDTH >= 1024 ? 48 : 18,
+    },
+    containerSmallText: {
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+      height: 30,
+      marginTop: MAX_WIDTH >= 1024 ? 76 : 0,
+      color: colorPuplic.yellow,
+    },
+    containerText: {
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+      height: 30,
+      marginTop: MAX_WIDTH >= 1024 ? 76 : 0,
+      color: colorPuplic.yellow,
+    },
+    textWhite: {
+      color: colorPuplic.white,
+    },
+  });
   return (
     <BoxLinear
       colors={colorLinearPublic.mauKV2}
@@ -83,35 +120,5 @@ const ComponentTop = ({
     </BoxLinear>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    alignSelf: "center",
-    width: 98,
-    height: 27,
-    marginBottom: 16,
-  },
-  styleboxTop: {
-    width: MAX_WIDTH >= 1024 ? "62%" : "100%",
-    paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
-    paddingTop: 45,
-    paddingLeft: MAX_WIDTH >= 1024 ? 48 : 18,
-  },
-  containerSmallText: {
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    height: 30,
-    marginTop: MAX_WIDTH >= 1024 ? 76 : 0,
-    color: colorPuplic.yellow,
-  },
-  containerText: {
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    height: 30,
-    marginTop: MAX_WIDTH >= 1024 ? 76 : 0,
-    color: colorPuplic.yellow,
-  },
-  textWhite: {
-    color: colorPuplic.white,
-  },
-});
 
 export default ComponentTop;

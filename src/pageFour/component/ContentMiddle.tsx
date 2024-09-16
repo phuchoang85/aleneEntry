@@ -1,4 +1,11 @@
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import {
   colorLinearPublic,
@@ -6,7 +13,7 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import LinearTextStyle from "@/components/LinearTextStyle";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const ContentMiddle = ({
   backgroundSubmit,
 }: {
@@ -15,6 +22,28 @@ const ContentMiddle = ({
     locations: number[];
   };
 }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    image: {
+      width: MAX_WIDTH >= 1024 ? 488 : 282,
+      height: MAX_WIDTH >= 1024 ? 442 : 211,
+    },
+    container: {
+      flexDirection: "column",
+      alignItems: "center",
+      flex: 1,
+    },
+    textWhite: {
+      color: colorPuplic.white,
+      marginBottom: 6,
+      textAlign: "center",
+    },
+    textLinear: {
+      height: 18,
+      textAlign: "center",
+      color: colorPuplic.yellow,
+    },
+  });
   return (
     <View style={styles.container}>
       <Image
@@ -54,27 +83,5 @@ const ContentMiddle = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: MAX_WIDTH >= 1024 ? 488 : 282,
-    height: MAX_WIDTH >= 1024 ? 442 : 211,
-  },
-  container: {
-    flexDirection: "column",
-    alignItems: "center",
-    flex: 1,
-  },
-  textWhite: {
-    color: colorPuplic.white,
-    marginBottom: 6,
-    textAlign: "center",
-  },
-  textLinear: {
-    height: 18,
-    textAlign: "center",
-    color: colorPuplic.yellow,
-  },
-});
 
 export default ContentMiddle;

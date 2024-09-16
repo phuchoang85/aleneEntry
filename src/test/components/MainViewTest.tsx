@@ -1,10 +1,9 @@
-import { StyleSheet, Animated, Dimensions, View } from "react-native";
+import { StyleSheet, Animated, useWindowDimensions } from "react-native";
 import React from "react";
 import LinearTextStyle from "@/components/LinearTextStyle";
 import { colorLinearPublic, stylesTextPuplic } from "@/constant/stylesPuplic";
 import { initial, resultReq } from "@/constant/type";
 import ItemVideo from "./ItemVideo";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
 
 const MainViewTest = ({
   resultQ,
@@ -17,6 +16,7 @@ const MainViewTest = ({
   nextQuestion: () => void;
   updateResultAQuestion: (status: "good" | "bad", result: resultReq) => void;
 }) => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
   const isAtTheEnd = () => {
     return resultQ.questionSelect?.id == 4;
   };

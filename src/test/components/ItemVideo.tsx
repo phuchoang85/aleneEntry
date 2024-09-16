@@ -7,6 +7,7 @@ import {
   Pressable,
   Platform,
   ActivityIndicator,
+  useWindowDimensions,
 } from "react-native";
 import React, { memo, useEffect, useRef, useState } from "react";
 import {
@@ -25,7 +26,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import storage from "@react-native-firebase/storage";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const ItemVideo = ({
   data,
   handleButtonPress,
@@ -35,6 +36,68 @@ const ItemVideo = ({
   handleButtonPress: (data: resultReq, status: "good" | "bad") => void;
   questionSelected: resultReq | null;
 }) => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    containerButtonSelect: {
+      width: 90,
+      height: 90,
+      borderRadius: 12,
+    },
+    container: {
+      width: MAX_WIDTH - 48,
+      height: MAX_WIDTH >= 1024 ? 408 : "auto",
+    },
+    viewVideo: {
+      width: MAX_WIDTH - 48,
+      height: MAX_WIDTH - 48,
+      borderRadius: 20,
+      backgroundColor: "black",
+    },
+    video: {
+      borderRadius: 16,
+      flex: 1,
+      maxWidth: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+      maxHeight: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+    },
+    videoInLayout: {
+      width: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+      height: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+      position: "absolute",
+      left: Platform.OS === "web" && MAX_WIDTH >= 1024 ? -20 : 0,
+    },
+    loadingVideo: {
+      borderRadius: 16,
+      width: "100%",
+      height: "100%",
+      maxWidth: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+      maxHeight: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
+      backgroundColor: "white",
+    },
+    icon: {
+      position: "absolute",
+      top: -12,
+      right: -12,
+      borderRadius: 100,
+      backgroundColor: colorPuplic.white,
+    },
+    textGuide: {
+      textAlign: "center",
+      color: colorPuplic.white,
+      marginVertical: 10,
+      paddingHorizontal: 14,
+    },
+    containerButton: {
+      flexDirection: "row",
+      gap: 20,
+      alignSelf: "center",
+      alignItems: "center",
+    },
+    textContent: {
+      textAlign: "center",
+      color: colorPuplic.white,
+      marginBottom: 8,
+    },
+  });
   const navigation = useNavigation();
   const [statusVideo, setStatus] = useState<AVPlaybackStatusSuccess>();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -216,67 +279,5 @@ const ItemVideo = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  containerButtonSelect: {
-    width: 90,
-    height: 90,
-    borderRadius: 12,
-  },
-  container: {
-    width: MAX_WIDTH - 48,
-    height: MAX_WIDTH >= 1024 ? 408 : "auto",
-  },
-  viewVideo: {
-    width: MAX_WIDTH - 48,
-    height: MAX_WIDTH - 48,
-    borderRadius: 20,
-    backgroundColor: "black",
-  },
-  video: {
-    borderRadius: 16,
-    flex: 1,
-    maxWidth: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
-    maxHeight: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
-  },
-  videoInLayout: {
-    width: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
-    height: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
-    position: "absolute",
-    left: Platform.OS === "web" && MAX_WIDTH >= 1024 ? -20 : 0,
-  },
-  loadingVideo: {
-    borderRadius: 16,
-    width: "100%",
-    height: "100%",
-    maxWidth: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
-    maxHeight: MAX_WIDTH >= 1024 ? 255 : MAX_WIDTH - 48,
-    backgroundColor: "white",
-  },
-  icon: {
-    position: "absolute",
-    top: -12,
-    right: -12,
-    borderRadius: 100,
-    backgroundColor: colorPuplic.white,
-  },
-  textGuide: {
-    textAlign: "center",
-    color: colorPuplic.white,
-    marginVertical: 10,
-    paddingHorizontal: 14,
-  },
-  containerButton: {
-    flexDirection: "row",
-    gap: 20,
-    alignSelf: "center",
-    alignItems: "center",
-  },
-  textContent: {
-    textAlign: "center",
-    color: colorPuplic.white,
-    marginBottom: 8,
-  },
-});
 
 export default memo(ItemVideo);

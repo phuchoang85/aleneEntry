@@ -1,4 +1,9 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import { resultReq } from "@/constant/type";
 import {
@@ -7,8 +12,28 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import LinearTextStyle from "@/components/LinearTextStyle";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    styleTextWhite: {
+      color: colorPuplic.white,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+    },
+    styleTextRed: {
+      color: colorPuplic.red,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+    },
+    styleTextYellow: {
+      color: colorPuplic.yellow,
+      height: 36,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+    },
+    styleTextGreen: {
+      color: colorPuplic.greenStrong,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+    },
+  });
   const returnColor = () => {
     if (listQuest[3].status === "bad") {
       return styles.styleTextGreen;
@@ -51,23 +76,4 @@ const ContentChange = ({ listQuest }: { listQuest: resultReq[] }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  styleTextWhite: {
-    color: colorPuplic.white,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-  },
-  styleTextRed: {
-    color: colorPuplic.red,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-  },
-  styleTextYellow: {
-    color: colorPuplic.yellow,
-    height: 36,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-  },
-  styleTextGreen: {
-    color: colorPuplic.greenStrong,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-  },
-});
 export default ContentChange;

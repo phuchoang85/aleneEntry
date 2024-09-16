@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
 import HeaderPage from "@/components/HeaderPage";
@@ -8,8 +14,29 @@ import {
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const ComponentTop = () => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    styleboxTop: {
+      width: MAX_WIDTH >= 1024 ? "62%" : "100%",
+      paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
+      paddingTop: 45,
+      paddingLeft: MAX_WIDTH >= 1024 ? 48 : 0,
+    },
+    containerSmallText: {
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 0 : 18,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+      color: colorPuplic.white,
+    },
+    containerText: {
+      paddingHorizontal: MAX_WIDTH >= 1024 ? 0 : 28,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+      height: MAX_WIDTH >= 1024 ? 130 : 100,
+      color: colorPuplic.yellow,
+    },
+  });
+
   return (
     <BoxLinear
       colors={
@@ -69,25 +96,5 @@ const ComponentTop = () => {
     </BoxLinear>
   );
 };
-
-const styles = StyleSheet.create({
-  styleboxTop: {
-    width: MAX_WIDTH >= 1024 ? "62%" : "100%",
-    paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
-    paddingTop: 45,
-    paddingLeft: MAX_WIDTH >= 1024 ? 48 : 0,
-  },
-  containerSmallText: {
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 0 : 18,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    color: colorPuplic.white,
-  },
-  containerText: {
-    paddingHorizontal: MAX_WIDTH >= 1024 ? 0 : 28,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    height: MAX_WIDTH >= 1024 ? 130 : 100,
-    color: colorPuplic.yellow,
-  },
-});
 
 export default ComponentTop;

@@ -4,7 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Image,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -25,8 +25,37 @@ import { dataPageFour } from "@/constant/data";
 import ShowMoreText from "./component/ShowMoreText";
 import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
 import ContentMiddle from "./component/ContentMiddle";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const PageFour = () => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    image: {
+      width: MAX_WIDTH >= 1024 ? 132 : 98,
+      height: MAX_WIDTH >= 1024 ? 36 : 27,
+      marginBottom: 8,
+      alignSelf: "center",
+    },
+    container: {
+      flex: 1,
+      paddingTop: 22.5,
+    },
+    containerItem: {
+      flex: 1,
+      paddingHorizontal: 18,
+      paddingBottom: 30,
+      flexDirection: MAX_WIDTH >= 1024 ? "row" : "column",
+    },
+    textWhite: {
+      color: colorPuplic.white,
+      textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
+      marginTop: 10,
+    },
+    containerInItem: {
+      flex: 1,
+      alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
+    },
+  });
+
   const listQuest = useSelector(
     (state: RootState) => state.result.questionList
   );
@@ -120,14 +149,12 @@ const PageFour = () => {
               showMore={showMore}
               setShowMore={setShowMore}
             />
-            
-  
-              <ButtonStrokeLinear
-                textSize={stylesTextPuplic.text20bold}
-                content="MUA NGAY"
-                onPress={goToPage}
-              />
 
+            <ButtonStrokeLinear
+              textSize={stylesTextPuplic.text20bold}
+              content="MUA NGAY"
+              onPress={goToPage}
+            />
           </View>
 
           {MAX_WIDTH >= 1024 && (
@@ -138,33 +165,5 @@ const PageFour = () => {
     </BackgroundPage>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: MAX_WIDTH >= 1024 ? 132 : 98,
-    height: MAX_WIDTH >= 1024 ? 36 : 27,
-    marginBottom: 8,
-    alignSelf: "center",
-  },
-  container: {
-    flex: 1,
-    paddingTop: 22.5,
-  },
-  containerItem: {
-    flex: 1,
-    paddingHorizontal: 18,
-    paddingBottom: 30,
-    flexDirection: MAX_WIDTH >= 1024 ? "row" : "column",
-  },
-  textWhite: {
-    color: colorPuplic.white,
-    textAlign: MAX_WIDTH >= 1024 ? "left" : "center",
-    marginTop: 10,
-  },
-  containerInItem: {
-    flex: 1,
-    alignItems: MAX_WIDTH >= 1024 ? "flex-start" : "center",
-  },
-});
 
 export default PageFour;

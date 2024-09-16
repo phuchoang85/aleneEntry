@@ -2,10 +2,9 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  ImageBackground,
   Image,
   Linking,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import React from "react";
 import { colorPuplic } from "@/constant/stylesPuplic";
@@ -15,8 +14,41 @@ import { useNavigation } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParams } from "@/app";
 import HeaderPage from "@/components/HeaderPage";
-const { width: MAX_WIDTH, height: MAX_HEIGHT } = Dimensions.get("screen");
+
 const PageFive = () => {
+  const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    image: {
+      alignSelf: "center",
+      width: 132,
+      height: 36,
+    },
+    styleImage: {
+      width: "100%",
+      height: MAX_WIDTH >= 1024 ? "100%" : MAX_HEIGHT,
+      position: "absolute",
+      top: 0,
+      zIndex: -1,
+      alignSelf: "center",
+      left: MAX_WIDTH >= 1024 ? 320 : 0,
+    },
+    container: {
+      flex: 1,
+    },
+    containerScrollView: {
+      flex: 1,
+      backgroundColor: colorPuplic.greenWeak,
+      position: "relative",
+    },
+    containerHeaderBigScreen: {
+      position: "absolute",
+      top: 10,
+      width: "100%",
+      paddingHorizontal: 36,
+      zIndex: 2,
+    },
+  });
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToWeb = () => {
@@ -73,37 +105,5 @@ const PageFive = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  image:{
-    alignSelf:'center',
-    width: 132,
-    height: 36
-  },
-  styleImage: {
-    width: "100%",
-    height: MAX_WIDTH >= 1024 ? "100%" : MAX_HEIGHT,
-    position: "absolute",
-    top: 0,
-    zIndex: -1,
-    alignSelf: "center",
-    left: MAX_WIDTH >= 1024 ? 320 : 0,
-  },
-  container: {
-    flex: 1,
-  },
-  containerScrollView: {
-    flex: 1,
-    backgroundColor: colorPuplic.greenWeak,
-    position: "relative",
-  },
-  containerHeaderBigScreen: {
-    position: "absolute",
-    top: 10,
-    width: "100%",
-    paddingHorizontal: 36,
-    zIndex: 2,
-  },
-});
 
 export default PageFive;

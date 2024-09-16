@@ -1,7 +1,14 @@
-import { View, Text, Pressable, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const NormalButton = ({
   content,
   onPress,
@@ -17,6 +24,25 @@ const NormalButton = ({
   haveBorder?: boolean;
   disable?: boolean;
 }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    button: {
+      width: MAX_WIDTH >= 1024 ? 220 : 140,
+      height: 44,
+      borderRadius: 24,
+      textAlign: "center",
+      justifyContent: "center",
+      alignSelf: "center",
+      marginTop: 20,
+      marginBottom: 8,
+      borderColor: colorPuplic.RED,
+    },
+    styleTextNormal: {
+      color: colorPuplic.white,
+      textAlign: "center",
+    },
+  });
+
   return (
     <Pressable
       disabled={disable}
@@ -40,23 +66,5 @@ const NormalButton = ({
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    width: MAX_WIDTH >= 1024 ? 220 : 140,
-    height: 44,
-    borderRadius: 24,
-    textAlign: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginTop: 20,
-    marginBottom: 8,
-    borderColor: colorPuplic.RED,
-  },
-  styleTextNormal: {
-    color: colorPuplic.white,
-    textAlign: "center",
-  },
-});
 
 export default NormalButton;

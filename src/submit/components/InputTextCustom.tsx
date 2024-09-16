@@ -1,7 +1,13 @@
-import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  useWindowDimensions,
+} from "react-native";
 import React from "react";
 import { colorPuplic, stylesTextPuplic } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const InputTextCustom = ({
   title,
   placeHolder,
@@ -23,6 +29,24 @@ const InputTextCustom = ({
   isNeccessary: boolean;
   keyboardType: "text" | "numeric";
 }) => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    textColorWhite: {
+      color: colorPuplic.white,
+    },
+    inputText: {
+      height: 50,
+      borderWidth: 1,
+      borderRadius: 8,
+      backgroundColor: "white",
+      paddingLeft: 10,
+      width: "100%",
+    },
+    container: {
+      width: "100%",
+      marginTop: 16,
+    },
+  });
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row" }}>
@@ -65,23 +89,5 @@ const InputTextCustom = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  textColorWhite: {
-    color: colorPuplic.white,
-  },
-  inputText: {
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 8,
-    backgroundColor: "white",
-    paddingLeft: 10,
-    width: "100%",
-  },
-  container: {
-    width: '100%',
-    marginTop: 16,
-  },
-});
 
 export default InputTextCustom;

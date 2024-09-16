@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  Dimensions,
+  useWindowDimensions,
 } from "react-native";
 import React from "react";
 import BoxBorder from "./components/BoxBorder";
@@ -18,8 +18,50 @@ import {
   colorPuplic,
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
-const { width: MAX_WIDTH } = Dimensions.get("screen");
+
 const PageSix = () => {
+  const { width: MAX_WIDTH } = useWindowDimensions();
+  const styles = StyleSheet.create({
+    textYellow: {
+      color: colorPuplic.yellow,
+      textAlign: "center",
+    },
+    container: {
+      flex: 1,
+    },
+    containerScrollView: {
+      flex: 1,
+      paddingTop: 45,
+    },
+    image: {
+      alignSelf: "center",
+      width: MAX_WIDTH >= 1024 ? 132 : 98,
+      height: MAX_WIDTH >= 1024 ? 36 : 27,
+      marginBottom: 16,
+    },
+    bigImage: {
+      width: MAX_WIDTH >= 1024 ? 489 : null,
+      height: MAX_WIDTH >= 1024 ? 300 : null,
+      marginVertical: 16,
+      alignSelf: "center",
+    },
+    textWhite: {
+      color: "white",
+      textAlign: "center",
+      paddingHorizontal: 24,
+      marginBottom: 28,
+      maxWidth: MAX_WIDTH >= 1024 ? 500 : null,
+      alignSelf: "center",
+    },
+    containerThreeBox: {
+      flexDirection: MAX_WIDTH >= 1024 ? "row" : "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 20,
+      width: "100%",
+      marginBottom: 50,
+    },
+  });
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
@@ -101,47 +143,5 @@ const PageSix = () => {
     </BackgroundPage>
   );
 };
-
-const styles = StyleSheet.create({
-  textYellow: {
-    color: colorPuplic.yellow,
-    textAlign: "center",
-  },
-  container: {
-    flex: 1,
-  },
-  containerScrollView: {
-    flex: 1,
-    paddingTop: 45,
-  },
-  image: {
-    alignSelf: "center",
-    width: MAX_WIDTH >= 1024 ? 132 : 98,
-    height: MAX_WIDTH >= 1024 ? 36 : 27,
-    marginBottom: 16,
-  },
-  bigImage: {
-    width: MAX_WIDTH >= 1024 ? 489 : null,
-    height: MAX_WIDTH >= 1024 ? 300 : null,
-    marginVertical: 16,
-    alignSelf: "center",
-  },
-  textWhite: {
-    color: "white",
-    textAlign: "center",
-    paddingHorizontal: 24,
-    marginBottom: 28,
-    maxWidth: MAX_WIDTH >= 1024? 500 : null,
-    alignSelf:'center',
-  },
-  containerThreeBox: {
-    flexDirection: MAX_WIDTH >= 1024 ? "row" : "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
-    width: "100%",
-    marginBottom: 50,
-  },
-});
 
 export default PageSix;
