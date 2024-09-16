@@ -9,19 +9,19 @@ import { resultReq } from "@/constant/type";
 
 export const useTestPage = () => {
   const resultQ = useSelector((state: RootState) => state.result);
-  const {data ,loading} = useSelector((state: RootState) => state.dataResult);
+  const { dataQuestion: data, loading } = resultQ;
   const dispatch = useDispatch();
   const idQuestionSelect = resultQ.questionSelect?.id || 0;
 
-  const nullQuestionSelect = () =>{
-    dispatch(questionSelect(null))
+  const nullQuestionSelect = () => {
+    dispatch(questionSelect(null));
   };
-  const restartQuestion = () =>{
-    dispatch(restart())
+  const restartQuestion = () => {
+    dispatch(restart());
   };
 
   const selectFirstQuestion = () => {
-    if(data?.length > 0 && !loading){
+    if (data?.length > 0 && !loading) {
       dispatch(questionSelect(data[0]));
     }
   };

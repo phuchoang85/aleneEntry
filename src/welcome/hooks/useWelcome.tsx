@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 
 export const useWelcome = () => {
   const dispatch = useAppDispatch();
-  const { data, loading } = useSelector((state: RootState) => state.dataResult);
+  const { dataQuestion: data, loading } = useSelector(
+    (state: RootState) => state.result
+  );
 
   useEffect(() => {
     dispatch(fetchQuestionAsync());
