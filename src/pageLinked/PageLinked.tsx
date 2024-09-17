@@ -96,7 +96,7 @@ const PageLinked = () => {
         <ComponentBottom goToScreen={goToScreen} goToWeb={goToWeb} />
         {MAX_WIDTH >= 1024 && (
           <Image
-            source={require("@images/first_pic_big.png")}
+            source={require("@images/anlene_cofee_big.png")}
             style={styles.styleImage}
           />
         )}

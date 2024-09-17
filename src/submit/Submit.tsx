@@ -69,7 +69,7 @@ const Submit = () => {
     },
     container: {
       flex: 1,
-      paddingTop:MAX_WIDTH >= 1024 ? 22.5 : 12.5,
+      paddingTop: MAX_WIDTH >= 1024 ? 22.5 : 12.5,
     },
   });
 
@@ -310,7 +310,8 @@ const Submit = () => {
               !input.phone ||
               error.name ||
               error.email ||
-              error.phone
+              error.phone ||
+              !isChecked
                 ? colorPuplic.grey
                 : colorPuplic.RED
             }
