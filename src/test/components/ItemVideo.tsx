@@ -130,25 +130,33 @@ const ItemVideo = ({
     return data?.status;
   };
   useEffect(() => {
-    if (questionSelected) {
-      loadVideoFromFireBase(data.video);
-    }
-
-    if (questionSelected && videoFirebase) {
-      if (data.id === questionSelected?.id && videoRef.current && !isPlaying) {
+    if (MAX_WIDTH >= 1024) {
+      if (!videoFirebase) {
+        loadVideoFromFireBase(data.video);
         videoRef.current?.playAsync();
         setIsPlaying(true);
+      }
+    } else {
+      if (questionSelected?.id === data.id && !videoFirebase) {
+        loadVideoFromFireBase(data.video);
+      }
+
+      if (questionSelected?.id === data.id) {
+        if (
+          data.id === questionSelected?.id &&
+          videoRef.current &&
+          !isPlaying &&
+          videoFirebase
+        ) {
+          videoRef.current?.playAsync();
+          setIsPlaying(true);
+        }
       } else {
-        if (isPlaying) {
+        if (isPlaying && videoRef.current && videoFirebase) {
           videoRef.current?.pauseAsync();
           setIsPlaying(false);
         }
       }
-    }
-
-    if (MAX_WIDTH >= 1024) {
-      videoRef.current?.playAsync();
-      setIsPlaying(true);
     }
   }, [questionSelected, videoFirebase]);
 
@@ -174,6 +182,12 @@ const ItemVideo = ({
         setvideoFirebase("");
       });
   };
+
+  useEffect(() =>{
+    if(videoRef && videoFirebase && statusVideo?.didJustFinish){
+      videoRef.current?.replayAsync();
+    }
+  },[statusVideo])
 
   return (
     <View style={[styles.container, reponsiveMaxView()]}>

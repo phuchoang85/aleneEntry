@@ -44,6 +44,7 @@ const InputTextCustom = ({
     },
     container: {
       width: MAX_WIDTH,
+      paddingHorizontal: 24,
       marginTop: 16,
       maxWidth: 660
     },
