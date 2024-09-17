@@ -22,7 +22,7 @@ export default function Welcome() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const goToScreen = () => {
-    navigation.navigate("PageFour");
+    navigation.navigate("Test");
   };
 
   if (loading) {
