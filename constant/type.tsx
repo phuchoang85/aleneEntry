@@ -20,3 +20,10 @@ export type dataContent = {
   content2: string;
   content3: string;
 };
+
+export type dataPageFinished = {
+  id: number;
+  contentWhite: string;
+  contentYellow: string;
+  image: number;
+};

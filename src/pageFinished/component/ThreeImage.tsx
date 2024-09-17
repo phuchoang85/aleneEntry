@@ -12,6 +12,8 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 import BackgroundPage from "@/components/BackgroundPage";
+import { listDataPageFinished } from "@/constant/data";
+import { dataPageFinished } from "@/constant/type";
 
 const ThreeImage = () => {
   const { width: MAX_WIDTH } = useWindowDimensions();
@@ -51,35 +53,7 @@ const ThreeImage = () => {
     },
   });
 
-  type data = {
-    id: number;
-    contentWhite: string;
-    contentYellow: string;
-    image: number;
-  };
-
-  const listData: data[] = [
-    {
-      id: 1,
-      contentWhite: "Khối cơ",
-      contentYellow: "Mất đi",
-      image: require("@images/less_muscle.png"),
-    },
-    {
-      id: 2,
-      contentWhite: "Mật độ xương",
-      contentYellow: "Suy giảm",
-      image: require("@images/less_bone_density.png"),
-    },
-    {
-      id: 3,
-      contentWhite: "Khớp",
-      contentYellow: "Thoái hóa",
-      image: require("@images/knee_osteoarthritis.png"),
-    },
-  ];
-
-  const _renderItem = (item: data) => {
+  const _renderItem = (item: dataPageFinished) => {
     return (
       <View key={item.id} style={styles.containerItem}>
         <Image source={item.image} style={styles.image} />
@@ -114,7 +88,7 @@ const ThreeImage = () => {
 
   return (
     <View style={styles.container}>
-      {listData.map((item, index) => _renderItem(item))}
+      {listDataPageFinished.map((item, index) => _renderItem(item))}
     </View>
   );
 };
