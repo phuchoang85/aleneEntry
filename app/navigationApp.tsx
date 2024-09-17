@@ -7,9 +7,9 @@ import Test from "@/src/test/Test";
 import Submit from "@/src/submit/Submit";
 import { useDispatch } from "react-redux";
 import { questionSelect, restart } from "@/redux/slice/ResultSlice";
-import PageFour from "@/src/pageFour/PageFour";
-import PageFive from "@/src/pageFive/PageFive";
-import PageSix from "@/src/pageSix/PageSix";
+import PageFinished from "@/src/pageFinished/PageFinished";
+import PageLinked from "@/src/pageLinked/PageLinked";
+import PageDetail from "@/src/pageDetail/PageDetail";
 
 const NavigationApp = () => {
   const Stack = createNativeStackNavigator<RootStackParams>();
@@ -37,18 +37,18 @@ const NavigationApp = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="PageFour"
-        component={PageFour}
+        name="PageFinished"
+        component={PageFinished}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="PageFive"
-        component={PageFive}
+        name="PageLinked"
+        component={PageLinked}
         options={{ headerShown: false }}
       />
        <Stack.Screen
-        name="PageSix"
-        component={PageSix}
+        name="PageDetail"
+        component={PageDetail}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

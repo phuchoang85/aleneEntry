@@ -83,7 +83,7 @@ const PageFour = () => {
   };
 
   const goToPage = () => {
-    navigation.navigate("PageFive");
+    navigation.navigate("PageLinked");
   };
 
   const returnContent = () => {

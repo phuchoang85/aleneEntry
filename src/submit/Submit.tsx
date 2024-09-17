@@ -194,7 +194,7 @@ const Submit = () => {
     if (message) {
       // console.log("thành công " + message);
       Alert.alert("Thông báo", "Lưu thành công");
-      navigation.navigate("PageFour");
+      navigation.navigate("PageFinished");
       clearMess();
     }
   }, [loading, errorApi, message]);

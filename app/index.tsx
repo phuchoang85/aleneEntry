@@ -10,9 +10,9 @@ export type RootStackParams = {
   Test: any;
   Welcome: any;
   Submit: any;
-  PageFour: any;
-  PageFive: any;
-  PageSix: any;
+  PageFinished: any;
+  PageLinked: any;
+  PageDetail: any;
 };
 
 const App = () => {

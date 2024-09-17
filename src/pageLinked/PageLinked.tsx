@@ -57,7 +57,7 @@ const PageFive = () => {
   };
 
   const goToScreen = () => {
-    navigation.navigate("PageSix");
+    navigation.navigate("PageDetail");
   };
   const goHome = () => {
     navigation.navigate("Welcome");
