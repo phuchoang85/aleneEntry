@@ -37,7 +37,7 @@ const PageFour = () => {
     },
     container: {
       flex: 1,
-      paddingTop: 22.5,
+      paddingTop: MAX_WIDTH >= 1024 ? 22.5 : 12.5,
     },
     containerItem: {
       flex: 1,

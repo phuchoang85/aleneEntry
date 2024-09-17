@@ -43,7 +43,7 @@ const App = () => {
           barStyle={"light-content"}
         />
         <SafeAreaView
-          style={{ flex: 1, marginTop: -60 }}
+          style={{ flex: 1, marginTop: -65 }}
         >
           <NavigationContainer linking={linking} independent={true}>
             <NavigationApp />

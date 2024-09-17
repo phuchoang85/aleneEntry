@@ -21,7 +21,7 @@ const ComponentTop = () => {
     styleboxTop: {
       width: MAX_WIDTH >= 1024 ? "62%" : "100%",
       paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
-      paddingTop: 45,
+      paddingTop: MAX_WIDTH >= 1024 ? 45 : 25,
       paddingLeft: MAX_WIDTH >= 1024 ? 48 : 0,
     },
     containerSmallText: {

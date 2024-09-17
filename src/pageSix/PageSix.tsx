@@ -31,7 +31,7 @@ const PageSix = () => {
     },
     containerScrollView: {
       flex: 1,
-      paddingTop: 45,
+      paddingTop: MAX_WIDTH >= 1024 ? 45 : 25,
     },
     image: {
       alignSelf: "center",

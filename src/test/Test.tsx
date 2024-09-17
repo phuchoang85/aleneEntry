@@ -43,7 +43,7 @@ const Test = () => {
     },
     container: {
       flex: 1,
-      paddingTop: 45,
+      paddingTop: MAX_WIDTH >= 1024 ? 45 : 25,
     },
     containerScrollView: {
       flex: 1,
