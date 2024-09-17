@@ -27,10 +27,7 @@ const resultSlice = createSlice({
       state.questionSelect = action.payload;
     },
     restart: (state) => {
-      state.questionList = state.questionList.map((item) => ({
-        ...item,
-        status: "noSelect",
-      }));
+      state.questionList = state.dataQuestion;
     },
     updateDataResult: (state, action) => {
       state.questionList = action.payload;

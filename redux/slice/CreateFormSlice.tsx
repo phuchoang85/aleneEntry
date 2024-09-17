@@ -3,7 +3,7 @@ import { createForm } from "../action/CreateForm";
 
 type initial = {
   loading: boolean;
-  error: unknown;
+  error: any;
   message: string | null;
 };
 
