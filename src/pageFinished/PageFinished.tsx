@@ -26,7 +26,7 @@ import ShowMoreText from "./component/ShowMoreText";
 import ButtonStrokeLinear from "@/components/ButtonStrokeLinear";
 import ContentMiddle from "./component/ContentMiddle";
 
-const PageFour = () => {
+const PageFinished = () => {
   const { width: MAX_WIDTH } = useWindowDimensions();
   const styles = StyleSheet.create({
     image: {
@@ -166,4 +166,4 @@ const PageFour = () => {
   );
 };
 
-export default PageFour;
+export default PageFinished;

@@ -15,7 +15,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParams } from "@/app";
 import HeaderPage from "@/components/HeaderPage";
 
-const PageFive = () => {
+const PageLinked = () => {
   const { width: MAX_WIDTH, height: MAX_HEIGHT } = useWindowDimensions();
   const styles = StyleSheet.create({
     image: {
@@ -105,4 +105,4 @@ const PageFive = () => {
   );
 };
 
-export default PageFive;
+export default PageLinked;

@@ -19,7 +19,7 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 
-const PageSix = () => {
+const PageDetail = () => {
   const { width: MAX_WIDTH } = useWindowDimensions();
   const styles = StyleSheet.create({
     textYellow: {
@@ -144,4 +144,4 @@ const PageSix = () => {
   );
 };
 
-export default PageSix;
+export default PageDetail;
