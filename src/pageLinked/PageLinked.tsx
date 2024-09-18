@@ -20,8 +20,8 @@ const PageLinked = () => {
   const styles = StyleSheet.create({
     image: {
       alignSelf: "center",
-      width: 132,
-      height: 36,
+      width: MAX_WIDTH >= 1024 ? 132 : 98,
+      height: MAX_WIDTH >= 1024 ? 36 : 27,
     },
     styleImage: {
       width: "100%",
@@ -42,7 +42,7 @@ const PageLinked = () => {
     },
     containerHeaderBigScreen: {
       position: "absolute",
-      top: 45,
+      top:MAX_WIDTH >=1024 ? 45 : 20,
       width: "100%",
       zIndex: 2,
     },
@@ -72,20 +72,19 @@ const PageLinked = () => {
         showsVerticalScrollIndicator={false}
         style={styles.containerScrollView}
       >
-        {MAX_WIDTH >= 1024 && (
-          <View style={styles.containerHeaderBigScreen}>
-            <HeaderPage
-              acctionLeft={goBack}
-              imageLeft={require("@images/arrow_back.png")}
-              imageRight={require("@images/home.png")}
-              numberPage="5"
-              acctionRight={goHome}
-            />
+        <View style={styles.containerHeaderBigScreen}>
+          <HeaderPage
+            acctionLeft={goBack}
+            imageLeft={require("@images/arrow_back.png")}
+            imageRight={require("@images/home.png")}
+            numberPage="5"
+            acctionRight={goHome}
+          />
 
-            <Image source={require("@images/logo.png")} style={styles.image} />
-          </View>
-        )}
-        <ComponentTop goHome={goHome} goBack={goBack} />
+          <Image source={require("@images/logo.png")} style={styles.image} />
+        </View>
+
+        <ComponentTop/>
         {MAX_WIDTH < 1024 && (
           <Image
             source={require("@images/anlene_cofee.png")}

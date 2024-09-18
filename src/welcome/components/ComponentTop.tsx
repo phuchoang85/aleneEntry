@@ -21,7 +21,7 @@ const ComponentTop = () => {
     styleboxTop: {
       width: MAX_WIDTH >= 1024 ? "62%" : "100%",
       paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
-      paddingTop: MAX_WIDTH >= 1024 ? 45 : 25,
+      paddingTop: 55,
       paddingLeft: MAX_WIDTH >= 1024 ? 48 : 0,
     },
     containerSmallText: {
@@ -46,17 +46,6 @@ const ComponentTop = () => {
       start={{ x:MAX_WIDTH >= 1024 ? 1 : 0.5, y: MAX_WIDTH >= 1024 ? 0 : 1.7 }}
       end={{ x: MAX_WIDTH >= 1024 ? 0 : 0.5, y: 0 }}
     >
-      <View style={{ paddingHorizontal: 24 }}>
-        {MAX_WIDTH < 1024 && (
-          <HeaderPage
-            acctionLeft={() => null}
-            imageLeft={null}
-            numberPage="1"
-            acctionRight={() => null}
-            imageRight={require("@images/logo_welcome.png")}
-          />
-        )}
-      </View>
       <LinearTextStyle
         colors={colorLinearPublic.linearYellowhao}
         styles={[

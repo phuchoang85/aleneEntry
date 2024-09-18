@@ -1,14 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-  useWindowDimensions,
-} from "react-native";
+import { Text, StyleSheet, useWindowDimensions } from "react-native";
 import React from "react";
 import BoxLinear from "@/components/BoxLinear";
-import HeaderPage from "@/components/HeaderPage";
 import LinearTextStyle from "@/components/LinearTextStyle";
 import {
   colorLinearPublic,
@@ -16,25 +8,13 @@ import {
   stylesTextPuplic,
 } from "@/constant/stylesPuplic";
 
-const ComponentTop = ({
-  goBack,
-  goHome,
-}: {
-  goBack: () => void;
-  goHome: () => void;
-}) => {
+const ComponentTop = () => {
   const { width: MAX_WIDTH } = useWindowDimensions();
   const styles = StyleSheet.create({
-    image: {
-      alignSelf: "center",
-      width: 98,
-      height: 27,
-      marginBottom: 16,
-    },
     styleboxTop: {
       width: MAX_WIDTH >= 1024 ? "62%" : "100%",
       paddingBottom: MAX_WIDTH >= 1024 ? 200 : 20,
-      paddingTop: MAX_WIDTH >= 1024 ? 125 : 25,
+      paddingTop: MAX_WIDTH >= 1024 ? 125 : 105,
       paddingHorizontal: MAX_WIDTH >= 1024 ? 48 : 18,
     },
     containerSmallText: {
@@ -49,7 +29,7 @@ const ComponentTop = ({
     },
     textWhite: {
       color: colorPuplic.white,
-      marginTop: 13
+      marginTop: 13,
     },
   });
   return (
@@ -59,19 +39,6 @@ const ComponentTop = ({
       start={{ x: MAX_WIDTH >= 1024 ? 1 : 0.5, y: MAX_WIDTH >= 1024 ? 0 : 1 }}
       end={{ x: MAX_WIDTH >= 1024 ? 0 : 0.5, y: 0 }}
     >
-      {MAX_WIDTH < 1024 && (
-        <>
-          <HeaderPage
-            acctionLeft={goBack}
-            imageLeft={require("@images/arrow_back.png")}
-            imageRight={require("@images/home.png")}
-            numberPage="5"
-            acctionRight={goHome}
-          />
-
-          <Image source={require("@images/logo.png")} style={styles.image} />
-        </>
-      )}
       <LinearTextStyle
         colors={colorLinearPublic.linearYellowhao}
         styles={[

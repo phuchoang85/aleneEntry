@@ -66,14 +66,13 @@ export default function Welcome() {
         showsVerticalScrollIndicator={false}
         style={styles.containerScrollView}
       >
-        {MAX_WIDTH >= 1024 && (
-          <View style={styles.containerHeaderBigScreen}>
-            <HeaderPage
-              numberPage="1"
-              imageRight={require("@images/logo_welcome.png")}
-            />
-          </View>
-        )}
+        <View style={styles.containerHeaderBigScreen}>
+          <HeaderPage
+            numberPage="1"
+            imageRight={require("@images/logo_welcome.png")}
+          />
+        </View>
+
         <ComponentTop />
         {MAX_WIDTH < 1024 && (
           <Image
