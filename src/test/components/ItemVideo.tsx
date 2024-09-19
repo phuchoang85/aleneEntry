@@ -179,15 +179,15 @@ const ItemVideo = ({
       })
       .catch((error) => {
         console.error("Error getting download URL:", error);
-        setvideoFirebase("");
+        setvideoFirebase(linkVideo);
       });
   };
 
-  useEffect(() =>{
-    if(videoRef && videoFirebase && statusVideo?.didJustFinish){
+  useEffect(() => {
+    if (videoRef && videoFirebase && statusVideo?.didJustFinish) {
       videoRef.current?.replayAsync();
     }
-  },[statusVideo])
+  }, [statusVideo]);
 
   return (
     <View style={[styles.container, reponsiveMaxView()]}>
