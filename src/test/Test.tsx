@@ -85,7 +85,7 @@ const Test = () => {
       updateQuestionNoSelectAtNow();
       updateQuestionNoSelectAtAfaterNow();
       updateQuestionSelectedStatusToNoSelect();
-      if (MAX_WIDTH < 720) {
+      if (MAX_WIDTH < 1024) {
         Animated.timing(animatedValue, {
           toValue: -(MAX_WIDTH - 14) * (idQuestionSelect - 2),
           duration: 500,
